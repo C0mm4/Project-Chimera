@@ -41,9 +41,7 @@ public class Weapon : MonoBehaviour
         GameObject projectileObj = ObjectPoolManager.Instance.GetPool(weaponData.ProjectilePrefab.name);
         Projectile projectile = projectileObj.GetComponent<Projectile>();
 
-        projectile.Initialize(transform, scanner.nearestTarget,
-                          weaponData.ProjectileSpeed,
-                          weaponData.ProjectileArcHeight);
+        projectile.Initialize(transform, scanner.nearestTarget, weaponData);
 
         // 마지막 공격 시간 갱신
         lastAttackTime = Time.time;
