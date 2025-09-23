@@ -20,5 +20,5 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 1132359506795249663, guid: d952e2730b7e6f44aac46955debea853,
     type: 3}
   ProjectileCount: 1
-  ProjectileSpeed: 3
+  ProjectileSpeed: 10
   ProjectileArcHeight: 3
