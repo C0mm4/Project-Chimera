@@ -25,4 +25,4 @@ public enum EnemyType
     Troll,
     Skeleton,
     Zombie
-}
+} // 적 종류인데 이걸로 쓸지는 몰?루
