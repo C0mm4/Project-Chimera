@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class SceneLoadManager : Singleton<SceneLoadManager>
 {
     private Dictionary<SceneType, SceneBase> _scenes = new ();
@@ -15,9 +16,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     private void Awake()
     {
         // 씬 클래스와 enum 매핑
-        _scenes.Add(SceneType.Intro, new IntroScene());
-        _scenes.Add(SceneType.Town, new TownScene());
-        _scenes.Add(SceneType.Battle, new BattleScene());
+//        _scenes.Add(SceneType.Intro, new IntroScene());
+//        _scenes.Add(SceneType.Town, new TownScene());
+//        _scenes.Add(SceneType.Battle, new BattleScene());
     }
 
     public void LoadScene(SceneType sceneType)
