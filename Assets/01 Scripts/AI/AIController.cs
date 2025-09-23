@@ -9,10 +9,14 @@ public class AIController : MonoBehaviour
     [field: SerializeField] public Transform Target { get; private set; }
 
     NavMeshAgent agent;
+    NavMeshPath path;
 
     public float PlayerDetectRange;
     public float StructureDetectRange;
     public float AttackRange;
+    public float PlayerChaseTime;
+
+    float playerChaseStartTime;
 
     public float TargetDist;
 
@@ -25,76 +29,92 @@ public class AIController : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        path = new NavMeshPath();
 
     }
     private void OnEnable()
     {
-        Debug.Log("베이스로 목표 설정");
-        // Target = StageManager.Instance.Basement.transform;
+        Target = StageManager.Instance.Basement.transform;
+        playerChaseStartTime = Time.time;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            // Target = GameManager.Instance.Player.transform;
-        }
-
         
     }
 
     private void FixedUpdate()
     {
-        // 주변 건물 찾아서 제일 가까운 건물로 타겟 설정
-        int count = Physics.OverlapSphereNonAlloc(transform.position, StructureDetectRange, overlaps, StructureLayerMask);
-        if (count > 0)
+        if (Time.time - playerChaseStartTime > PlayerChaseTime)
         {
-            float minDist = 12345;
-            int targetIdx = -1;
-            for (int i = 0; i < count; ++i)
-            {
-                float dist = Vector3.Distance(transform.position, overlaps[i].transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    targetIdx = i;
-                }
-            }
-
-            Target = overlaps[targetIdx].transform;
+            Target = StageManager.Instance.Basement.transform;
         }
+
+        //if (!FindNearestTargetInRange(StructureDetectRange, StructureLayerMask))
+        //{
+        //    Target = StageManager.Instance.Basement.transform;
+        //}
 
         if (Target != null)
         {
             TargetDist = Vector3.Distance(Target.position, transform.position);
-            Debug.Log($"{Target.name}을 추적");
 
-            if (TargetDist < AttackRange)
+            Debug.Log(Target.gameObject.layer);
+
+            if (FindNearestTargetInRange(AttackRange, Target.gameObject.layer))
             {
-                Debug.Log("공격 범위 내로 들어옴. 공격하기");
+                Debug.Log($"{name}이 {Target.name}을 공격");
                 agent.destination = transform.position;
             }
             else
             {
-                agent.destination = Target.position;
-
+                Debug.Log($"{Target.name}을 추적");
+                agent.SetDestination(Target.position);
             }
 
         }
 
     }
 
-    private void OnHit()
+    private bool FindNearestTargetInRange(float range, LayerMask layerMask)
     {
-        Debug.Log("피격 받음 (에너미 캐릭터의 HitReaction에서 이 함수 호출하기)");
-        Debug.Log($"에너미 주위 반지름 {PlayerDetectRange} 이내에 플레이어 있는지 감지");
+        int count = Physics.OverlapSphereNonAlloc(transform.position, range, overlaps, layerMask);
 
-        bool checkPlayer = Physics.CheckSphere(transform.position, PlayerDetectRange, PlayerLayerMask);
+        if (count < 1) return false;
 
-        if (checkPlayer)
+        float minDist = 12345;
+        int targetIdx = -1;
+
+        for (int i = 0; i < count; ++i)
         {
-            // Target = GameManager.Instance.Player;
+            float dist = Vector3.Distance(transform.position, overlaps[i].transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                targetIdx = i;
+            }
         }
+
+        Target = overlaps[targetIdx].transform;
+
+        return true;
+    }
+
+    public void OnHit()
+    {
+
+        // Debug.Log($"에너미 주위 반지름 {PlayerDetectRange} 이내에 플레이어 있는지 감지");
+
+        // bool checkPlayer = Physics.CheckSphere(transform.position, PlayerDetectRange, PlayerLayerMask);
+
+        // if (checkPlayer)
+        // {
+            // Debug.Log("플레이어 찾음");
+            //playerChaseStartTime = Time.time;
+            //Target = GameManager.Instance.Player.transform;
+        // }
+        playerChaseStartTime = Time.time;
+        Target = GameManager.Instance.Player.transform;
     }
 
     private void OnPathFailed()

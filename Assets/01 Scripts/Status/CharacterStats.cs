@@ -7,6 +7,8 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private BaseStatusSO originData;
 
+    AIController aiController;
+
     private BaseStatusSO data;
 
 
@@ -15,6 +17,7 @@ public class CharacterStats : MonoBehaviour
 
     private void Awake()
     {
+        aiController = GetComponent<AIController>();
         data = Instantiate(originData);
 
         data.currentHealth = data.maxHealth;
@@ -26,6 +29,7 @@ public class CharacterStats : MonoBehaviour
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
         OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
+        aiController.OnHit();
 
         if(data.currentHealth <= 0)
         {
