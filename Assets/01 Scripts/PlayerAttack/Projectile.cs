@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     private float arcHeight;
 
     private float totalDistance;            // 전체 이동해야 할 거리
+    private Vector3 lastPosition;
 
     public void Initialize(Transform start, Transform target, float projectileSpeed, float projectileArcHeight)
     {
@@ -24,6 +25,7 @@ public class Projectile : MonoBehaviour
 
         this.speed = projectileSpeed;
         this.arcHeight = projectileArcHeight;
+        this.lastPosition = transform.position;
 
         if (targetTransform != null)
         {
@@ -34,12 +36,24 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        // 타겟이 죽었는지 확인, 살아있다면 마지막 위치를 갱신
+        UpdateTargetPosition();
+        MovementToTarget();
+        RotationToTarget();
+        CheckForArrival();
+    }
+    
+    // 타겟이 죽었는지 확인, 살아있다면 마지막 위치를 갱신
+    private void UpdateTargetPosition()
+    {
         if (targetTransform != null)
         {
             lastKnownPosition = targetTransform.position;
         }
+    }
 
+    // 발사체의 이동 로직 메서드
+    private void MovementToTarget()
+    {
         // 수평 이동 로직(몬스터 추적)
         Vector3 nextHorizontalPos = Vector3.MoveTowards(
             new Vector3(transform.position.x, 0, transform.position.z),
@@ -61,7 +75,24 @@ public class Projectile : MonoBehaviour
 
         // 최종 위치 적용
         transform.position = new Vector3(nextHorizontalPos.x, startPosition.y + yOffset, nextHorizontalPos.z);
+    }
 
+    // 회전 처리 로직
+    private void RotationToTarget()
+    {
+        Vector3 direction = transform.position - lastPosition;
+
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
+
+        lastPosition = transform.position;
+    }
+
+    // 목표에 도착했는지 확인
+    private void CheckForArrival()
+    {
         // 거리가 매우 가까워 지면 발사체 파괴(오브젝트 풀링 처리 필요)
         if (Vector3.Distance(transform.position, lastKnownPosition) < 0.1f)
         {
