@@ -7,6 +7,8 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private BaseStatusSO originData;
 
+    AIController aiController;
+
     private BaseStatusSO data;
 
 
@@ -15,6 +17,7 @@ public class CharacterStats : MonoBehaviour
 
     private void Awake()
     {
+        aiController = GetComponent<AIController>();
         data = Instantiate(originData);
 
         data.currentHealth = data.maxHealth;
@@ -26,11 +29,18 @@ public class CharacterStats : MonoBehaviour
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
         OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
+        aiController.OnHit();
 
         if(data.currentHealth <= 0)
         {
             OnDeath?.Invoke();
+            Death();
         }
+    }
+
+    protected virtual void Death()
+    {
+        ObjectPoolManager.Instance.ResivePool("", gameObject);
     }
 
     // 적이랑 플레이어랑 같이 쓸수있게 해놓았어요. 
