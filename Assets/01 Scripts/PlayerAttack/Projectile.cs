@@ -17,6 +17,8 @@ public class Projectile : MonoBehaviour
     private float totalDistance;            // 전체 이동해야 할 거리
     private Vector3 lastPosition;
 
+    private float damage = 10f;
+
     public void Initialize(Transform start, Transform target, float projectileSpeed, float projectileArcHeight)
     {
         this.transform.position = start.position;
@@ -106,6 +108,10 @@ public class Projectile : MonoBehaviour
         string name = gameObject.name;
         name = name.Replace("(Clone)", "");
         
-        ObjectPoolManager.Instance.ResivePool(name, gameObject);
+        if(collision.gameObject.TryGetComponent<CharacterStats>(out var status))
+        {
+            status.TakeDamage(damage);
+            ObjectPoolManager.Instance.ResivePool(name, gameObject);
+        }
     }
 }
