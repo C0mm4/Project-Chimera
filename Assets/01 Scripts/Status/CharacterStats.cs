@@ -39,4 +39,6 @@ public class CharacterStats : MonoBehaviour
             OnDeath?.Invoke();
         }
     }
+
+    // 적이랑 플레이어랑 같이 쓸수있게 해놓았어요.
 }
