@@ -860,6 +860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3843dc7cc46d24147a039cb445b3e61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isClick: 0
   dpad: {fileID: 665700067}
 --- !u!114 &602703446
 MonoBehaviour:
@@ -934,7 +935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33, y: -16}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &665700067
@@ -949,6 +950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb9da4124082184ea7482acac7b6c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stick: {fileID: 351084503}
+  stickRect: {fileID: 351084500}
 --- !u!1 &729463937
 GameObject:
   m_ObjectHideFlags: 0
