@@ -61,7 +61,8 @@ public class AIController : MonoBehaviour
 
             Debug.Log(Target.gameObject.layer);
 
-            if (FindNearestTargetInRange(AttackRange, Target.gameObject.layer))
+            LayerMask layer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
+            if (FindNearestTargetInRange(AttackRange, layer))
             {
                 Debug.Log($"{name}이 {Target.name}을 공격");
                 agent.destination = transform.position;
@@ -95,6 +96,7 @@ public class AIController : MonoBehaviour
             }
         }
 
+        Debug.Log($"타깃: {overlaps[targetIdx].name}");
         Target = overlaps[targetIdx].transform;
 
         return true;

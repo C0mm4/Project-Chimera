@@ -6,6 +6,6 @@ public class StageManager : Singleton<StageManager>
 {
     // Spawner spawner;
     // public Spawner spawner; 
-    public StructureBase Basement;
+    public BasementStructure Basement;
     
 }
