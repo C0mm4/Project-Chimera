@@ -100,4 +100,12 @@ public class Projectile : MonoBehaviour
             // Todo: 이팩트, 사운드, 데미지 처리 등등
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        string name = gameObject.name;
+        name = name.Replace("(Clone)", "");
+        
+        ObjectPoolManager.Instance.ResivePool(name, gameObject);
+    }
 }

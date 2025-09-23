@@ -14,6 +14,8 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         scanner = GetComponent<EnemyScanner>();
+        
+        ObjectPoolManager.Instance.CreatePool(weaponData.ProjectilePrefab.name, weaponData.ProjectilePrefab.name, 10);
     }
 
     private void Start()
@@ -36,7 +38,7 @@ public class Weapon : MonoBehaviour
         }
 
         // 3단계 공격 시작
-        GameObject projectileObj = Instantiate(weaponData.ProjectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(weaponData.ProjectilePrefab.name);
         Projectile projectile = projectileObj.GetComponent<Projectile>();
 
         projectile.Initialize(transform, scanner.nearestTarget,

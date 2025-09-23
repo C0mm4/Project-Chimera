@@ -5,36 +5,29 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    [SerializeField] private EnemyData enemyData;
+    [SerializeField] private BaseStatusSO originData;
 
-    public float MaxHealth { get; private set; }
-    public float CurrentHealth { get; private set; }
-    public float Damage { get; private set; }
-    public float MoveSpeed { get; private set; }
+    private BaseStatusSO data;
+
 
     public event Action<float, float> OnHealthChanged;
     public event Action OnDeath;
 
     private void Awake()
     {
-        if(enemyData != null)
-        {
-            MaxHealth = enemyData.maxHealth;
-            Damage = enemyData.damage;
-            MoveSpeed = enemyData.moveSpeed;
-        }
+        data = Instantiate(originData);
 
-        CurrentHealth = MaxHealth;
+        data.currentHealth = data.maxHealth;
     }
 
     public void TakeDamage(float damageAmount)
     {
-        CurrentHealth -= damageAmount;
-        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        data.currentHealth -= damageAmount;
+        data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
 
-        if(CurrentHealth <= 0)
+        if(data.currentHealth <= 0)
         {
             OnDeath?.Invoke();
         }
