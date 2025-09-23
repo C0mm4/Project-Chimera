@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.OnScreen;
 
 public class VirtualDPad : MonoBehaviour
 {
-    private void Awake()
-    {
-        gameObject.SetActive(false);
-    }
+    [SerializeField] OnScreenStick stick;
+    [SerializeField] RectTransform stickRect;
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnDragHandler(PointerEventData eventData)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (stick != null && stickRect != null)
+        {
+            stick.OnDrag(eventData);
+        }
     }
 }
