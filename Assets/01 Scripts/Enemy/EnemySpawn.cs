@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawn : Singleton<EnemySpawn>
 {
     [SerializeField] private Transform enemyTransform;
 
@@ -19,12 +19,13 @@ public class EnemySpawn : MonoBehaviour
     private void Start()
     {
         //테스트
+        /*
         ObjectPoolManager.Instance.CreatePool("enemy", "enemy", 1, enemyTransform);
         ObjectPoolManager.Instance.CreatePool("enemy2", "enemy2", 1, enemyTransform);
 
         SpawnMonster("enemy", 5, 0, 3);
         SpawnMonster("enemy2", 4, 0, 3,1.3f);
-
+        */
     }
 
     public void SpawnMonster(string name,int enemycount,int spawnpoint,int spawncount = 1,float time = 1f)
