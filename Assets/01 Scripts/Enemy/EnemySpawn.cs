@@ -4,42 +4,23 @@ using UnityEngine;
 
 public class EnemySpawn : Singleton<EnemySpawn>
 {
-    [System.Serializable]
-    private class MonsterSpawnInfo
-    {
-        public string keyName;
-        public string prefabName; //어드레서블
-        public int enemyCount;
-        public int spawnPoint;
-        public int spawnCount;
-        public float spawnTime;
 
-        public MonsterSpawnInfo(string keyname, string prefabname, int enemycount, int spawnpoint, int spawncount, float spawntime)
-        {
-            keyName = keyname;
-            prefabName = prefabname;
-            enemyCount = enemycount;
-            spawnPoint = spawnpoint;
-            spawnCount = spawncount;
-            spawnTime = spawntime;
-        }
-    }
-
+    [SerializeField] private EnemySO enemyDataSO;
     [SerializeField] private Transform enemyTransform;
 
     private BoxCollider[] boxColliders;
 
+    private Dictionary<int, List<MonsterSpawnInfo>> stageData = new Dictionary<int, List<MonsterSpawnInfo>>();
+
     //오브젝트의 크기값 비교해서 넣으면됨
     public float outRangeValue = 0.5f;
-
-    private Dictionary<int, List<MonsterSpawnInfo>> stageData = new Dictionary<int, List<MonsterSpawnInfo>>();
 
     private void Awake()
     {
         boxColliders = transform.GetComponentsInChildren<BoxCollider>();
 
         //스테이지 생성
-        stageData[1] = new List<MonsterSpawnInfo>
+        /*stageData[1] = new List<MonsterSpawnInfo>
         {
             new MonsterSpawnInfo("enemy", "enemy", 5, 0, 3, 1f),
             new MonsterSpawnInfo("enemy2", "enemy2", 4, 1, 2, 1.5f)
@@ -49,8 +30,18 @@ public class EnemySpawn : Singleton<EnemySpawn>
         {
             new MonsterSpawnInfo("enemy", "enemy", 6, 0, 3, 2f),
             new MonsterSpawnInfo("enemy2", "enemy2", 8, 0, 3, 5f)
-        };
+        };*/
 
+        // ScriptableObject 데이터 불러오기
+        foreach (StageWave wave in enemyDataSO.stageWaves)
+        {
+            if (!stageData.ContainsKey(wave.stageNumber))
+            {
+                stageData[wave.stageNumber] = new List<MonsterSpawnInfo>();
+            }
+
+            stageData[wave.stageNumber].AddRange(wave.monsters);
+        }
     }
 
     private void Start()
