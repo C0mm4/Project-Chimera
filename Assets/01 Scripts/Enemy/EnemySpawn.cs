@@ -127,7 +127,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
     }
 
     //스테이지 번호 찾아서 해당 몬스터 스테이지 생성
-    public async void StartStage(int stageNumber)
+    public void StartStage(int stageNumber)
     {
         string key = $"stage{stageNumber:D2}";
 
