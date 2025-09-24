@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         scanner.scanRange = weaponData.ScanRange;
+        scanner.detectCollider.radius = scanner.scanRange;
     }
 
     public void Attack()
