@@ -1,56 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class EnemySpawn : Singleton<EnemySpawn>
 {
-    [System.Serializable]
-    private class MonsterSpawnInfo
-    {
-        public string keyName;
-        public string prefabName; //어드레서블
-        public int enemyCount;
-        public int spawnPoint;
-        public int spawnCount;
-        public float spawnTime;
 
-        public MonsterSpawnInfo(string keyname, string prefabname, int enemycount, int spawnpoint, int spawncount, float spawntime)
-        {
-            keyName = keyname;
-            prefabName = prefabname;
-            enemyCount = enemycount;
-            spawnPoint = spawnpoint;
-            spawnCount = spawncount;
-            spawnTime = spawntime;
-        }
-    }
-
+    [SerializeField] private List<StageWaveSO> stageDataSO;
     [SerializeField] private Transform enemyTransform;
 
     private BoxCollider[] boxColliders;
 
+    private Dictionary<string, List<MonsterSpawnInfo>> stageData = new Dictionary<string, List<MonsterSpawnInfo>>();
+
     //오브젝트의 크기값 비교해서 넣으면됨
     public float outRangeValue = 0.5f;
-
-    private Dictionary<int, List<MonsterSpawnInfo>> stageData = new Dictionary<int, List<MonsterSpawnInfo>>();
 
     private void Awake()
     {
         boxColliders = transform.GetComponentsInChildren<BoxCollider>();
-
-        //스테이지 생성
-        stageData[1] = new List<MonsterSpawnInfo>
-        {
-            new MonsterSpawnInfo("enemy", "enemy", 5, 0, 3, 1f),
-            new MonsterSpawnInfo("enemy2", "enemy2", 4, 1, 2, 1.5f)
-        };
-
-        stageData[2] = new List<MonsterSpawnInfo>
-        {
-            new MonsterSpawnInfo("enemy", "enemy", 6, 0, 3, 2f),
-            new MonsterSpawnInfo("enemy2", "enemy2", 8, 0, 3, 5f)
-        };
-
     }
 
     private void Start()
@@ -76,6 +44,11 @@ public class EnemySpawn : Singleton<EnemySpawn>
             //랜덤으로 뿌려진 위치 기록용
             List<Vector3> usedPositions = new List<Vector3>();
 
+            foreach (Transform child in enemyTransform)
+            {
+                usedPositions.Add(child.position);
+            }
+
             for (int i = 0; i < enemycount; i++)
             {
                 //오브젝트 풀에서 name키값의 오브젝트 가져옮
@@ -100,8 +73,6 @@ public class EnemySpawn : Singleton<EnemySpawn>
         //지금 구조로는 생성된거만 확인해서 변경 필요
         int tryValue = 30;
 
-        //Vector3 newPosition = Vector3.zero;
-
         float randX = Random.Range(boxcoll.bounds.min.x, boxcoll.bounds.max.x);
         float randZ = Random.Range(boxcoll.bounds.min.z, boxcoll.bounds.max.z);
 
@@ -111,13 +82,28 @@ public class EnemySpawn : Singleton<EnemySpawn>
         {
             bool nearCheck = false;
 
+            //위치 중복 체크
             foreach (Vector3 pos in position)
             {
-                float distanceAll = Vector3.Distance(pos, newPositions);
-                float distanceZ = Mathf.Abs(pos.z - newPositions.z);
+                if (Vector3.Distance(pos, newPositions) < distanceMin)
+                {
+                    nearCheck = true;
+                    break;
+                }
+            }
 
-                //겹치는지 확인
-                if (distanceAll < distanceMin || distanceZ < distanceMin)
+            if (nearCheck)
+            {
+                randX = Random.Range(boxcoll.bounds.min.x, boxcoll.bounds.max.x);
+                randZ = Random.Range(boxcoll.bounds.min.z, boxcoll.bounds.max.z);
+                newPositions = new Vector3(randX, boxcoll.transform.position.y, randZ);
+                continue;
+            }
+
+            //새로 생성된거랑 위치 다시 확인
+            foreach (Vector3 occupiedPos in position)
+            {
+                if (Vector3.Distance(occupiedPos, newPositions) < distanceMin)
                 {
                     nearCheck = true;
                     break;
@@ -143,13 +129,24 @@ public class EnemySpawn : Singleton<EnemySpawn>
     //스테이지 번호 찾아서 해당 몬스터 스테이지 생성
     public void StartStage(int stageNumber)
     {
-        if (!stageData.ContainsKey(stageNumber))
+        string key = $"stage{stageNumber:D2}";
+
+        if (stageData.ContainsKey(key))
         {
-            Debug.LogWarning($"Stage {stageNumber} not found!");
-            return;
+            //키가 있으면 스테이지를 가져오지 않고 바로 몬스터 생성
+            Debug.LogWarning($"Stage {stageNumber} 가 이미 있음");
+        }
+        else
+        {
+            // SO 데이터 가져와서 넣기
+            var handle = ResourceManager.Instance.Load<StageWaveSO>(key);
+
+            StageWaveSO waveSO = handle;
+            stageData[key] = waveSO.monsters;
         }
 
-        foreach (var spawnInfo in stageData[stageNumber])
+        //몬스터 스폰부분
+        foreach (var spawnInfo in stageData[key])
         {
             // 풀 생성
             ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, spawnInfo.prefabName, 1, enemyTransform);
@@ -164,4 +161,5 @@ public class EnemySpawn : Singleton<EnemySpawn>
             );
         }
     }
+
 }
