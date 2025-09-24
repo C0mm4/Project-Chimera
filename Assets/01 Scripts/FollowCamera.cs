@@ -11,9 +11,11 @@ public class FollowCamera : MonoBehaviour
 
     private Vector3 cameraConst;
 
+
     private void Awake()
     {
         cameraConst = transform.position;
+
     }
 
     private void LateUpdate()

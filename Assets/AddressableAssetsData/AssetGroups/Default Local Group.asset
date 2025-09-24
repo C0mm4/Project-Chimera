@@ -18,12 +18,12 @@ MonoBehaviour:
   m_GUID: 17cefe0c33b178a4eadac85b75915d96
   m_SerializeEntries:
   - m_GUID: b6c4399ca66a9b74f9a6d524773a605d
-    m_Address: enemy2
+    m_Address: enemy
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1ba066f6275c7f84ea314d22fa88b6ff
-    m_Address: enemy
+    m_Address: enemy2
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -37,13 +37,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 421f014b3bd0567429e1e1f8f5570be8
-    m_Address: stage01
+  - m_GUID: f9bd7fe5e50755348a8afe714ccbb227
+    m_Address: GoldMining
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9f8eeaeab4a1a5441ba7ce58704b73fd
-    m_Address: stage02
+  - m_GUID: 83d938578b2bbd540ae7fb601b512d3d
+    m_Address: Wall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d8c5fdcc9c2ee0438a54fbbe70cb61b
+    m_Address: Tower
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 254a686ec86052646b0c3b447c35f881
+    m_Address: Barrack
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -25,11 +25,12 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+        if (data == null) return;
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
         OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
-        aiController.OnHit();
+        aiController?.OnHit();
 
         if(data.currentHealth <= 0)
         {
