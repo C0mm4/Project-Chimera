@@ -35,11 +35,22 @@ public class CollectGold : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, flyingSpeed * Time.deltaTime);
 
             // 거리가 가까워 지면 수집하는 방식
-            if (Vector3.Distance(transform.position, playerTransform.position) < 0.5f)
-            {
-                // 오브젝트 풀 키 설정 필요
-                ObjectPoolManager.Instance.ResivePool(name, gameObject);
-            }
+            //if (Vector3.Distance(transform.position, playerTransform.position) < 0.5f)
+            //{
+            //    // Todo: 플레이어에게 코인 추가, 이펙트 추가
+            //    // 오브젝트 풀 키 설정 필요
+            //    ObjectPoolManager.Instance.ResivePool(name, gameObject);
+            //}
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isFlying && playerTransform != null)
+        {
+            // Todo: 플레이어에게 코인 추가, 이펙트 추가
+            // 오브젝트 풀 키 설정 필요
+            ObjectPoolManager.Instance.ResivePool(name, gameObject);
         }
     }
 }
