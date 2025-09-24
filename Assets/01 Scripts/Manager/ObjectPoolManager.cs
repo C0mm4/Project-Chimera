@@ -30,8 +30,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             obj.SetActive(false);
 
             //Hierarchy창에서 생성위치 지정
-            if(_defaultTransform != null)
-                obj.transform.SetParent(_defaultTransform,false);
+            //if(_defaultTransform != null)
+            //    obj.transform.SetParent(_defaultTransform,false);
             // 이거 필요없을 듯?
             
             //queue에 겜오브젝트 추가
@@ -76,8 +76,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             obj.SetActive(false);
 
             //부모 위치 있는지 확인
-            if (info.defaultTransform != null)
-                obj.transform.SetParent(info.defaultTransform, false);
+            //if (info.defaultTransform != null)
+            //    obj.transform.SetParent(info.defaultTransform, false);
 
             //queue 에 생성한 오브젝트 집어넣기
             queue.Push(obj);
