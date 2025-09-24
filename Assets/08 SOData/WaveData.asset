@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19c0f94d5300bd4f9851294e58e3e8e, type: 3}
+  m_Name: WaveData
+  m_EditorClassIdentifier: 
+  stageWaves:
+  - stageNumber: 1
+    monsters:
+    - keyName: enemy
+      prefabName: enemy
+      enemyCount: 3
+      spawnPoint: 0
+      spawnCount: 3
+      spawnTime: 2
+  - stageNumber: 2
+    monsters:
+    - keyName: enemy
+      prefabName: enemy
+      enemyCount: 3
+      spawnPoint: 0
+      spawnCount: 3
+      spawnTime: 2
+    - keyName: enemy2
+      prefabName: enemy2
+      enemyCount: 2
+      spawnPoint: 0
+      spawnCount: 2
+      spawnTime: 2
+  - stageNumber: 3
+    monsters: []
+  - stageNumber: 4
+    monsters: []
+  - stageNumber: 5
+    monsters: []
+  - stageNumber: 6
+    monsters: []
+  - stageNumber: 7
+    monsters: []
+  - stageNumber: 8
+    monsters: []
+  - stageNumber: 9
+    monsters: []
+  - stageNumber: 10
+    monsters: []
+  - stageNumber: 11
+    monsters: []
+  - stageNumber: 12
+    monsters: []
+  - stageNumber: 13
+    monsters: []
+  - stageNumber: 14
+    monsters: []
+  - stageNumber: 15
+    monsters: []
+  - stageNumber: 16
+    monsters: []
+  - stageNumber: 17
+    monsters: []
+  - stageNumber: 18
+    monsters: []
+  - stageNumber: 19
+    monsters: []
+  - stageNumber: 20
+    monsters: []

@@ -19,19 +19,6 @@ public class EnemySpawn : Singleton<EnemySpawn>
     {
         boxColliders = transform.GetComponentsInChildren<BoxCollider>();
 
-        //스테이지 생성
-        /*stageData[1] = new List<MonsterSpawnInfo>
-        {
-            new MonsterSpawnInfo("enemy", "enemy", 5, 0, 3, 1f),
-            new MonsterSpawnInfo("enemy2", "enemy2", 4, 1, 2, 1.5f)
-        };
-
-        stageData[2] = new List<MonsterSpawnInfo>
-        {
-            new MonsterSpawnInfo("enemy", "enemy", 6, 0, 3, 2f),
-            new MonsterSpawnInfo("enemy2", "enemy2", 8, 0, 3, 5f)
-        };*/
-
         // ScriptableObject 데이터 불러오기
         foreach (StageWave wave in enemyDataSO.stageWaves)
         {
