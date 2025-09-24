@@ -81,6 +81,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
                 //오브젝트 풀에서 name키값의 오브젝트 가져옮
                 //가져오면서 active ture로 변하니 따로 설정할필요 X
                 GameObject enemy = ObjectPoolManager.Instance.GetPool(name);
+                enemy.name = name;
 
                 if (enemy != null)
                 {

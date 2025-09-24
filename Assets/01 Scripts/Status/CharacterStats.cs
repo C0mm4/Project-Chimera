@@ -40,7 +40,7 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Death()
     {
-        ObjectPoolManager.Instance.ResivePool("", gameObject);
+        ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject);
     }
 
     // 적이랑 플레이어랑 같이 쓸수있게 해놓았어요. 
