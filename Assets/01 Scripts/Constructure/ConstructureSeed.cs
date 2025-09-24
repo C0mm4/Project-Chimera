@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ConstructureSeed : MonoBehaviour
@@ -10,6 +11,16 @@ public class ConstructureSeed : MonoBehaviour
     }
 
     [SerializeField] private ConstructureType type;
+
+    [SerializeField] InteractionZone interactionZone;
+    private void Awake()
+    {
+
+        if (interactionZone != null)
+        {
+            interactionZone.OnInteract += Build;
+        }
+    }
 
     private void Build()
     {
@@ -39,14 +50,6 @@ public class ConstructureSeed : MonoBehaviour
             obj.transform.position = transform.position;
             obj.transform.rotation = transform.rotation;
             ObjectPoolManager.Instance.ResivePool("", gameObject);
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Build();
         }
     }
 }
