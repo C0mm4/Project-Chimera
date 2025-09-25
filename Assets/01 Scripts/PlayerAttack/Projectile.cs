@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
 
 
 
-    public void Initialize(Transform start, Transform target, WeaponSO weaponData)
+    public void Initialize(Transform start, Transform target, RangedWeaponSO weaponData)
     {
         this.transform.position = start.position;
         this.startPosition = start.position;

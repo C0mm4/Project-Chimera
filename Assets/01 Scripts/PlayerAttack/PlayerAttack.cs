@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     // 인스펙터 창에서 현재 장착 중인 무기를 연결해줄 변수
-    [SerializeField] private Weapon currentWeapon;
+    [SerializeField] private BaseWeapon currentWeapon;
 
     private void Update()
     {
