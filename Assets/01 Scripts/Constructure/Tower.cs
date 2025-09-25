@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Tower : StructureBase
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Weapon currentWeapon;
+
+    public void SetWeaponData(WeaponSO weapon)
     {
-        
+        currentWeapon.SetWeapon(weapon);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void UpdateEffect()
     {
-        
+        base.UpdateEffect();
+        {
+            if (currentWeapon != null)
+            {
+                currentWeapon.Attack();
+            }
+        }
     }
 }
