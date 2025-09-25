@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
 
 
 
-    public void Initialize(Transform start, Transform target, RangedWeaponSO weaponData)
+    public void Initialize(Transform start, Transform target, RangedWeaponSO weaponData, Transform instigator)
     {
         this.transform.position = start.position;
         this.startPosition = start.position;
@@ -36,6 +36,8 @@ public class Projectile : MonoBehaviour
         this.damage = weaponData.Damage;
         //this.arcHeight = projectileArcHeight; // 동적 높이 계산으로 변경
         this.lastPosition = transform.position;
+
+        this.Instigator = instigator;
 
         if (targetTransform != null)
         {
@@ -163,7 +165,7 @@ public class Projectile : MonoBehaviour
             // 타겟이 맞다면 데미지를 준다.
             if(collision.gameObject.TryGetComponent<CharacterStats>(out var status))
             {
-                status.TakeDamage(transform, damage);
+                status.TakeDamage(Instigator, damage);
                 ObjectPoolManager.Instance.ResivePool(name, gameObject);
             }
         }

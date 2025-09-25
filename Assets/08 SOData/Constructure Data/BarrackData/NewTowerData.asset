@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f86c9ef4f7dd346ad3d8971faec73f, type: 3}
-  m_Name: TestBarrack
+  m_Script: {fileID: 11500000, guid: 48584c447f4bbf145b8968fdaa50e3b1, type: 3}
+  m_Name: NewTowerData
   m_EditorClassIdentifier: 
-  currentHealth: 0
+  currentHealth: 50
   maxHealth: 50
   moveSpeed: 0
-  spawnUnitKey: TestUnit
-  spawnCount: 4
-  spawnRate: 1
+  weaponData: {fileID: 11400000, guid: c667bc405ed0ef64f99f9b3564ddde11, type: 2}
+  weaponDataID: 560001

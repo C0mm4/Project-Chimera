@@ -15,6 +15,7 @@ public class StructureBase : MonoBehaviour
     public virtual void SetDataSO(BaseStatusSO statData)
     {
         this.statData = statData;
+        this.statData.currentHealth = statData.maxHealth;
     }
 
     private void OnEnable()

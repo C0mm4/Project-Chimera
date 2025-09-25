@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f86c9ef4f7dd346ad3d8971faec73f, type: 3}
-  m_Name: TestBarrack
+  m_Script: {fileID: 11500000, guid: 3c18ad6bc8e968948ac9864541cd6cf4, type: 3}
+  m_Name: NewGoldMiningData
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 50
+  currentHealth: 30
+  maxHealth: 30
   moveSpeed: 0
-  spawnUnitKey: TestUnit
-  spawnCount: 4
-  spawnRate: 1
+  AddGoldDropRate: 0
+  AddGoldGetRate: 0

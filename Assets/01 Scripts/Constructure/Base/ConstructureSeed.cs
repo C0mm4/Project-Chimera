@@ -30,22 +30,22 @@ public class ConstructureSeed : MonoBehaviour
         {
             case ConstructureType.GoldMining:
                 keyName = "GoldMining";
-                so = DataManager.Instance.GetSOData<GoldMiningSO>(0);
+                so = DataManager.Instance.GetSOData<GoldMiningSO>(310000);
                 break;
 
             case ConstructureType.Tower:
                 keyName = "Tower";
-                so = DataManager.Instance.GetSOData<TowerSO>(1);
+                so = DataManager.Instance.GetSOData<TowerSO>(320000);
                 break;
 
             case ConstructureType.Wall:
                 keyName = "Wall";
-                so = DataManager.Instance.GetSOData<BaseStatusSO>(3);
+                so = DataManager.Instance.GetSOData<WallSO>(340000);
                 break;
 
             case ConstructureType.Barrack:
                 keyName = "Barrack";
-                so = DataManager.Instance.GetSOData<BarrackSO>(4);
+                so = DataManager.Instance.GetSOData<BarrackSO>(310000);
                 break;
         }
 
