@@ -16,7 +16,7 @@ public class PlayerChangeWeapon : MonoBehaviour
         ObjectPoolManager.Instance.CreatePool("Pref_510000", 1, weaponPrefab.transform);
 
         //테스트용
-        ChangeWeapon(WeaponTypes.Sword);
+        ChangeWeapon(WeaponTypes.Bow);
     }
 
     public void ChangeWeapon(WeaponTypes name)
@@ -40,7 +40,7 @@ public class PlayerChangeWeapon : MonoBehaviour
 
             //무기.. weapon으로 되어있어서 일단 넣 모르겠다
             BaseWeapon changeWeapon = weaponGameobject.GetComponent<BaseWeapon>();
-            playerAttack.SetWeapon(changeWeapon);
+            playerAttack.EquipNewWeapon(changeWeapon);
         }
     }
 
