@@ -22,7 +22,6 @@ public class UIManager : Singleton<UIManager>
     Stack<PopupUIBase> popupStack = new Stack<PopupUIBase>();
     public int PopupStackCount => popupStack.Count;
 
-    private InteractionController activeInteractor;
 
 
     private void OnEnable()
@@ -261,15 +260,5 @@ public class UIManager : Singleton<UIManager>
 
         return ui.gameObject.activeInHierarchy;
         
-    }
-
-    public void SetActiveInteraction(InteractionController interaction)
-    {
-        activeInteractor = interaction;
-    }
-
-    public void OnInteractionUpgradeButton()
-    {
-        activeInteractor.OnUpgradeButtonClick();
     }
 }
