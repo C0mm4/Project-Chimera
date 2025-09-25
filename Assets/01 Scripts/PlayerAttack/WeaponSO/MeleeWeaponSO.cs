@@ -9,4 +9,5 @@ public class MeleeWeaponSO : BaseWeaponSO
     public float AttackRadius; // 공격 판정 범위
     public float AttackArcAngle; // 공격 부채꼴 각도  
     public float hitboxActiveDuration = 0.3f; // 히트박스를 활성화할 시간
+    public LayerMask targetLayer; // 타겟 레이어
 }
