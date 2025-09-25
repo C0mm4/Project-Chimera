@@ -19,3 +19,7 @@ MonoBehaviour:
   AttackCooldown: 1
   AttackRadius: 5
   AttackArcAngle: 5
+  hitboxActiveDuration: 0.3
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 1024

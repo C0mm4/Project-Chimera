@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2784096723042234024}
-  - component: {fileID: 36236714452208924}
   - component: {fileID: 3644801218216288305}
   m_Layer: 0
   m_Name: Hitbox
@@ -17,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2784096723042234024
 Transform:
   m_ObjectHideFlags: 0
@@ -33,27 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 452557490083465496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &36236714452208924
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883626755574297641}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0.6}
 --- !u!114 &3644801218216288305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +282,6 @@ GameObject:
   m_Component:
   - component: {fileID: 452557490083465496}
   - component: {fileID: 1949867193987511846}
-  - component: {fileID: 7519542744453782163}
   - component: {fileID: 5614096177803376679}
   m_Layer: 0
   m_Name: Sword
@@ -344,27 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 02fb83223aff784429d6ad080e5a3586, type: 2}
-  attackHitbox: {fileID: 36236714452208924}
+  attackHitbox: {fileID: 5614096177803376679}
   trailRenderer: {fileID: 6002083672231767316}
---- !u!114 &7519542744453782163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7996177228957667398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 894d6b7ddc141314dbd4c66ae57d3b46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scanRange: 3
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  nearestTarget: {fileID: 0}
-  colliders: []
-  detectCollider: {fileID: 5614096177803376679}
 --- !u!135 &5614096177803376679
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -384,5 +342,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.65
+  m_Center: {x: 0, y: 0, z: 1.65}

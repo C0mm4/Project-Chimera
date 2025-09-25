@@ -10,7 +10,7 @@ public class EnemyScanner : MonoBehaviour
 {
     public float scanRange;         // 무기에서 받아올 탐지 범위(원의 반지름)
     public LayerMask targetLayer;   // 타겟 레이어
-//    public Collider[] targets;    // 탐지 범위에 들어온 타겟
+//  public Collider[] targets;    // 탐지 범위에 들어온 타겟
     public Transform nearestTarget; // 가장 가까운 적
 
     public List<Collider> colliders;
@@ -18,7 +18,7 @@ public class EnemyScanner : MonoBehaviour
 
     private void FixedUpdate()
     {
-//        targets = Physics.OverlapSphere(transform.position, scanRange, targetLayer);
+//      targets = Physics.OverlapSphere(transform.position, scanRange, targetLayer);
         nearestTarget = GetNearestEnemy();
     }
 
@@ -76,7 +76,14 @@ public class EnemyScanner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        colliders.Add(other);
+        if ((targetLayer.value & (1 << other.gameObject.layer)) > 0)
+        {
+            // 2. 레이어가 맞을 경우에만, 그리고 리스트에 이미 없다면 추가합니다.
+            if (!colliders.Contains(other))
+            {
+                colliders.Add(other);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)

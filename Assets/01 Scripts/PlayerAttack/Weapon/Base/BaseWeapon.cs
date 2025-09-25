@@ -8,20 +8,14 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField] protected BaseWeaponSO weaponData;
     protected float lastAttackTime;
 
+
     protected EnemyScanner scanner;
     [SerializeField] protected Transform InstigatorTrans;
 
-    protected virtual void Awake()
-    {
-        scanner = GetComponent<EnemyScanner>();
-        // 활 스크립트로 이동
-        //ObjectPoolManager.Instance.CreatePool(weaponData.ProjectilePrefab.name, weaponData.ProjectilePrefab.name, 10);
-    }
+    public BaseWeaponSO GetWeaponData()
 
-    protected virtual void Start()
     {
-        scanner.scanRange = weaponData.ScanRange;
-        //scanner.detectCollider.radius = scanner.scanRange;
+        return weaponData;
     }
 
     public void SetWeapon(BaseWeaponSO weapon, Transform originTrans)
@@ -30,7 +24,8 @@ public abstract class BaseWeapon : MonoBehaviour
         InstigatorTrans = originTrans;
     }
 
-    public void Attack()
+    public void Attack(Transform target)
+
     {
         // 1단계 공격 쿨타임 확인
         if (Time.time < lastAttackTime + weaponData.AttackCooldown)
@@ -39,17 +34,12 @@ public abstract class BaseWeapon : MonoBehaviour
         }
 
         // 2단계 공격 가능한 타겟이 있는지 확인
-        if (scanner.nearestTarget == null)
+        if (target == null)
         {
             return; // 타겟이 없으면 아무것도 안 함
         }
 
-        // 3단계 공격 시작
-        //GameObject projectileObj = ObjectPoolManager.Instance.GetPool(weaponData.ProjectilePrefab.name);
-        //Projectile projectile = projectileObj.GetComponent<Projectile>();
-
-        //projectile.Initialize(transform, scanner.nearestTarget, weaponData);
-        PerformAttack(scanner.nearestTarget);
+        PerformAttack(target);
         // 마지막 공격 시간 갱신
         lastAttackTime = Time.time;
     }
