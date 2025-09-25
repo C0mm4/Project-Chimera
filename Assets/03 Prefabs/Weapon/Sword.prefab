@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 02fb83223aff784429d6ad080e5a3586, type: 2}
+  InstigatorTrans: {fileID: 0}
   attackHitbox: {fileID: 36236714452208924}
   trailRenderer: {fileID: 6002083672231767316}
 --- !u!114 &7519542744453782163

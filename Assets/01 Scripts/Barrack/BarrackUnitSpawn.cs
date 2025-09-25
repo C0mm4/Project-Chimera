@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class BarrackUnitSpawn : Singleton<BarrackUnitSpawn> 
 {
-    //test 오브젝트
-    public List<BarrackUnit> testunit = new List<BarrackUnit>();
-
     //유닛 최대치 수, 현재 유닛 수, 키 값, 프리팹 이름
     private int maxUnit = 0;
 
@@ -23,12 +20,12 @@ public class BarrackUnitSpawn : Singleton<BarrackUnitSpawn>
     private void Start()
     {
         //유닛 추가 됨에 따라 해당부분 추가 필요
-        ObjectPoolManager.Instance.CreatePool("SwordMan", 1, transform);
+        //ObjectPoolManager.Instance.CreatePool("SwordMan", 1, transform);
 
         SavePositions();
 
         //테스트 생성
-        SpawnUnits(8, "SwordMan");
+        //SpawnUnits(8, "SwordMan");
     }
 
     public void Update()
@@ -47,11 +44,6 @@ public class BarrackUnitSpawn : Singleton<BarrackUnitSpawn>
             }
         }
 
-        if (Input.GetMouseButtonDown(0)) // 0은 왼쪽 마우스 버튼
-        {
-            Debug.Log("???");
-            testunit[4].TakeDamage(10); // 예: 10만큼 데미지 입기
-        }
     }
 
     public void SpawnUnits(int maxunit, string keyvalue, bool oneSpawn = false)
@@ -69,9 +61,6 @@ public class BarrackUnitSpawn : Singleton<BarrackUnitSpawn>
                 position.unitPosition = savePosition[i];
                 position.transform.position = savePosition[i];
 
-                //테스트 데이터
-                testunit.Add(position);
-                //
             }
 
             maxUnit = maxunit;

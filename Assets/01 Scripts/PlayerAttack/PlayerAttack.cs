@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void SetWeapon(Weapon newWeapon)
+    public void SetWeapon(BaseWeapon newWeapon)
     {
         currentWeapon = newWeapon;
     }

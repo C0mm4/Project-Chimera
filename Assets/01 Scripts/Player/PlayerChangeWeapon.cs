@@ -9,10 +9,10 @@ public class PlayerChangeWeapon : MonoBehaviour
     private void Awake()
     {
         //모든 무기 생성
-        ObjectPoolManager.Instance.CreatePool("Bow",1, weaponPrefab.transform);
-
+        ObjectPoolManager.Instance.CreatePool("Pref_510000", 1, weaponPrefab.transform);
+        ObjectPoolManager.Instance.CreatePool("Pref_500000", 1, weaponPrefab.transform);
         //테스트용
-        ChangeWeapon("Bow");
+        ChangeWeapon("Pref_500000");
     }
 
     public void ChangeWeapon(string name)
@@ -33,7 +33,7 @@ public class PlayerChangeWeapon : MonoBehaviour
             GameObject weaponGameobject = ObjectPoolManager.Instance.GetPool(name);
 
             //무기.. weapon으로 되어있어서 일단 넣 모르겠다
-            Weapon changeWeapon = weaponGameobject.GetComponent<Weapon>();
+            BaseWeapon changeWeapon = weaponGameobject.GetComponent<BaseWeapon>();
             playerAttack.SetWeapon(changeWeapon);
         }
     }

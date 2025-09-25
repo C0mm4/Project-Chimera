@@ -13,7 +13,7 @@ public class CharacterStats : MonoBehaviour
     public event Action<float, float> OnHealthChanged;
     public event Action OnDeath;
 
-    /*
+    
     private void Awake()
     {
         aiController = GetComponent<NormalAIController>();
@@ -21,21 +21,6 @@ public class CharacterStats : MonoBehaviour
 
         data.currentHealth = data.maxHealth;
     }
-    */
-
-    private void OnEnable()
-    {
-        // 이게 먼저 실행되도록 해야 안전함
-        if (data == null)
-        {
-            data = Instantiate(originData);
-            data.currentHealth = data.maxHealth;
-        }
-
-        if (aiController == null)
-            aiController = GetComponent<AIController>();
-    }
-
 
     public void TakeDamage(Transform instigator, float damageAmount)
     {
