@@ -5,26 +5,34 @@ using UnityEngine;
 public class StructureBase : MonoBehaviour
 {
     [Header("Inspector 연결")]
-    [SerializeField] private CharacterStats statData;
+    [SerializeField] protected BaseStatusSO statData;
 
     public void Heal()
     {
-        statData.data.currentHealth = statData.data.maxHealth;
+        statData.currentHealth = statData.maxHealth;
+    }
+
+    public virtual void SetDataSO(BaseStatusSO statData)
+    {
+        this.statData = statData;
     }
 
     private void OnEnable()
     {
-        BuildEffect();
+        if(statData != null)
+            BuildEffect();
     }
 
     private void OnDisable()
     {
-        DestroyEffect();
+        if (statData != null)
+            DestroyEffect();
     }
 
     private void Update()
     {
-        UpdateEffect();
+        if (statData != null)
+            UpdateEffect();
     }
 
     protected virtual void BuildEffect()

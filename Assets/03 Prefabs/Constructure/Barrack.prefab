@@ -136,7 +136,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statData: {fileID: 0}
-  spawnUnitKey: TestUnit
-  spawnCount: 5
   currentSpawnCount: 0
-  spawnRate: 1

@@ -5,29 +5,32 @@ using UnityEngine;
 public class Barrack : StructureBase
 {
     // 여기 내용은 SO화 해서 카드로 변경 예정
-    [SerializeField] private string spawnUnitKey;
-    [SerializeField] private int spawnCount;
     [SerializeField] private int currentSpawnCount;
-    [SerializeField] private float spawnRate;
 
+    private BarrackSO barrackData;
 
     private float lastSpawnTime;
 
     private List<GameObject> spawnUnits = new();
 
-    public void SetSpawnData(string spawnUnitKey, int spawnCount)
+    public override void SetDataSO(BaseStatusSO data)
     {
+        Debug.Log("SetData");
+        base.SetDataSO(data);
+        barrackData = statData as BarrackSO;
+
+        if (barrackData == null) return;
+
         // 기존 소환된 애들 삭제 처리
         foreach(var obj in spawnUnits)
         {
-            ObjectPoolManager.Instance.ResivePool(spawnUnitKey, obj);
+            ObjectPoolManager.Instance.ResivePool(barrackData.spawnUnitKey, obj);
         }
         spawnUnits.Clear();
 
-        this.spawnUnitKey = spawnUnitKey;
-        this.spawnCount = spawnCount;
+        // 최초 설정 시 소환 유닛 개수만큼 소환
         currentSpawnCount = 0;
-        for (int i = 0; i < spawnCount; i++)
+        for (int i = 0; i < barrackData.spawnCount; i++)
         {
             Spawn();
         }
@@ -36,7 +39,7 @@ public class Barrack : StructureBase
     protected override void BuildEffect()
     {
         base.BuildEffect();
-        ObjectPoolManager.Instance.CreatePool(spawnUnitKey, spawnUnitKey, 4, transform);
+        ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, barrackData.spawnUnitKey, 4, transform);
     }
 
     protected override void DestroyEffect()
@@ -44,7 +47,7 @@ public class Barrack : StructureBase
         base.DestroyEffect();
         foreach (var obj in spawnUnits)
         {
-            ObjectPoolManager.Instance.ResivePool(spawnUnitKey, obj);
+            ObjectPoolManager.Instance.ResivePool(barrackData.spawnUnitKey, obj);
         }
 
         spawnUnits.Clear();
@@ -54,9 +57,9 @@ public class Barrack : StructureBase
     {
         base.UpdateEffect();
         // 소환된 개수가 적으면, 주기적으로 소환
-        if (currentSpawnCount < spawnCount)
+        if (currentSpawnCount < barrackData.spawnCount)
         {
-            if (Time.time - lastSpawnTime >= spawnRate)
+            if (Time.time - lastSpawnTime >= barrackData.spawnRate)
             {
                 {
                     Spawn();
@@ -68,7 +71,7 @@ public class Barrack : StructureBase
 
     private void Spawn()
     {
-        var obj = ObjectPoolManager.Instance.GetPool(spawnUnitKey);
+        var obj = ObjectPoolManager.Instance.GetPool(barrackData.spawnUnitKey);
         if (obj != null)
         {
             spawnUnits.Add(obj);
