@@ -22,8 +22,6 @@ public class Projectile : MonoBehaviour
     private float flightDuration;            // 전체 이동해야 할 거리
     private float timeElapsed;
 
-
-
     public void Initialize(Transform start, Transform target, RangedWeaponSO weaponData)
     {
         this.transform.position = start.position;
@@ -129,6 +127,7 @@ public class Projectile : MonoBehaviour
     }
 
     // 타겟이 죽어서 마지막 위치에 도달했을 때
+    // 화살이 연달아 두 발 날라갈 때, 한 발 먼저 맞고 죽으면 그 다음 화살이 그 자리에서 멈추는 버그?
     private void CheckForArrival()
     {
         string name = gameObject.name;
