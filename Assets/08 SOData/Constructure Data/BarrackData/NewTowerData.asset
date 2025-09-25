@@ -16,3 +16,4 @@ MonoBehaviour:
   maxHealth: 50
   moveSpeed: 0
   weaponData: {fileID: 11400000, guid: c667bc405ed0ef64f99f9b3564ddde11, type: 2}
+  weaponDataID: 560001
