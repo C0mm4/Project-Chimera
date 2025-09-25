@@ -154,8 +154,9 @@ public class Projectile : MonoBehaviour
 
 
     // 살아있는 타겟 공격시 발동
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
+
         string name = gameObject.name;
         name = name.Replace("(Clone)", "");
 
@@ -163,7 +164,7 @@ public class Projectile : MonoBehaviour
         if (targetTransform != null && collision.transform == targetTransform)
         {
             // 타겟이 맞다면 데미지를 준다.
-            if(collision.gameObject.TryGetComponent<CharacterStats>(out var status))
+            if (collision.gameObject.TryGetComponent<CharacterStats>(out var status))
             {
                 status.TakeDamage(Instigator, damage);
                 ObjectPoolManager.Instance.ResivePool(name, gameObject);
