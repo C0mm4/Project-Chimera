@@ -6,6 +6,8 @@ using UnityEngine;
 /// 
 public class Projectile : MonoBehaviour
 {
+    public Transform Instigator;
+
     private Transform targetTransform;      // 현재 타겟의 위치
     private Vector3 startPosition;          // 발사체 시작 위치(플레이어 or 무기)
 
@@ -24,7 +26,7 @@ public class Projectile : MonoBehaviour
 
 
 
-    public void Initialize(Transform start, Transform target, WeaponSO weaponData)
+    public void Initialize(Transform start, Transform target, RangedWeaponSO weaponData)
     {
         this.transform.position = start.position;
         this.startPosition = start.position;
@@ -161,7 +163,7 @@ public class Projectile : MonoBehaviour
             // 타겟이 맞다면 데미지를 준다.
             if(collision.gameObject.TryGetComponent<CharacterStats>(out var status))
             {
-                status.TakeDamage(damage);
+                status.TakeDamage(transform, damage);
                 ObjectPoolManager.Instance.ResivePool(name, gameObject);
             }
         }

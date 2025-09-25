@@ -7,7 +7,7 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private BaseStatusSO originData;
 
-    AIController aiController;
+    NormalAIController aiController;
 
     public BaseStatusSO data;
 
@@ -17,20 +17,20 @@ public class CharacterStats : MonoBehaviour
 
     private void Awake()
     {
-        aiController = GetComponent<AIController>();
+        aiController = GetComponent<NormalAIController>();
         data = Instantiate(originData);
 
         data.currentHealth = data.maxHealth;
     }
 
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage(Transform instigator, float damageAmount)
     {
         if (data == null) return;
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
         OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
-        aiController?.OnHit();
+        aiController?.OnHit(instigator);
 
         if(data.currentHealth <= 0)
         {
