@@ -23,7 +23,7 @@ public class BarrackUnitSpawn : Singleton<BarrackUnitSpawn>
     private void Start()
     {
         //유닛 추가 됨에 따라 해당부분 추가 필요
-        ObjectPoolManager.Instance.CreatePool("SwordMan", 1, transform);
+        ObjectPoolManager.Instance.CreatePool("SwordMan", transform);
 
         SavePositions();
 

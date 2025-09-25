@@ -7,10 +7,10 @@ public class Test : MonoBehaviour
 
     void Start()
     {
-        ObjectPoolManager.Instance.CreatePool("GoldMining", 1);
-        ObjectPoolManager.Instance.CreatePool("Tower", 1);
-        ObjectPoolManager.Instance.CreatePool("Wall", 1);
-        ObjectPoolManager.Instance.CreatePool("Barrack", 1);
+        ObjectPoolManager.Instance.CreatePool("GoldMining");
+        ObjectPoolManager.Instance.CreatePool("Tower");
+        ObjectPoolManager.Instance.CreatePool("Wall");
+        ObjectPoolManager.Instance.CreatePool("Barrack");
     }
 
 }
