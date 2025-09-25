@@ -18,4 +18,10 @@ public class PlayerAttack : MonoBehaviour
             currentWeapon.Attack();
         }
     }
+
+    public void SetWeapon(Weapon newWeapon)
+    {
+        currentWeapon = newWeapon;
+    }
+
 }

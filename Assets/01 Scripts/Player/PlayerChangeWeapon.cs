@@ -1,0 +1,42 @@
+using UnityEngine;
+
+public class PlayerChangeWeapon : MonoBehaviour
+{
+    //무기 생성 위치
+    [SerializeField] private GameObject weaponPrefab;
+
+
+    private void Awake()
+    {
+        //모든 무기 생성
+        ObjectPoolManager.Instance.CreatePool("Bow",1, weaponPrefab.transform);
+
+        //테스트용
+        ChangeWeapon("Bow");
+    }
+
+    public void ChangeWeapon(string name)
+    {
+        //무기 바꾸기전 다 반환
+        foreach (Transform transforms in weaponPrefab.transform)
+        {
+            ObjectPoolManager.Instance.ResivePool(transforms.name, transforms.gameObject);
+        }
+        
+        //플레이어와 같은 위치에 있는 어택에 접근
+        PlayerAttack playerAttack = GetComponent<PlayerAttack>();
+
+        //스크립트 있는지 확인
+        if (playerAttack != null)
+        {
+            //name의 프리팹 무기 오브젝트를 활성화
+            GameObject weaponGameobject = ObjectPoolManager.Instance.GetPool(name);
+
+            //무기.. weapon으로 되어있어서 일단 넣 모르겠다
+            Weapon changeWeapon = weaponGameobject.GetComponent<Weapon>();
+            playerAttack.SetWeapon(changeWeapon);
+        }
+    }
+}
+
+
