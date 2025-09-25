@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     {
         scanner = GetComponent<EnemyScanner>();
         
-        ObjectPoolManager.Instance.CreatePool(weaponData.ProjectilePrefab.name, weaponData.ProjectilePrefab.name, 10);
+        ObjectPoolManager.Instance.CreatePool(weaponData.ProjectilePrefab.name, 10);
     }
 
     private void Start()
