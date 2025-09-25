@@ -7,7 +7,7 @@ public class CharacterStats : MonoBehaviour
 
     AIController aiController;
 
-    private BaseStatusSO data;
+    public BaseStatusSO data;
 
 
     public event Action<float, float> OnHealthChanged;

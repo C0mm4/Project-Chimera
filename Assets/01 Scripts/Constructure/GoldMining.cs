@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StructureBase : MonoBehaviour
+public class GoldMining : MonoBehaviour
 {
-    
+
 }

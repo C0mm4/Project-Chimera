@@ -25,30 +25,38 @@ public class ConstructureSeed : MonoBehaviour
     private void Build()
     {
         string keyName = "";
+        BaseStatusSO so = null;
         switch (type)
         {
             case ConstructureType.GoldMining:
                 keyName = "GoldMining";
+                so = DataManager.Instance.GetSOData<GoldMiningSO>(0);
                 break;
 
             case ConstructureType.Tower:
                 keyName = "Tower";
+                so = DataManager.Instance.GetSOData<TowerSO>(1);
                 break;
 
             case ConstructureType.Wall:
                 keyName = "Wall";
+                so = DataManager.Instance.GetSOData<BaseStatusSO>(3);
                 break;
 
             case ConstructureType.Barrack:
                 keyName = "Barrack";
+                so = DataManager.Instance.GetSOData<BarrackSO>(4);
                 break;
         }
 
-        if(keyName != "")
+        if(keyName != "" && so != null)
         {
             var obj = ObjectPoolManager.Instance.GetPool(keyName);
             obj.transform.position = transform.position;
             obj.transform.rotation = transform.rotation;
+
+            // SO Data로드 후 주입
+            obj.GetComponent<StructureBase>().SetDataSO(so);
             ObjectPoolManager.Instance.ResivePool("", gameObject);
         }
     }

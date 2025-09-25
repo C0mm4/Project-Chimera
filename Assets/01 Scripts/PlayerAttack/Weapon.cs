@@ -20,6 +20,17 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
+        SetData();
+    }
+
+    public void SetWeapon(WeaponSO newWeapon)
+    {
+        weaponData = Instantiate(newWeapon);
+        SetData();
+    }
+
+    private void SetData()
+    {
         scanner.scanRange = weaponData.ScanRange;
         scanner.detectCollider.radius = scanner.scanRange;
     }
