@@ -6,5 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewTowerData", menuName = "Constructure Data/New Tower Data")]
 public class TowerSO : BaseStatusSO
 {
+    public WeaponSO weaponData;
 
 }

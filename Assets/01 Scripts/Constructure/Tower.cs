@@ -5,6 +5,15 @@ using UnityEngine;
 public class Tower : StructureBase
 {
     [SerializeField] private Weapon currentWeapon;
+    private TowerSO data;
+
+    public override void SetDataSO(BaseStatusSO statData)
+    {
+        base.SetDataSO(statData);
+        data = statData as TowerSO;
+
+        SetWeaponData(data.weaponData);
+    }
 
     public void SetWeaponData(WeaponSO weapon)
     {
