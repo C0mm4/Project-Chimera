@@ -40,7 +40,7 @@ public class ConstructureSeed : MonoBehaviour
 
             case ConstructureType.Wall:
                 keyName = "Wall";
-                so = DataManager.Instance.GetSOData<BaseStatusSO>(3);
+                so = DataManager.Instance.GetSOData<WallSO>(3);
                 break;
 
             case ConstructureType.Barrack:

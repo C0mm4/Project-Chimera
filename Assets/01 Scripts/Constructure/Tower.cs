@@ -9,15 +9,35 @@ public class Tower : StructureBase
 
     public override void SetDataSO(BaseStatusSO statData)
     {
-        base.SetDataSO(statData);
-        data = statData as TowerSO;
+        // 기존 정보 파괴
+        DestroyEffect();
 
-        SetWeaponData(data.weaponData);
+        // 새로운 정보 설정
+        base.SetDataSO(statData);
+        BuildEffect();
     }
 
     public void SetWeaponData(WeaponSO weapon)
     {
+        if (currentWeapon == null)
+            currentWeapon = GetComponentInChildren<Weapon>();
         currentWeapon.SetWeapon(weapon);
+    }
+
+    protected override void BuildEffect()
+    {
+        base.BuildEffect();
+        data = statData as TowerSO;
+        data.weaponData = DataManager.Instance.GetSOData<WeaponSO>(data.weaponDataID);
+        SetWeaponData(data.weaponData);
+
+    }
+
+    protected override void DestroyEffect()
+    {
+        base.DestroyEffect();
+        data = null;
+        statData = null;
     }
 
     protected override void UpdateEffect()

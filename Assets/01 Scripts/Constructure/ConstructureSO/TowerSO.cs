@@ -7,5 +7,5 @@ using UnityEngine;
 public class TowerSO : BaseStatusSO
 {
     public WeaponSO weaponData;
-
+    public int weaponDataID;
 }

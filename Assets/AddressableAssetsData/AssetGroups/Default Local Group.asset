@@ -78,12 +78,17 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0619f45f4be3dd54398090522874b23b
-    m_Address: 1
+    m_Address: SO_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f43d7b3b20e2b7745aa970bf566cd069
-    m_Address: 0
+    m_Address: SO_0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b34a610fe65b8543a2f611527820cc6
+    m_Address: SO_3
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c18ad6bc8e968948ac9864541cd6cf4, type: 3}
   m_Name: NewGoldMiningData
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 0
+  currentHealth: 30
+  maxHealth: 30
   moveSpeed: 0
   AddGoldDropRate: 0
   AddGoldGetRate: 0
