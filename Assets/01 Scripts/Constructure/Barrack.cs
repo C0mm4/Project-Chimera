@@ -35,7 +35,7 @@ public class Barrack : StructureBase
     protected override void BuildEffect()
     {
         base.BuildEffect();
-        ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, barrackData.spawnUnitKey, 4, transform);
+        ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey,  4, transform);
     }
 
     protected override void DestroyEffect()
@@ -64,7 +64,7 @@ public class Barrack : StructureBase
         // 소환 시도 시 풀 생성 안되어있으면 삭제
         if (!ObjectPoolManager.Instance.ContainsPool(barrackData.spawnUnitKey))
         {
-            ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, barrackData.spawnUnitKey, 4, transform);
+            ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, 4, transform);
         }
         
         var obj = ObjectPoolManager.Instance.GetPool(barrackData.spawnUnitKey);

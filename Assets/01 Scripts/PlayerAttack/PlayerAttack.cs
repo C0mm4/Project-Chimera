@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -45,6 +43,9 @@ public class PlayerAttack : MonoBehaviour
     public void EquipNewWeapon(BaseWeapon newWeapon)
     {
         currentWeapon = newWeapon;
+        currentWeapon.InstigatorTrans = transform;
         ApplyWeaponScanRange();
     }
+
+
 }

@@ -10,7 +10,7 @@ public abstract class BaseWeapon : MonoBehaviour
 
 
     protected EnemyScanner scanner;
-    [SerializeField] protected Transform InstigatorTrans;
+    public Transform InstigatorTrans;
 
     public BaseWeaponSO GetWeaponData()
 
