@@ -72,7 +72,7 @@ public class Sword : BaseWeapon
         {
             if (other.TryGetComponent<CharacterStats>(out var status))
             {
-                status.TakeDamage(MeleeData.Damage);
+                status.TakeDamage(InstigatorTrans, MeleeData.Damage);
                 targetsHitThisSwing.Add(other); // 맞은 적 목록에 추가
             }
         }

@@ -46,7 +46,8 @@ public class Tower : StructureBase
         {
             if (currentWeapon != null)
             {
-                currentWeapon.Attack();
+                // 타워도 스캐너
+                //currentWeapon.Attack();
             }
         }
     }
