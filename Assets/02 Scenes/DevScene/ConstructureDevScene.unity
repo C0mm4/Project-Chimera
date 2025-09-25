@@ -534,6 +534,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bow
       objectReference: {fileID: 0}
+    - target: {fileID: 7365781287275157151, guid: 021a122b9e0fc814992186c6fdcc4575,
+        type: 3}
+      propertyPath: InstigatorTrans
+      value: 
+      objectReference: {fileID: 864053925}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -656,7 +661,7 @@ PrefabInstance:
         type: 3}
       propertyPath: currentWeapon
       value: 
-      objectReference: {fileID: 1232210505}
+      objectReference: {fileID: 1377614280}
     - target: {fileID: 4865030376591887468, guid: a92b1c6607e64fb43b8f81df88f957e2,
         type: 3}
       propertyPath: m_Name
@@ -925,16 +930,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1232210505 stripped
+--- !u!114 &1377614280 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8586296523868868393, guid: 021a122b9e0fc814992186c6fdcc4575,
+  m_CorrespondingSourceObject: {fileID: 7365781287275157151, guid: 021a122b9e0fc814992186c6fdcc4575,
     type: 3}
   m_PrefabInstance: {fileID: 462449101}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1489f623dcdbe5c4da12311953da9c12, type: 3}
+  m_Script: {fileID: 11500000, guid: 433aa55c85e370946a386d05a5f282b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1422829811

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tower : StructureBase
 {
-    [SerializeField] private Weapon currentWeapon;
+    [SerializeField] private BaseWeapon currentWeapon;
     private TowerSO data;
 
     public override void SetDataSO(BaseStatusSO statData)
@@ -17,18 +17,18 @@ public class Tower : StructureBase
         BuildEffect();
     }
 
-    public void SetWeaponData(WeaponSO weapon)
+    public void SetWeaponData(BaseWeaponSO weapon)
     {
         if (currentWeapon == null)
-            currentWeapon = GetComponentInChildren<Weapon>();
-        currentWeapon.SetWeapon(weapon);
+            currentWeapon = GetComponentInChildren<BaseWeapon>();
+        currentWeapon.SetWeapon(weapon, transform);
     }
 
     protected override void BuildEffect()
     {
         base.BuildEffect();
         data = statData as TowerSO;
-        data.weaponData = DataManager.Instance.GetSOData<WeaponSO>(data.weaponDataID);
+        data.weaponData = DataManager.Instance.GetSOData<BaseWeaponSO>(data.weaponDataID);
         SetWeaponData(data.weaponData);
 
     }

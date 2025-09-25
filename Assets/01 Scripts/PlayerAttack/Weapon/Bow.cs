@@ -27,7 +27,7 @@ public class Bow : BaseWeapon
         Projectile projectile = projectileObj.GetComponent<Projectile>();
         if (projectile != null)
         {
-            projectile.Initialize(transform, scanner.nearestTarget, RangedData);
+            projectile.Initialize(transform, scanner.nearestTarget, RangedData, InstigatorTrans);
         }
     }
 }

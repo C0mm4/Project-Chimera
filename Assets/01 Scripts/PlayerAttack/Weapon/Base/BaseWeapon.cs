@@ -9,7 +9,7 @@ public abstract class BaseWeapon : MonoBehaviour
     protected float lastAttackTime;
 
     protected EnemyScanner scanner;
-
+    [SerializeField] protected Transform InstigatorTrans;
 
     protected virtual void Awake()
     {
@@ -22,6 +22,12 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         scanner.scanRange = weaponData.ScanRange;
         //scanner.detectCollider.radius = scanner.scanRange;
+    }
+
+    public void SetWeapon(BaseWeaponSO weapon, Transform originTrans)
+    {
+        this.weaponData = weapon;
+        InstigatorTrans = originTrans;
     }
 
     public void Attack()
