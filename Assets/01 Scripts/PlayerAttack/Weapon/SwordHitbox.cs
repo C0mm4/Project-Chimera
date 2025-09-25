@@ -39,7 +39,7 @@ public class SwordHitbox : MonoBehaviour
         // 데미지 처리
         if (other.TryGetComponent<CharacterStats>(out var status))
         {
-            status.TakeDamage(damage);
+            status.TakeDamage(transform, damage);
             Debug.Log(other.name + "에게 " + damage + " 데미지!");
         }
     }

@@ -163,7 +163,7 @@ public class Projectile : MonoBehaviour
             // 타겟이 맞다면 데미지를 준다.
             if(collision.gameObject.TryGetComponent<CharacterStats>(out var status))
             {
-                status.TakeDamage(damage);
+                status.TakeDamage(transform, damage);
                 ObjectPoolManager.Instance.ResivePool(name, gameObject);
             }
         }
