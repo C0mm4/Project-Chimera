@@ -169,13 +169,14 @@ MonoBehaviour:
   StructureDetectRange: 10
   AttackRange: 3
   PlayerChaseTime: 20
-  TargetDist: 0
+  AttackCoolTime: 1
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 128
   StructureLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  TargetDist: 0
 --- !u!195 &7380422303505727834
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -196,7 +197,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 7
   m_ObstacleAvoidanceType: 4
 --- !u!114 &4301712139916797185
 MonoBehaviour:

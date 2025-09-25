@@ -4,27 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIController : MonoBehaviour
+public class NormalAIController : AIControllerBase
 {
-    [field: SerializeField] public Transform Target { get; private set; }
-
     NavMeshAgent agent;
     NavMeshPath path;
 
-    public float PlayerDetectRange;
-    public float StructureDetectRange;
-    public float AttackRange;
-    public float PlayerChaseTime;
-
-    float playerChaseStartTime;
-
     public float TargetDist;
-
-    // Player player;
-    public LayerMask PlayerLayerMask;
-    public LayerMask StructureLayerMask;
-
-    private Collider[] overlaps = new Collider[10];
 
     private void Awake()
     {
@@ -32,15 +17,11 @@ public class AIController : MonoBehaviour
         path = new NavMeshPath();
 
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         Target = StageManager.Instance.Basement.transform;
         playerChaseStartTime = Time.time;
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -59,17 +40,13 @@ public class AIController : MonoBehaviour
         {
             TargetDist = Vector3.Distance(Target.position, transform.position);
 
-            Debug.Log(Target.gameObject.layer);
-
             LayerMask layer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
             if (FindNearestTargetInRange(AttackRange, layer))
             {
-                Debug.Log($"{name}이 {Target.name}을 공격");
                 agent.destination = transform.position;
             }
             else
             {
-                Debug.Log($"{Target.name}을 추적");
                 agent.SetDestination(Target.position);
             }
 
@@ -96,7 +73,6 @@ public class AIController : MonoBehaviour
             }
         }
 
-        Debug.Log($"타깃: {overlaps[targetIdx].name}");
         Target = overlaps[targetIdx].transform;
 
         return true;
