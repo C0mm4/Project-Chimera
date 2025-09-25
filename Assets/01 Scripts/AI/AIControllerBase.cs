@@ -90,21 +90,6 @@ public abstract class AIControllerBase : MonoBehaviour
 
         if (count < 1) return false;
 
-        float minDist = 12345;
-        int targetIdx = -1;
-
-        for (int i = 0; i < count; ++i)
-        {
-            float dist = Vector3.Distance(transform.position, overlaps[i].transform.position);
-            if (dist < minDist)
-            {
-                minDist = dist;
-                targetIdx = i;
-            }
-        }
-
-        Target = overlaps[targetIdx].transform;
-
         return true;
         
     }
