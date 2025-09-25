@@ -7,78 +7,30 @@ using UnityEngine.AI;
 public class NormalAIController : AIControllerBase
 {
     NavMeshAgent agent;
-    NavMeshPath path;
 
-    public float TargetDist;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         agent = GetComponent<NavMeshAgent>();
-        path = new NavMeshPath();
+        searchStrategy = new GeneralSearchStrategy();
+        InitStrategy();
 
     }
     protected override void OnEnable()
     {
         base.OnEnable();
+
         Target = StageManager.Instance.Basement.transform;
-        playerChaseStartTime = Time.time;
     }
 
-    private void FixedUpdate()
+    protected override void Update()
     {
-        if (Time.time - playerChaseStartTime > PlayerChaseTime)
-        {
-            Target = StageManager.Instance.Basement.transform;
-        }
-
-        //if (!FindNearestTargetInRange(StructureDetectRange, StructureLayerMask))
-        //{
-        //    Target = StageManager.Instance.Basement.transform;
-        //}
-
-        if (Target != null)
-        {
-            TargetDist = Vector3.Distance(Target.position, transform.position);
-
-            LayerMask layer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
-            if (FindNearestTargetInRange(AttackRange, layer))
-            {
-                agent.destination = transform.position;
-            }
-            else
-            {
-                agent.SetDestination(Target.position);
-            }
-
-        }
-
+        base.Update();
     }
 
-    private bool FindNearestTargetInRange(float range, LayerMask layerMask)
-    {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, range, overlaps, layerMask);
 
-        if (count < 1) return false;
-
-        float minDist = 12345;
-        int targetIdx = -1;
-
-        for (int i = 0; i < count; ++i)
-        {
-            float dist = Vector3.Distance(transform.position, overlaps[i].transform.position);
-            if (dist < minDist)
-            {
-                minDist = dist;
-                targetIdx = i;
-            }
-        }
-
-        Target = overlaps[targetIdx].transform;
-
-        return true;
-    }
-
-    public void OnHit()
+    public void OnHit(Transform instigator)
     {
 
         // Debug.Log($"에너미 주위 반지름 {PlayerDetectRange} 이내에 플레이어 있는지 감지");
@@ -87,17 +39,37 @@ public class NormalAIController : AIControllerBase
 
         // if (checkPlayer)
         // {
-            // Debug.Log("플레이어 찾음");
-            //playerChaseStartTime = Time.time;
-            //Target = GameManager.Instance.Player.transform;
+        // Debug.Log("플레이어 찾음");
+        //playerChaseStartTime = Time.time;
+        //Target = GameManager.Instance.Player.transform;
         // }
-        playerChaseStartTime = Time.time;
-        Target = GameManager.Instance.Player.transform;
+        Debug.Log($"{instigator.name}");
+        if (instigator.CompareTag("Player"))
+        {
+            playerChaseStartTime = Time.time;
+
+        }
+
+        Target = instigator;
     }
 
     private void OnPathFailed()
     {
         // 타겟으로 가는 경로 못찾을 때 실행되는 함수 
 
+    }
+
+    protected override void ChaseTarget()
+    {
+        agent.SetDestination(Target.position);
+    }
+
+    protected override void InitStrategy()
+    {
+        GeneralSearchStrategy strategy = searchStrategy as GeneralSearchStrategy;
+
+        strategy.Owner = transform;
+        strategy.SearchLayerMask = StructureLayerMask;
+        strategy.SearchRange = StructureDetectRange;
     }
 }

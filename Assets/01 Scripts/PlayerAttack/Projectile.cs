@@ -6,6 +6,8 @@ using UnityEngine;
 /// 
 public class Projectile : MonoBehaviour
 {
+    public Transform Instigator;
+
     private Transform targetTransform;      // 현재 타겟의 위치
     private Vector3 startPosition;          // 발사체 시작 위치(플레이어 or 무기)
 

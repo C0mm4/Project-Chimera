@@ -6,24 +6,32 @@ public class FlyingAIController : AIControllerBase
 {
     CharacterController characterController;
 
-    private void Awake()
-    {
-        characterController = GetComponent<CharacterController>();
-    }
-    private void FixedUpdate()
+    protected override void ChaseTarget()
     {
         Vector3 dir = Target.position - transform.position;
         dir.y = 0;
 
         Quaternion rot = Quaternion.LookRotation(dir);
         transform.rotation = rot;
-        
-        if (!isStop)
+
+        if (!shouldStop)
         {
             characterController.Move(dir.normalized * 3f * Time.fixedDeltaTime);
 
         }
 
         Debug.DrawRay(transform.position, dir);
+    }
+   
+
+    protected override void Awake()
+    {
+        base.Awake();
+        characterController = GetComponent<CharacterController>();
+    }
+
+    protected override void InitStrategy()
+    {
+        throw new System.NotImplementedException();
     }
 }
