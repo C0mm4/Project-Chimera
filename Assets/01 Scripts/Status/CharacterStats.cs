@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
@@ -15,6 +13,7 @@ public class CharacterStats : MonoBehaviour
     public event Action<float, float> OnHealthChanged;
     public event Action OnDeath;
 
+    
     private void Awake()
     {
         aiController = GetComponent<NormalAIController>();
@@ -25,6 +24,7 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(Transform instigator, float damageAmount)
     {
+        Debug.Log(data);
         if (data == null) return;
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);

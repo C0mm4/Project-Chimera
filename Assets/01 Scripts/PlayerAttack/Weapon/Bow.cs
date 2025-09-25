@@ -9,7 +9,7 @@ public class Bow : BaseWeapon
     {
         if (RangedData.ProjectilePrefab != null)
         {
-            ObjectPoolManager.Instance.CreatePool(RangedData.ProjectilePrefab.name, RangedData.ProjectilePrefab.name, 10);
+            ObjectPoolManager.Instance.CreatePool(RangedData.ProjectilePrefab.name, 10);
         }
     }
 

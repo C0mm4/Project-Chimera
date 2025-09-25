@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WaveData", menuName = "EnemySO")]
+[CreateAssetMenu(fileName = "WaveData", menuName = "StageSO")]
 public class StageWaveSO : ScriptableObject
 {
     public List<MonsterSpawnInfo> monsters;
