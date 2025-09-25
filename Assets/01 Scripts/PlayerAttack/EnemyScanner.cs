@@ -32,7 +32,7 @@ public class EnemyScanner : MonoBehaviour
 
         for(int i = 0; i < colliders.Count; i++)
         {
-            if (colliders[i] == null)
+            if (colliders[i] == null || !colliders[i].gameObject.activeSelf || !colliders[i].enabled)
             {
                 colliders.RemoveAt(i--);
                 continue;
