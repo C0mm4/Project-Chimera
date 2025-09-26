@@ -6,6 +6,8 @@ using UnityEngine;
 /// 
 public class Projectile : MonoBehaviour
 {
+    public Transform Instigator;
+
     private Transform targetTransform;      // 현재 타겟의 위치
     private Vector3 startPosition;          // 발사체 시작 위치(플레이어 or 무기)
 
@@ -23,8 +25,7 @@ public class Projectile : MonoBehaviour
     private float timeElapsed;
 
 
-
-    public void Initialize(Transform start, Transform target, WeaponSO weaponData)
+    public void Initialize(Transform start, Transform target, RangedWeaponSO weaponData, Transform instigator)
     {
         this.transform.position = start.position;
         this.startPosition = start.position;
@@ -34,6 +35,8 @@ public class Projectile : MonoBehaviour
         this.damage = weaponData.Damage;
         //this.arcHeight = projectileArcHeight; // 동적 높이 계산으로 변경
         this.lastPosition = transform.position;
+
+        this.Instigator = instigator;
 
         if (targetTransform != null)
         {
@@ -129,6 +132,7 @@ public class Projectile : MonoBehaviour
     }
 
     // 타겟이 죽어서 마지막 위치에 도달했을 때
+    // 화살이 연달아 두 발 날라갈 때, 한 발 먼저 맞고 죽으면 그 다음 화살이 그 자리에서 멈추는 버그?
     private void CheckForArrival()
     {
         string name = gameObject.name;
@@ -150,8 +154,9 @@ public class Projectile : MonoBehaviour
 
 
     // 살아있는 타겟 공격시 발동
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
+
         string name = gameObject.name;
         name = name.Replace("(Clone)", "");
 
@@ -159,9 +164,9 @@ public class Projectile : MonoBehaviour
         if (targetTransform != null && collision.transform == targetTransform)
         {
             // 타겟이 맞다면 데미지를 준다.
-            if(collision.gameObject.TryGetComponent<CharacterStats>(out var status))
+            if (collision.gameObject.TryGetComponent<CharacterStats>(out var status))
             {
-                status.TakeDamage(damage);
+                status.TakeDamage(Instigator, damage);
                 ObjectPoolManager.Instance.ResivePool(name, gameObject);
             }
         }

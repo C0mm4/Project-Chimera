@@ -154,7 +154,7 @@ PrefabInstance:
     - target: {fileID: 239674662140926685, guid: 021a122b9e0fc814992186c6fdcc4575,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.683
+      value: -0.021
       objectReference: {fileID: 0}
     - target: {fileID: 239674662140926685, guid: 021a122b9e0fc814992186c6fdcc4575,
         type: 3}
@@ -200,6 +200,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586296523868868393, guid: 021a122b9e0fc814992186c6fdcc4575,
+        type: 3}
+      propertyPath: weaponData
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

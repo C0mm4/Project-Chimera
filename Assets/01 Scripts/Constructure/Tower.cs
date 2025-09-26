@@ -4,11 +4,40 @@ using UnityEngine;
 
 public class Tower : StructureBase
 {
-    [SerializeField] private Weapon currentWeapon;
+    [SerializeField] private BaseWeapon currentWeapon;
+    private TowerSO data;
 
-    public void SetWeaponData(WeaponSO weapon)
+    public override void SetDataSO(BaseStatusSO statData)
     {
-        currentWeapon.SetWeapon(weapon);
+        // 기존 정보 파괴
+        DestroyEffect();
+
+        // 새로운 정보 설정
+        base.SetDataSO(statData);
+        BuildEffect();
+    }
+
+    public void SetWeaponData(BaseWeaponSO weapon)
+    {
+        if (currentWeapon == null)
+            currentWeapon = GetComponentInChildren<BaseWeapon>();
+        currentWeapon.SetWeapon(weapon, transform);
+    }
+
+    protected override void BuildEffect()
+    {
+        base.BuildEffect();
+        data = statData as TowerSO;
+        data.weaponData = DataManager.Instance.GetSOData<BaseWeaponSO>(data.weaponDataID);
+        SetWeaponData(data.weaponData);
+
+    }
+
+    protected override void DestroyEffect()
+    {
+        base.DestroyEffect();
+        data = null;
+        statData = null;
     }
 
     protected override void UpdateEffect()
@@ -17,7 +46,8 @@ public class Tower : StructureBase
         {
             if (currentWeapon != null)
             {
-                currentWeapon.Attack();
+                // 타워도 스캐너
+                //currentWeapon.Attack();
             }
         }
     }

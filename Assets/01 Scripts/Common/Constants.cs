@@ -5,32 +5,12 @@ public enum SceneType
     Battle
 }
 
-public enum RoomType
+public enum WeaponTypes
 {
-    Up,             // 위              0
-    Down,           // 아래            1
-    Left,           // 왼              2
-    Right,          // 오른            3
-    Side,           // 왼, 오른        4
-    UpAndDown,      // 위, 아래        5
-    LeftUp,         // 왼, 위          6
-    LeftDown,       // 왼, 아래        7
-    RightUp,        // 오른, 위        8
-    RightDown,      // 오른, 아래      9
-    SideUp,         // 왼, 오른, 위    10
-    SideDown,       // 왼, 오른, 아래  11
-    UpAndDownLeft,  // 왼, 위, 아래    12
-    UpAndDownRight, // 오른, 위, 아래  13
-    All             // 모든방향        14
+    Sword,
+    Bow
 }
 
-public enum RoomOption
-{
-    town,
-    normal,
-    boss,
-    special
-}
 
 
 

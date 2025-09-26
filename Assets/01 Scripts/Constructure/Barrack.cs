@@ -22,11 +22,7 @@ public class Barrack : StructureBase
         if (barrackData == null) return;
 
         // 기존 소환된 애들 삭제 처리
-        foreach(var obj in spawnUnits)
-        {
-            ObjectPoolManager.Instance.ResivePool(barrackData.spawnUnitKey, obj);
-        }
-        spawnUnits.Clear();
+        Clear();
 
         // 최초 설정 시 소환 유닛 개수만큼 소환
         currentSpawnCount = 0;
@@ -39,18 +35,12 @@ public class Barrack : StructureBase
     protected override void BuildEffect()
     {
         base.BuildEffect();
-        ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, transform, 4);
+        ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey,  4, transform);
     }
 
     protected override void DestroyEffect()
     {
         base.DestroyEffect();
-        foreach (var obj in spawnUnits)
-        {
-            ObjectPoolManager.Instance.ResivePool(barrackData.spawnUnitKey, obj);
-        }
-
-        spawnUnits.Clear();
     }
 
     protected override void UpdateEffect()
@@ -71,6 +61,12 @@ public class Barrack : StructureBase
 
     private void Spawn()
     {
+        // 소환 시도 시 풀 생성 안되어있으면 삭제
+        if (!ObjectPoolManager.Instance.ContainsPool(barrackData.spawnUnitKey))
+        {
+            ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, 4, transform);
+        }
+        
         var obj = ObjectPoolManager.Instance.GetPool(barrackData.spawnUnitKey);
         if (obj != null)
         {
@@ -80,5 +76,15 @@ public class Barrack : StructureBase
             obj.transform.position = transform.position + randomPos;
         }
         currentSpawnCount++;
+    }
+
+    private void Clear()
+    {
+        foreach (var obj in spawnUnits)
+        {
+            ObjectPoolManager.Instance.ResivePool(barrackData.spawnUnitKey, obj);
+        }
+
+        spawnUnits.Clear();
     }
 }

@@ -119,4 +119,9 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         //풀안의 키값 삭제
         pool.Remove(keyValue);
     }
+
+    public bool ContainsPool(string keyValue) 
+    {
+        return pool.ContainsKey(keyValue);
+    }
 }

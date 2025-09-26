@@ -58,12 +58,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f8eeaeab4a1a5441ba7ce58704b73fd
-    m_Address: Stage_ID600001
+    m_Address: stage02
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 421f014b3bd0567429e1e1f8f5570be8
-    m_Address: Stage_ID600000
+    m_Address: stage01
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -72,13 +72,43 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8561a66f4b3392d4ab59693f4f618f25
-    m_Address: SO_ID450000
+  - m_GUID: fb6d53f31b0850a4bad7061f98727a84
+    m_Address: SO_310000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 643dd1672a5fef244bfaf0faf85004f1
-    m_Address: SO_ID460000
+  - m_GUID: 0619f45f4be3dd54398090522874b23b
+    m_Address: SO_320000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f43d7b3b20e2b7745aa970bf566cd069
+    m_Address: SO_310000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b34a610fe65b8543a2f611527820cc6
+    m_Address: SO_340000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0995e55f3dfcc9f4fbca34d1a6d9c72f
+    m_Address: SO_560001
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 02fb83223aff784429d6ad080e5a3586
+    m_Address: SO_550001
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 021a122b9e0fc814992186c6fdcc4575
+    m_Address: Pref_510000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f3e3b4ec63575e4db2cd10370c1f04f
+    m_Address: Pref_510000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

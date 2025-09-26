@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TestBarrack
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 0
+  maxHealth: 50
   moveSpeed: 0
-  spawnUnitKey: 
-  spawnCount: 0
-  spawnRate: 0
+  spawnUnitKey: TestUnit
+  spawnCount: 4
+  spawnRate: 1

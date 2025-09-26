@@ -5,7 +5,7 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private BaseStatusSO originData;
 
-    AIController aiController;
+    NormalAIController aiController;
 
     public BaseStatusSO data;
 
@@ -13,31 +13,16 @@ public class CharacterStats : MonoBehaviour
     public event Action<float, float> OnHealthChanged;
     public event Action OnDeath;
 
-    /*
+    
     private void Awake()
     {
-        aiController = GetComponent<AIController>();
+        aiController = GetComponent<NormalAIController>();
         data = Instantiate(originData);
 
         data.currentHealth = data.maxHealth;
     }
-    */
 
-    private void OnEnable()
-    {
-        // 이게 먼저 실행되도록 해야 안전함
-        if (data == null)
-        {
-            data = Instantiate(originData);
-            data.currentHealth = data.maxHealth;
-        }
-
-        if (aiController == null)
-            aiController = GetComponent<AIController>();
-    }
-
-
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage(Transform instigator, float damageAmount)
     {
         Debug.Log(data);
         if (data == null) return;
@@ -45,7 +30,7 @@ public class CharacterStats : MonoBehaviour
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
         OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
-        aiController?.OnHit();
+        aiController?.OnHit(instigator);
 
         if(data.currentHealth <= 0)
         {
