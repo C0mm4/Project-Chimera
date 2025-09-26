@@ -1,38 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StructureBase : MonoBehaviour
+public abstract class StructureBase : MonoBehaviour
 {
-    [Header("Inspector 연결")]
-    [SerializeField] protected BaseStatusSO statData;
+    private BaseStatusSO originData;
+    [SerializeField] private StructureData structureData;
 
     public void Heal()
     {
-        statData.currentHealth = statData.maxHealth;
+        structureData.currentHealth = structureData.maxHealth;
     }
 
     public virtual void SetDataSO(BaseStatusSO statData)
     {
-        this.statData = Instantiate(statData);
-        this.statData.currentHealth = statData.maxHealth;
+        originData = statData;
+        structureData.maxHealth = statData.maxHealth;
+        structureData.currentHealth = structureData.maxHealth;
+        CopyStatusData(statData);
     }
+
+    public abstract void CopyStatusData(BaseStatusSO statData);
 
     private void OnEnable()
     {
-        if(statData != null)
+        if(originData != null)
             BuildEffect();
     }
 
     private void OnDisable()
     {
-        if (statData != null)
+        if (originData != null)
             DestroyEffect();
     }
 
     private void Update()
     {
-        if (statData != null)
+        if (originData != null)
             UpdateEffect();
     }
 
@@ -50,4 +55,10 @@ public class StructureBase : MonoBehaviour
     {
 
     }
+}
+[Serializable]
+public struct StructureData
+{
+    public float currentHealth;
+    public float maxHealth;
 }

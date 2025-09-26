@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,16 @@ public class Tower : StructureBase
 {
     [SerializeField] private BaseWeapon currentWeapon;
     [SerializeField] private EnemyScanner scanner;
-    private TowerSO data;
+
+    [SerializeField] private TowerData data;
+
+    public override void CopyStatusData(BaseStatusSO statData)
+    {
+        TowerSO so = statData as TowerSO;
+        
+        data.weaponData = DataManager.Instance.GetSOData<BaseWeaponSO>(so.weaponDataID);
+        SetWeaponData(data.weaponData);
+    }
 
     public override void SetDataSO(BaseStatusSO statData)
     {
@@ -34,17 +44,12 @@ public class Tower : StructureBase
     protected override void BuildEffect()
     {
         base.BuildEffect();
-        data = statData as TowerSO;
-        data.weaponData = DataManager.Instance.GetSOData<BaseWeaponSO>(data.weaponDataID);
-        SetWeaponData(data.weaponData);
 
     }
 
     protected override void DestroyEffect()
     {
         base.DestroyEffect();
-        data = null;
-        statData = null;
     }
 
     protected override void UpdateEffect()
@@ -60,4 +65,11 @@ public class Tower : StructureBase
             }
         }
     }
+}
+
+
+[Serializable]
+public struct TowerData
+{
+    public BaseWeaponSO weaponData;
 }

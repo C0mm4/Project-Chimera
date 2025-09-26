@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class Barrack : StructureBase
     // 여기 내용은 SO화 해서 카드로 변경 예정
     [SerializeField] private int currentSpawnCount;
 
-    private BarrackSO barrackData;
+    [SerializeField] private BarrackData barrackData;
 
     private float lastSpawnTime;
 
@@ -17,9 +18,6 @@ public class Barrack : StructureBase
     {
         Debug.Log("SetData");
         base.SetDataSO(data);
-        barrackData = statData as BarrackSO;
-
-        if (barrackData == null) return;
 
         // 기존 소환된 애들 삭제 처리
         Clear();
@@ -30,6 +28,14 @@ public class Barrack : StructureBase
         {
             Spawn();
         }
+    }
+
+    public override void CopyStatusData(BaseStatusSO statData)
+    {
+        BarrackSO so = statData as BarrackSO;
+        barrackData.spawnRate = so.spawnRate;
+        barrackData.spawnUnitKey = so.spawnUnitKey;
+        barrackData.spawnCount = so.spawnCount;
     }
 
     protected override void BuildEffect()
@@ -71,7 +77,7 @@ public class Barrack : StructureBase
         if (obj != null)
         {
             spawnUnits.Add(obj);
-            Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            Vector3 randomPos = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f));
             randomPos = randomPos.normalized;
             obj.transform.position = transform.position + randomPos;
         }
@@ -87,4 +93,12 @@ public class Barrack : StructureBase
 
         spawnUnits.Clear();
     }
+}
+
+[Serializable]
+public struct BarrackData
+{
+    public string spawnUnitKey;
+    public int spawnCount;
+    public float spawnRate;
 }

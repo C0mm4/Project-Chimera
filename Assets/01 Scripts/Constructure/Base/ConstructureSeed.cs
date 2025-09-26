@@ -45,7 +45,7 @@ public class ConstructureSeed : MonoBehaviour
 
             case ConstructureType.Barrack:
                 keyName = "Barrack";
-                so = DataManager.Instance.GetSOData<BarrackSO>(310000);
+                so = DataManager.Instance.GetSOData<BarrackSO>(330000);
                 break;
         }
 
