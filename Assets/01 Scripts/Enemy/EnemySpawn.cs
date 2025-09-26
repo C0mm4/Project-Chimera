@@ -31,7 +31,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
         StartStage(1);
     }
 
-    public IEnumerator SpawnMonster(MonsterSpawnInfo info, int prevWaveIndex = -1)
+    public IEnumerator SpawnMonster(MonsterSpawnInfo info, int waveIndex)
     {
         if (info.spawnEnemyCount <= 0 || info.spawnPointIndex < 0 || info.spawnPointIndex >= boxColliders.Length)
         {
@@ -76,7 +76,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
                     {
                         bool isAllClearPrevWaves = false;
 
-                        while (isAllClearPrevWaves) 
+                        while (!isAllClearPrevWaves) 
                         { 
                             isAllClearPrevWaves = true;
                             foreach(var index in info.checkPrevWaveIndexes)
@@ -92,22 +92,17 @@ public class EnemySpawn : Singleton<EnemySpawn>
                                     break;
                                 }
                             }
-                        }
-
-                        Debug.Log($"{prevWaveIndex} 활성화 되었음. 몹 사망 대기.");
-                        while (waveSpawnDict.ContainsKey(prevWaveIndex) && waveSpawnDict[prevWaveIndex].Count > 0)
-                        {
                             yield return null;
                         }
+
                     }
 
                     // Wave간 딜레이만큼 대기
-                    Debug.Log($"{prevWaveIndex} 몹 사망 확인. 활성화.");
                     yield return new WaitForSeconds(info.delayBetweenWave);
                 }
             }
             // 웨이브 스폰 정보 생성
-            StartCoroutine(SpawnMonsterCoroutine(info, prevWaveIndex+1));
+            StartCoroutine(SpawnMonsterCoroutine(info, waveIndex));
         }
             
     }
@@ -239,7 +234,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
             var spawnInfo = stageData[key][i];
             ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, 1, enemyTransform);
             // 웨이브 스폰 정보 클리어
-            StartCoroutine(SpawnMonster(spawnInfo, i-1));
+            StartCoroutine(SpawnMonster(spawnInfo, i));
         }
     }
 
