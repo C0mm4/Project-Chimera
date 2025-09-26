@@ -21,6 +21,7 @@ public abstract class AIControllerBase : MonoBehaviour
 
     public float TargetGroundDistance;
 
+
     public LayerMask PlayerLayerMask;
     public LayerMask StructureLayerMask;
 
@@ -38,6 +39,7 @@ public abstract class AIControllerBase : MonoBehaviour
     {
         playerChaseElapseTime = 0f;
         Target = searchStrategy.SearchTarget();
+
     }
 
     protected virtual void Update()
@@ -109,11 +111,12 @@ public abstract class AIControllerBase : MonoBehaviour
     {
         if (Target == null) return false;
 
-        if (TargetGroundDistance <= AttackRange)
-            return true;
+        LayerMask targetLayer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, AttackRange, overlaps, targetLayer);
 
-        return false;
-        
+        if (count == 0) return false;
+
+        return true;
     }
 
     protected virtual void TryAttack()
