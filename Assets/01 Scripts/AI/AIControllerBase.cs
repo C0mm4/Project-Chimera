@@ -19,6 +19,8 @@ public abstract class AIControllerBase : MonoBehaviour
 
     protected bool shouldStop;
 
+    public float TargetGroundDistance;
+
     public LayerMask PlayerLayerMask;
     public LayerMask StructureLayerMask;
 
@@ -26,8 +28,6 @@ public abstract class AIControllerBase : MonoBehaviour
     protected ISearchStrategy searchStrategy;
 
     protected Collider[] overlaps = new Collider[10];
-
-    protected Transform closestStructure;
 
     protected virtual void Awake()
     {
@@ -42,7 +42,8 @@ public abstract class AIControllerBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Target == GameManager.Instance.Player.transform)
+
+        if (Target.gameObject.CompareTag("Player"))
         {
             playerChaseElapseTime += Time.deltaTime;
         }
@@ -56,6 +57,11 @@ public abstract class AIControllerBase : MonoBehaviour
         {
             Target = searchStrategy.SearchTarget();
         }
+
+        Vector3 dir = Target.position - transform.position;
+        dir.y = 0f;
+        TargetGroundDistance = dir.magnitude;
+
 
         if (attackCoolDown > 0)
         {
@@ -75,10 +81,22 @@ public abstract class AIControllerBase : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (!shouldStop)
+        
+        ChaseTarget();
+        
+    }
+
+    public void OnHit(Transform instigator)
+    {
+        if (SearchType == AISearchType.BaseOnly) return;
+        
+        if (instigator.CompareTag("Player"))
         {
-            ChaseTarget();
+            playerChaseElapseTime = 0f;
+
         }
+
+        Target = instigator;
     }
 
     // 일반 ai : 피격 시 공격 유닛을 타겟팅, 가까운 구조물 공격, 그 외 기지 공격
@@ -91,20 +109,24 @@ public abstract class AIControllerBase : MonoBehaviour
     {
         if (Target == null) return false;
 
-        LayerMask targetLayer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
+        if (TargetGroundDistance <= AttackRange)
+            return true;
 
-        int count = Physics.OverlapSphereNonAlloc(transform.position, AttackRange, overlaps, targetLayer);
-
-        if (count < 1) return false;
-
-        return true;
+        return false;
         
     }
 
     protected virtual void TryAttack()
     {
         if (attackCoolDown > 0f) return;
+
+        LayerMask targetLayer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, AttackRange, overlaps, targetLayer);
+
+        if (count < 1) return;
+
         Debug.Log("공격");
+        Debug.DrawRay(transform.position, Target.position - transform.position, Color.red, 3f);
         attackCoolDown = AttackCoolTime;
     }
 

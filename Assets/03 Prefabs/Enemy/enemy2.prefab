@@ -135,7 +135,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -168,9 +168,10 @@ MonoBehaviour:
   <Target>k__BackingField: {fileID: 0}
   PlayerDetectRange: 20
   StructureDetectRange: 10
-  AttackRange: 3
+  AttackRange: 1
   PlayerChaseTime: 20
-  AttackCoolTime: 1
+  AttackCoolTime: 3
+  TargetGroundDistance: 0
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -192,9 +193,9 @@ NavMeshAgent:
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
