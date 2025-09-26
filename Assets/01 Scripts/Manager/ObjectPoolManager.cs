@@ -36,7 +36,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
         pool.Add(_addressableName, queue);
 
-        //ㅇ
         poolOther[_addressableName] = new SavePool
         {
             prefabPath = _addressableName,
