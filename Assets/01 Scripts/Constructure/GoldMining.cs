@@ -6,7 +6,7 @@ public class GoldMining : StructureBase
 {
     private GoldMiningSO data;
 
-    public override void SetDataSO(BaseStatusSO statData)
+    public override void SetDataSO(StructureSO statData)
     {
         DestroyEffect();
 

@@ -13,7 +13,7 @@ public class Barrack : StructureBase
 
     private List<GameObject> spawnUnits = new();
 
-    public override void SetDataSO(BaseStatusSO data)
+    public override void SetDataSO(StructureSO data)
     {
         Debug.Log("SetData");
         base.SetDataSO(data);

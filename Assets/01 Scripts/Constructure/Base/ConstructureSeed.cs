@@ -25,7 +25,7 @@ public class ConstructureSeed : MonoBehaviour
     private void Build()
     {
         string keyName = "";
-        BaseStatusSO so = null;
+        StructureSO so = null;
         switch (type)
         {
             case ConstructureType.GoldMining:

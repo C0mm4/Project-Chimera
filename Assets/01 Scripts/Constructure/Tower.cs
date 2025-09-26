@@ -7,7 +7,7 @@ public class Tower : StructureBase
     [SerializeField] private BaseWeapon currentWeapon;
     private TowerSO data;
 
-    public override void SetDataSO(BaseStatusSO statData)
+    public override void SetDataSO(StructureSO statData)
     {
         // 기존 정보 파괴
         DestroyEffect();
