@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-
     public void OnTriggerEnter(Collider other)
     {
         UpgradeableObject objectToInteract = other.GetComponent<UpgradeableObject>();
