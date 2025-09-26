@@ -15,7 +15,7 @@ public class GoldMining : StructureBase
         data.AddGoldGetRate = so.AddGoldGetRate;
     }
 
-    public override void SetDataSO(BaseStatusSO statData)
+    public override void SetDataSO(StructureSO statData)
     {
         DestroyEffect();
 

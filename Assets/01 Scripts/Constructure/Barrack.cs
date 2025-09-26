@@ -14,7 +14,7 @@ public class Barrack : StructureBase
 
     private List<GameObject> spawnUnits = new();
 
-    public override void SetDataSO(BaseStatusSO data)
+    public override void SetDataSO(StructureSO data)
     {
         Debug.Log("SetData");
         base.SetDataSO(data);
@@ -41,7 +41,7 @@ public class Barrack : StructureBase
     protected override void BuildEffect()
     {
         base.BuildEffect();
-        ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey,  4, transform);
+        //ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey,  4, transform);
     }
 
     protected override void DestroyEffect()

@@ -18,7 +18,7 @@ public class Tower : StructureBase
         SetWeaponData(data.weaponData);
     }
 
-    public override void SetDataSO(BaseStatusSO statData)
+    public override void SetDataSO(StructureSO statData)
     {
         // 기존 정보 파괴
         DestroyEffect();

@@ -15,3 +15,12 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 0
   moveSpeed: 0
+  prefabKey: 
+  levelProgressionData:
+  - upgradeCost: 0
+    modelAddressableKey: Wall
+  - upgradeCost: 0
+    modelAddressableKey: Wall
+  - upgradeCost: 100
+    modelAddressableKey: Wall
+  upgradeData: {fileID: 11400000, guid: 0f1daabaabbd9c54fa11b45da09d4041, type: 2}

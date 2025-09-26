@@ -25,7 +25,7 @@ public class ConstructureSeed : MonoBehaviour
     private void Build()
     {
         string keyName = "";
-        BaseStatusSO so = null;
+        StructureSO so = null;
         switch (type)
         {
             case ConstructureType.GoldMining:
@@ -57,7 +57,8 @@ public class ConstructureSeed : MonoBehaviour
 
             // SO Data로드 후 주입
             obj.GetComponent<StructureBase>().SetDataSO(so);
-            ObjectPoolManager.Instance.ResivePool("", gameObject);
+            //ObjectPoolManager.Instance.ResivePool("", gameObject);
+            Destroy(gameObject);
         }
     }
 }
