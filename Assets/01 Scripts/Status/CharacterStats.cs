@@ -14,13 +14,15 @@ public class CharacterStats : MonoBehaviour
     public event Action OnDeath;
 
     
-    private void Awake()
+    protected virtual void Awake()
     {
         aiController = GetComponent<GroundAIController>();
         data = Instantiate(originData);
 
         data.currentHealth = data.maxHealth;
     }
+
+
 
     public void TakeDamage(Transform instigator, float damageAmount)
     {

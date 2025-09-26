@@ -12,11 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19c0f94d5300bd4f9851294e58e3e8e, type: 3}
   m_Name: stage01
   m_EditorClassIdentifier: 
-  stageNumber: 1
   monsters:
-  - keyName: enemy
-    prefabName: enemy
+  - keyName: Pref_410000
+    prefabName: Pref_410000
+    enemyCount: 1
+    spawnPoint: 0
+    spawnCount: 2
+    spawnTime: 1
+    delayType: 0
+  - keyName: Pref_400000
+    prefabName: Pref_400000
     enemyCount: 4
     spawnPoint: 0
     spawnCount: 2
-    spawnTime: 2
+    spawnTime: 1
+    delayType: 2

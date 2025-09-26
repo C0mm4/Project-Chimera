@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2660380780824614002}
   - component: {fileID: 1888641629233495242}
   - component: {fileID: 5942528185500870559}
-  - component: {fileID: 7524187025307379095}
   - component: {fileID: 83660988967734492}
+  - component: {fileID: -9138799410854351110}
   m_Layer: 10
   m_Name: FlyingEnemy
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2996141773863253391}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.42, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -87,20 +87,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7524187025307379095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2996141773863253391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2270d163f3d604e44a64654c407d561e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
-  data: {fileID: 0}
 --- !u!114 &83660988967734492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +100,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropData: {fileID: 11400000, guid: 20b726dd2251f9d4e9b8cd2ec39f79f4, type: 2}
+--- !u!114 &-9138799410854351110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2996141773863253391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a1fd6a269cad74e81b84aafa2d938b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
+  data: {fileID: 0}
+  body: {fileID: 0}
+  spawnWaveIndex: 0
 --- !u!1 &6512859645000050065
 GameObject:
   m_ObjectHideFlags: 0
