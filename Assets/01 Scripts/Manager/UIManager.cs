@@ -48,6 +48,11 @@ public class UIManager : Singleton<UIManager>
         //string uiName = GetUIName<T>();
 
         //var ui = CreateSlotUI<T>();
+        //if (popupStack.Count == 0)
+        //{
+        //    Time.timeScale = 0f;
+        //    Debug.Log("멈춰!");
+        //}
 
         var ui = GetUI<T>();
         ui?.OpenUI();
@@ -64,6 +69,7 @@ public class UIManager : Singleton<UIManager>
     
     public void CloseUI<T>() where T : UIBase
     {
+
         if (IsExistUI<T>())
         {
             var ui = GetUI<T>();
@@ -76,13 +82,21 @@ public class UIManager : Singleton<UIManager>
         if (popupStack.Count == 0) return;
 
         var ui = popupStack.Pop();
+
         if (ui != null)
         {
             ui?.CloseUI();
             //Destroy(ui.gameObject);
         }
-        string uiName = ui.GetType().ToString();
+        // string uiName = ui.GetType().ToString();
         // _uiDictionary.Remove(uiName);
+
+        //if (popupStack.Count == 0)
+        //{
+        //    Time.timeScale = 1f;
+        //    Debug.Log("시작!");
+        //}
+
         --sortOrder;
     }
 
@@ -195,11 +209,14 @@ public class UIManager : Singleton<UIManager>
 
     private void CheckEventSystem()
     {
-        if(_eventSystem != null)
-            return;
-        
-        string prefKey = Path.UI + UICommonPath + Prefab.EventSystem;
-        _eventSystem = ResourceManager.Instance.Create<GameObject>(prefKey).GetComponent<EventSystem>();
+        _eventSystem = FindObjectOfType<EventSystem>();
+
+        if (_eventSystem == null)
+        {
+            GameObject eventSystemObj = new GameObject("EventSystem");
+            _eventSystem = eventSystemObj.AddComponent<EventSystem>();
+            eventSystemObj.AddComponent<StandaloneInputModule>();
+        }
     }
 
 
