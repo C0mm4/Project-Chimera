@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7606492771139652345}
   - component: {fileID: 4292571648784641013}
   - component: {fileID: 9089943232005748426}
-  - component: {fileID: 6136591530898584360}
   - component: {fileID: 3111053988382130647}
   - component: {fileID: 1679639439913389785}
   - component: {fileID: 2908227222125576037}
+  - component: {fileID: -7773208148130843124}
   m_Layer: 10
   m_Name: FlyGeneralEnemy
   m_TagString: Untagged
@@ -101,20 +101,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6136591530898584360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678014764863322199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2270d163f3d604e44a64654c407d561e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
-  data: {fileID: 0}
 --- !u!114 &3111053988382130647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +166,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7773208148130843124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678014764863322199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a1fd6a269cad74e81b84aafa2d938b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
+  body: {fileID: 0}
+  spawnWaveIndex: 0
 --- !u!1 &7633907912013213165
 GameObject:
   m_ObjectHideFlags: 0

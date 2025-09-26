@@ -54,13 +54,14 @@ MonoBehaviour:
   AttackRange: 10
   PlayerChaseTime: 10
   AttackCoolTime: 1
+  TargetGroundDistance: 0
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 128
   StructureLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  SearchType: 1
+  SearchType: 0
 --- !u!143 &5942528185500870559
 CharacterController:
   m_ObjectHideFlags: 0
@@ -113,7 +114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
-  data: {fileID: 0}
   body: {fileID: 0}
   spawnWaveIndex: 0
 --- !u!1 &6512859645000050065

@@ -17,7 +17,7 @@ public class EnemyController : CharacterStats
     private void FixedUpdate()
     {
         if (body == null) return;
-        body.velocity *= 0.3f;
+//        body.velocity *= 0.3f;
         if(body.velocity.sqrMagnitude <= 0.01f)
         {
             body.velocity = Vector3.zero;
