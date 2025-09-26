@@ -1,38 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradePopupUI : PopupUIBase
+public class UpgradePopupUI : MonoBehaviour
 {
-
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button closeButton;
     [SerializeField] private Button backgroundButton;
 
-    private void Start()
+    void Start()
     {
-
-        upgradeButton.onClick.AddListener(OnClickUpgradeButton);
-        closeButton.onClick.AddListener(OnClickCloseButton);
-
+        upgradeButton.onClick.AddListener(Close);
+        closeButton.onClick.AddListener(Close);
 
         if (backgroundButton != null)
         {
-            backgroundButton.onClick.AddListener(OnClickCloseButton);
+            backgroundButton.onClick.AddListener(Close);
         }
+
+        gameObject.SetActive(false);
     }
 
-
-    public void OnClickUpgradeButton()
+    public void Open()
     {
-        Debug.Log("실행");
-        UIManager.Instance.ClosePopupUI();
+        gameObject.SetActive(true);
+        Time.timeScale = 0f;      
+        Debug.Log("업그레이드 창 열림 & 게임 일시정지");
     }
 
-    public void OnClickCloseButton()
+    public void Close()
     {
-        Debug.Log("닫음");
-        UIManager.Instance.ClosePopupUI();
+        gameObject.SetActive(false);
+        Time.timeScale = 1f;        
+        Debug.Log("업그레이드 창 닫힘 & 게임 재개");
     }
 }
