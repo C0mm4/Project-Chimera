@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class StructureBase : MonoBehaviour
 {
 	[Header("Inspector 연결")]
-    [SerializeField] private StructureData structureData;
+    [SerializeField] protected StructureData structureData;
     [SerializeField] protected StructureSO statData; // 정진규: BaseStatusSO 에서 StructureSO로 변경
     [SerializeField] protected InteractionZone interactionZone; // 정진규: 건물도 업그레이드 하려면 필요
     
@@ -32,7 +32,7 @@ public abstract class StructureBase : MonoBehaviour
 
     public abstract void CopyStatusData(BaseStatusSO statData);
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         if (interactionZone != null)
         {
@@ -43,7 +43,7 @@ public abstract class StructureBase : MonoBehaviour
             BuildEffect();
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         if (interactionZone != null)
         {
@@ -75,7 +75,7 @@ public abstract class StructureBase : MonoBehaviour
     }
 
     // 업그레이드 시도 메서드
-    private void TryStartUpgrade()
+    protected virtual void TryStartUpgrade()
     {
         //if (CurrentLevel >= statData.GetMaxLevel())
         //{
@@ -133,7 +133,7 @@ public abstract class StructureBase : MonoBehaviour
         int nextLevel = structureData.CurrentLevel + 1;
 
         // 베이스 건물의 레벨이 부족할 때
-        if (nextLevel >= PlayerBaseManager.Instance.CurrentBaseLevel)
+        if (nextLevel > PlayerBaseManager.Instance.CurrentBaseLevel)
         {
             Debug.Log($"베이스 레벨이 부족합니다. (필요 베이스 레벨: {statData.GetMaxLevel()})"); // 여기를 GetMaxLevel()로 변경하는 것이 더 명확할 수 있습니다.
             return;
