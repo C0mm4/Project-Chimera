@@ -1,36 +1,36 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private BaseStatusSO originData;
 
-    AIController aiController;
+    GroundAIController aiController;
 
-    private BaseStatusSO data;
+    public BaseStatusSO data;
 
 
     public event Action<float, float> OnHealthChanged;
     public event Action OnDeath;
 
+    
     private void Awake()
     {
-        aiController = GetComponent<AIController>();
+        aiController = GetComponent<GroundAIController>();
         data = Instantiate(originData);
 
         data.currentHealth = data.maxHealth;
     }
 
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage(Transform instigator, float damageAmount)
     {
+        Debug.Log(data);
         if (data == null) return;
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
         OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
-        aiController?.OnHit();
+        aiController?.OnHit(instigator);
 
         if(data.currentHealth <= 0)
         {

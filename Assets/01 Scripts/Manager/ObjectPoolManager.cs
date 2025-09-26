@@ -13,7 +13,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     private Dictionary<string, SavePool> poolOther = new Dictionary<string, SavePool>();
 
     //풀 생성
-    public void CreatePool(string _keyValue, string _prefabPath, int _count = 1, Transform _defaultTransform = null)
+    public void CreatePool(string _keyValue, int _count = 1, Transform _defaultTransform = null)
     {
         if (pool.ContainsKey(_keyValue))
         {
@@ -21,18 +21,16 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             return;
         }
 
+        string _prefabPath = _keyValue;
+
         Stack<GameObject> queue = new Stack<GameObject>();
 
         for (int i = 0; i < _count; i++)
         {
             //로드+생성 후 오브젝트 끄기
-            GameObject obj = ResourceManager.Instance.Create<GameObject>(_prefabPath,_defaultTransform);
+            GameObject obj = ResourceManager.Instance.Create<GameObject>(_prefabPath, _defaultTransform);
             obj.SetActive(false);
-
-            //Hierarchy창에서 생성위치 지정
-            //if(_defaultTransform != null)
-            //    obj.transform.SetParent(_defaultTransform,false);
-            // 이거 필요없을 듯?
+            obj.name = _keyValue;
             
             //queue에 겜오브젝트 추가
             queue.Push(obj);
@@ -74,6 +72,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             SavePool info = poolOther[keyValue];
             GameObject obj = ResourceManager.Instance.Create<GameObject>(info.prefabPath, info.defaultTransform);
             obj.SetActive(false);
+            obj.name = keyValue;
 
             //부모 위치 있는지 확인
             //if (info.defaultTransform != null)
@@ -122,5 +121,10 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
         //풀안의 키값 삭제
         pool.Remove(keyValue);
+    }
+
+    public bool ContainsPool(string keyValue) 
+    {
+        return pool.ContainsKey(keyValue);
     }
 }

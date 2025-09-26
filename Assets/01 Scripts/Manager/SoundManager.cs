@@ -35,7 +35,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         audioMixer = ResourceManager.Instance.Load<AudioMixer>(MixerPath);
 
-        ObjectPoolManager.Instance.CreatePool("Pref_SFX", "Pref_SFX", 10, transform);
+        ObjectPoolManager.Instance.CreatePool("Pref_SFX", 10, transform);
     }
 
     public void SetVolume(float volume, VolumeType type = VolumeType.Master)

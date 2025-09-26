@@ -12,7 +12,7 @@ public class InputUIBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(Screen.width / 2, Screen.height / 2); // 왼쪽 아래에 입력 범위 설정
+        rect.sizeDelta = new Vector2(Screen.width, Screen.height / 2); // 왼쪽 아래에 입력 범위 설정
     }
 
     public void OnDrag(PointerEventData eventData)
