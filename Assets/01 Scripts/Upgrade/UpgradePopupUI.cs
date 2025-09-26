@@ -1,29 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradePopupUI : MonoBehaviour
+public class UpgradePopupUI : PopupUIBase
 {
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button closeButton;
 
-    private PlayerInteraction playerInteraction;
+    private UpgradeableObject currentObject;
 
-    public void Initialize(PlayerInteraction owner)
+    public void Initialize(UpgradeableObject targetObject)
     {
-        playerInteraction = owner;
+        currentObject = targetObject;
     }
 
     void Start()
     {
-        upgradeButton.onClick.AddListener(CloseUI);
-        closeButton.onClick.AddListener(CloseUI);
+        upgradeButton.onClick.AddListener(OnInteractionFinished);
+        closeButton.onClick.AddListener(OnInteractionFinished);
     }
 
-    void CloseUI()
+    void OnInteractionFinished()
     {
-        if (playerInteraction != null)
+        if (currentObject != null)
         {
-            playerInteraction.CloseUIAndResumeGame();
+            currentObject.hasBeenInteractedWith = true;
         }
+
+        UIManager.Instance.ClosePopupUI();
     }
 }
