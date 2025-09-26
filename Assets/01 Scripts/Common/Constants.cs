@@ -11,6 +11,13 @@ public enum WeaponTypes
     Bow
 }
 
+public enum AISearchType
+{
+    General,
+    PlayerFirst,
+    DistanceFirst,
+    BaseOnly,
+}
 
 
 
