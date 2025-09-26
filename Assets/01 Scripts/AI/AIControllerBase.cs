@@ -13,7 +13,7 @@ public abstract class AIControllerBase : MonoBehaviour
     public float PlayerChaseTime;
     public float AttackCoolTime;
 
-    protected float playerChaseStartTime;
+    protected float playerChaseElapseTime;
 
     protected float attackCoolDown;
 
@@ -22,6 +22,7 @@ public abstract class AIControllerBase : MonoBehaviour
     public LayerMask PlayerLayerMask;
     public LayerMask StructureLayerMask;
 
+    public AISearchType SearchType;
     protected ISearchStrategy searchStrategy;
 
     protected Collider[] overlaps = new Collider[10];
@@ -30,17 +31,23 @@ public abstract class AIControllerBase : MonoBehaviour
 
     protected virtual void Awake()
     {
+        InitializeStrategy();
     }
 
     protected virtual void OnEnable()
     {
-        playerChaseStartTime = Time.time;
-
+        playerChaseElapseTime = 0f;
+        Target = searchStrategy.SearchTarget();
     }
 
     protected virtual void Update()
     {
-        if (Time.time - playerChaseStartTime > PlayerChaseTime)
+        if (Target == GameManager.Instance.Player.transform)
+        {
+            playerChaseElapseTime += Time.deltaTime;
+        }
+
+        if (playerChaseElapseTime > PlayerChaseTime)
         {
             Target = null;
         }
@@ -90,21 +97,6 @@ public abstract class AIControllerBase : MonoBehaviour
 
         if (count < 1) return false;
 
-        float minDist = 12345;
-        int targetIdx = -1;
-
-        for (int i = 0; i < count; ++i)
-        {
-            float dist = Vector3.Distance(transform.position, overlaps[i].transform.position);
-            if (dist < minDist)
-            {
-                minDist = dist;
-                targetIdx = i;
-            }
-        }
-
-        Target = overlaps[targetIdx].transform;
-
         return true;
         
     }
@@ -116,6 +108,45 @@ public abstract class AIControllerBase : MonoBehaviour
         attackCoolDown = AttackCoolTime;
     }
 
-    protected abstract void InitStrategy();
+    protected void InitializeStrategy()
+    {
+        switch (SearchType)
+        {
+            case AISearchType.General:
+                GeneralSearchStrategy generalStrategy = new GeneralSearchStrategy();
+
+                generalStrategy.Owner = transform;
+                generalStrategy.SearchLayerMask = StructureLayerMask;
+                generalStrategy.SearchRange = StructureDetectRange;
+
+                searchStrategy = generalStrategy;
+                break;
+            case AISearchType.PlayerFirst:
+                PlayerAggroSearchStrategy playerAggroSearchStrategy = new PlayerAggroSearchStrategy();
+
+                playerAggroSearchStrategy.Owner = transform;
+                playerAggroSearchStrategy.PlayerSearchRange = PlayerDetectRange;
+                playerAggroSearchStrategy.StructureSearchRange = StructureDetectRange;
+                playerAggroSearchStrategy.PlayerLayerMask = PlayerLayerMask;
+                playerAggroSearchStrategy.StructureLayerMask = StructureLayerMask;
+
+                searchStrategy = playerAggroSearchStrategy;
+                break;
+            case AISearchType.DistanceFirst:
+                DFSStrategy dfsStrategy = new DFSStrategy();
+
+                dfsStrategy.Owner = transform;
+                dfsStrategy.SearchLayerMask = LayerMask.GetMask("Player", "Structure");
+                dfsStrategy.SearchRange = 5f;
+
+                searchStrategy = dfsStrategy;
+                break;
+            case AISearchType.BaseOnly:
+                BaseOnlySearchStrategy baseOnlyStrategy = new BaseOnlySearchStrategy();
+
+                searchStrategy = baseOnlyStrategy;
+                break;
+        }
+    }
     
 }
