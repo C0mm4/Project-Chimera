@@ -93,7 +93,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 021a122b9e0fc814992186c6fdcc4575
-    m_Address: Pref_500000
+    m_Address: Pref_510000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -154,6 +154,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 84c4942e724bd6d4982619819f95199b
     m_Address: Pref_400003
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 159eefb96fdd73b41bd2a2e95a5bc62f
+    m_Address: UI/Elements/UpgradePopupUI
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

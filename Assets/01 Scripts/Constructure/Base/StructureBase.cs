@@ -54,8 +54,8 @@ public abstract class StructureBase : MonoBehaviour
 
     private void Update()
     {
-        if (originData != null)
-            UpdateEffect();
+        //if (originData != null)
+        //    UpdateEffect();
     }
 
     protected virtual void BuildEffect()
