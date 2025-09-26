@@ -227,7 +227,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
         for (int i = 0; i < stageData[key].Count; i++)
         {
             var spawnInfo = stageData[key][i];
-            ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, 1, enemyTransform);
+            ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, enemyTransform);
             // 웨이브 스폰 정보 클리어
             StartCoroutine(SpawnMonster(spawnInfo, i));
         }
