@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class GroundAIController : AIControllerBase
 {
     NavMeshAgent agent;
+    NavMeshPath path;
+
+    Vector3 randomTargetOffset;
+
 
     protected override void Awake()
     {
         base.Awake();
 
         agent = GetComponent<NavMeshAgent>();
+        randomTargetOffset = Random.insideUnitSphere;
 
     }
     protected override void OnEnable()
@@ -24,26 +30,23 @@ public class GroundAIController : AIControllerBase
     protected override void Update()
     {
         base.Update();
+        
     }
 
-
-    
-
-    private void OnPathFailed()
-    {
-        // 타겟으로 가는 경로 못찾을 때 실행되는 함수 
-
-    }
 
     protected override void ChaseTarget()
     {
         if (shouldStop)
         {
-            agent.SetDestination(transform.position);
+            agent.isStopped = true;
         }
         else
         {
-            agent.SetDestination(Target.position);
+            agent.isStopped = false;
+            agent.SetDestination(Target.position + randomTargetOffset);
+               
+
+            
         }
     }
 
