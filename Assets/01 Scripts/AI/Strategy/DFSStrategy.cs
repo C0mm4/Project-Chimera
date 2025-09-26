@@ -5,7 +5,7 @@ using UnityEngine;
 // Distance First Search임
 public class DFSStrategy : ISearchStrategy
 {
-    public Transform owner;
+    public Transform Owner;
     public float SearchRange;
     public LayerMask SearchLayerMask;
 
@@ -13,7 +13,7 @@ public class DFSStrategy : ISearchStrategy
 
     public Transform SearchTarget()
     {
-        int count = Physics.OverlapSphereNonAlloc(owner.position, SearchRange, overlaps, SearchLayerMask);
+        int count = Physics.OverlapSphereNonAlloc(Owner.position, SearchRange, overlaps, SearchLayerMask);
 
         if (count < 1) return StageManager.Instance.Basement.transform;
 
@@ -22,7 +22,7 @@ public class DFSStrategy : ISearchStrategy
 
         for (int i = 0; i < count; ++i)
         {
-            float dist = Vector3.Distance(owner.position, overlaps[i].transform.position);
+            float dist = Vector3.Distance(Owner.position, overlaps[i].transform.position);
             if (dist < minDist)
             {
                 minDist = dist;

@@ -5,7 +5,7 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private BaseStatusSO originData;
 
-    NormalAIController aiController;
+    GeneralAIController aiController;
 
     public BaseStatusSO data;
 
@@ -16,7 +16,7 @@ public class CharacterStats : MonoBehaviour
     
     private void Awake()
     {
-        aiController = GetComponent<NormalAIController>();
+        aiController = GetComponent<GeneralAIController>();
         data = Instantiate(originData);
 
         data.currentHealth = data.maxHealth;

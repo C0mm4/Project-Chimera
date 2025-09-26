@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NormalAIController : AIControllerBase
+public class GeneralAIController : AIControllerBase
 {
     NavMeshAgent agent;
 
@@ -13,15 +13,12 @@ public class NormalAIController : AIControllerBase
         base.Awake();
 
         agent = GetComponent<NavMeshAgent>();
-        searchStrategy = new GeneralSearchStrategy();
-        InitStrategy();
 
     }
     protected override void OnEnable()
     {
         base.OnEnable();
 
-        Target = StageManager.Instance.Basement.transform;
     }
 
     protected override void Update()
@@ -46,7 +43,7 @@ public class NormalAIController : AIControllerBase
         Debug.Log($"{instigator.name}");
         if (instigator.CompareTag("Player"))
         {
-            playerChaseStartTime = Time.time;
+            playerChaseElapseTime = 0f;
 
         }
 
@@ -64,12 +61,5 @@ public class NormalAIController : AIControllerBase
         agent.SetDestination(Target.position);
     }
 
-    protected override void InitStrategy()
-    {
-        GeneralSearchStrategy strategy = searchStrategy as GeneralSearchStrategy;
-
-        strategy.Owner = transform;
-        strategy.SearchLayerMask = StructureLayerMask;
-        strategy.SearchRange = StructureDetectRange;
-    }
+    
 }
