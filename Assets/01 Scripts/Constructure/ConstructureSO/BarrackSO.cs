@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "NewBarrackData", menuName = "Constructure Data/New Barrack Data")]
-public class BarrackSO : BaseStatusSO
+public class BarrackSO : StructureSO
 {
     public string spawnUnitKey;
     public int spawnCount;

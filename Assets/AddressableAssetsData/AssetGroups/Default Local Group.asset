@@ -17,16 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 17cefe0c33b178a4eadac85b75915d96
   m_SerializeEntries:
-  - m_GUID: b6c4399ca66a9b74f9a6d524773a605d
-    m_Address: enemy2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1ba066f6275c7f84ea314d22fa88b6ff
-    m_Address: enemy
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a92b1c6607e64fb43b8f81df88f957e2
     m_Address: Pref_Player
     m_ReadOnly: 0
@@ -63,7 +53,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 421f014b3bd0567429e1e1f8f5570be8
-    m_Address: stage01
+    m_Address: stage
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -73,7 +63,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fb6d53f31b0850a4bad7061f98727a84
-    m_Address: SO_310000
+    m_Address: SO_330000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -109,6 +99,66 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f3e3b4ec63575e4db2cd10370c1f04f
     m_Address: Pref_500000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4f54f22e3ca83846837486da8a91248
+    m_Address: Pref_410000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57c303e6917c4304383863baaffd6b42
+    m_Address: stage01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e42fac1ae6cb4654b95a6e412b8f5c7a
+    m_Address: Assets/03 Prefabs/Enemy/Gold_Cube.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a506a1fe2b95d149a0fe07b56247c9e
+    m_Address: Pref_410003
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60ecbc5dc3501b141a21ef4efd0f8710
+    m_Address: Pref_410002
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5170f6aa3d0a7dc4b83509f1339cbc9c
+    m_Address: Pref_400002
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 368d85561d6983d40acd8fc09beaf7bb
+    m_Address: Pref_410004
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c07fba9769fa53478216a6fe9280e82
+    m_Address: Pref_400001
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23e031ca8aaa334419eee3abbfe14688
+    m_Address: Pref_410001
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec1256fd46d3bdf4aae090be7858f5cd
+    m_Address: Pref_400004
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84c4942e724bd6d4982619819f95199b
+    m_Address: Pref_400003
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 159eefb96fdd73b41bd2a2e95a5bc62f
+    m_Address: UI/Elements/UpgradePopupUI
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

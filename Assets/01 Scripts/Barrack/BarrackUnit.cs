@@ -5,7 +5,7 @@ public class BarrackUnit : CharacterStats
     public Vector3 unitPosition { get; set; }
     private Vector3 unitRotation;
 
-    private void Awake()
+    protected override void Awake()
     {
         unitRotation = transform.rotation.eulerAngles;
     }

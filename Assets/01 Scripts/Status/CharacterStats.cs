@@ -7,25 +7,29 @@ public class CharacterStats : MonoBehaviour
 
     GroundAIController aiController;
 
-    public BaseStatusSO data;
+    public StatusData data;
 
 
     public event Action<float, float> OnHealthChanged;
     public event Action OnDeath;
 
     
-    private void Awake()
+    protected virtual void Awake()
     {
         aiController = GetComponent<GroundAIController>();
-        data = Instantiate(originData);
+        
+        data.maxHealth = originData.maxHealth;
 
         data.currentHealth = data.maxHealth;
+        data.moveSpeed = originData.moveSpeed;
     }
+
+
 
     public void TakeDamage(Transform instigator, float damageAmount)
     {
-        Debug.Log(data);
-        if (data == null) return;
+//        Debug.Log(data);
+//        if (data == null) return;
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
@@ -44,5 +48,14 @@ public class CharacterStats : MonoBehaviour
         ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject);
     }
 
-    // 적이랑 플레이어랑 같이 쓸수있게 해놓았어요. 
+    // 적이랑 플레이어랑 같이 쓸수있게 해놓았어요.
+}
+
+
+public struct StatusData
+{
+    public float currentHealth;
+    public float maxHealth;
+
+    public float moveSpeed;
 }

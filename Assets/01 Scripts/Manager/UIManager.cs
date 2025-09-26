@@ -23,6 +23,7 @@ public class UIManager : Singleton<UIManager>
     public int PopupStackCount => popupStack.Count;
 
 
+
     private void OnEnable()
     {
         SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -42,27 +43,27 @@ public class UIManager : Singleton<UIManager>
         ui?.OpenUI();
     }
 
-    public void OpenPopupUI<T>() where T : PopupUIBase
+    public void OpenPopupUI<T>(UpgradeableObject targetObject) where T : PopupUIBase
     {
-        //string uiName = GetUIName<T>();
-
-        //var ui = CreateSlotUI<T>();
-
-        var ui = GetUI<T>();
-        ui?.OpenUI();
-
-        if (ui != null)
+        var ui = GetUI<T>() as UpgradePopupUI;
+        if (ui == null)
         {
-            popupStack.Push(ui);
-            //_uiDictionary[uiName] = ui;
-            
+            Debug.LogError("UpgradePopupUI를 찾을 수 없거나 타입이 다릅니다.");
+            return;
         }
 
-        Debug.Log(_uiDictionary.Count);
+        Time.timeScale = 0f;
+        Debug.Log("게임 일시정지");
+
+        ui.Initialize(targetObject);
+        ui.OpenUI();
+
+        popupStack.Push(ui);
     }
-    
+
     public void CloseUI<T>() where T : UIBase
     {
+
         if (IsExistUI<T>())
         {
             var ui = GetUI<T>();
@@ -75,14 +76,25 @@ public class UIManager : Singleton<UIManager>
         if (popupStack.Count == 0) return;
 
         var ui = popupStack.Pop();
+        ui?.CloseUI();
+
+        --sortOrder;
+
+        if (popupStack.Count == 0)
+        {
+            Time.timeScale = 1f;
+            Debug.Log("게임 재개");
+        }
+
         if (ui != null)
         {
             ui?.CloseUI();
             //Destroy(ui.gameObject);
         }
-        string uiName = ui.GetType().ToString();
+        // string uiName = ui.GetType().ToString();
         // _uiDictionary.Remove(uiName);
-        --sortOrder;
+
+
     }
 
     public T GetUI<T>() where T : UIBase
@@ -194,11 +206,14 @@ public class UIManager : Singleton<UIManager>
 
     private void CheckEventSystem()
     {
-        if(_eventSystem != null)
-            return;
-        
-        string prefKey = Path.UI + UICommonPath + Prefab.EventSystem;
-        _eventSystem = ResourceManager.Instance.Create<GameObject>(prefKey).GetComponent<EventSystem>();
+        _eventSystem = FindObjectOfType<EventSystem>();
+
+        if (_eventSystem == null)
+        {
+            GameObject eventSystemObj = new GameObject("EventSystem");
+            _eventSystem = eventSystemObj.AddComponent<EventSystem>();
+            eventSystemObj.AddComponent<StandaloneInputModule>();
+        }
     }
 
 

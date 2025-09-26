@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class Wall : StructureBase
 {
+    public override void CopyStatusData(BaseStatusSO statData)
+    {
 
+    }
+    public override void UpgradeApplyConcreteStructure()
+    {
+    }
 }

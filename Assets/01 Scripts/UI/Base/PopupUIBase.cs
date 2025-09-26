@@ -10,5 +10,15 @@ public class PopupUIBase : UIBase
         UIManager.Instance.InitPopupCanvas(canvas);
     }
 
-    
+    public override void OpenUI()
+    {
+        base.OpenUI();
+        Canvas canvas = GetComponent<Canvas>();
+
+        if (canvas != null)
+        {
+            UIManager.Instance.InitPopupCanvas(canvas);
+        }
+    }
+
 }

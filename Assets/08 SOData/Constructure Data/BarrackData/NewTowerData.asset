@@ -15,5 +15,14 @@ MonoBehaviour:
   currentHealth: 50
   maxHealth: 50
   moveSpeed: 0
+  prefabKey: 
+  levelProgressionData:
+  - upgradeCost: 0
+    modelAddressableKey: Tower
+  - upgradeCost: 0
+    modelAddressableKey: Tower
+  - upgradeCost: 100
+    modelAddressableKey: Tower
+  upgradeData: {fileID: 11400000, guid: 0f1daabaabbd9c54fa11b45da09d4041, type: 2}
   weaponData: {fileID: 11400000, guid: c667bc405ed0ef64f99f9b3564ddde11, type: 2}
   weaponDataID: 560001

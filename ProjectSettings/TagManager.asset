@@ -17,9 +17,9 @@ TagManager:
   - 
   - Enemy
   - EnemyAttack
+  - Weapon
+  - 'Interactable '
   - 
-  - 
-  - Unit
   - 
   - 
   - 

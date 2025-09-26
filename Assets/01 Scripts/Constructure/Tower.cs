@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,19 @@ using UnityEngine;
 public class Tower : StructureBase
 {
     [SerializeField] private BaseWeapon currentWeapon;
-    private TowerSO data;
+    [SerializeField] private EnemyScanner scanner;
 
-    public override void SetDataSO(BaseStatusSO statData)
+    [SerializeField] private TowerData data;
+
+    public override void CopyStatusData(BaseStatusSO statData)
+    {
+        TowerSO so = statData as TowerSO;
+        
+        data.weaponData = DataManager.Instance.GetSOData<BaseWeaponSO>(so.weaponDataID);
+        SetWeaponData(data.weaponData);
+    }
+
+    public override void SetDataSO(StructureSO statData)
     {
         // 기존 정보 파괴
         DestroyEffect();
@@ -22,33 +33,46 @@ public class Tower : StructureBase
         if (currentWeapon == null)
             currentWeapon = GetComponentInChildren<BaseWeapon>();
         currentWeapon.SetWeapon(weapon, transform);
+
+        if(scanner == null)
+            scanner = GetComponentInChildren<EnemyScanner>();
+
+        scanner.scanRange = currentWeapon.GetWeaponData().ScanRange;
+        scanner.detectCollider.radius = scanner.scanRange;
     }
 
     protected override void BuildEffect()
     {
         base.BuildEffect();
-        data = statData as TowerSO;
-        data.weaponData = DataManager.Instance.GetSOData<BaseWeaponSO>(data.weaponDataID);
-        SetWeaponData(data.weaponData);
 
     }
 
     protected override void DestroyEffect()
     {
         base.DestroyEffect();
-        data = null;
-        statData = null;
     }
 
     protected override void UpdateEffect()
     {
         base.UpdateEffect();
         {
-            if (currentWeapon != null)
+            if (scanner != null && scanner.nearestTarget != null)
             {
-                // 타워도 스캐너
-                //currentWeapon.Attack();
+                if (currentWeapon != null)
+                {
+                    currentWeapon.Attack(scanner.nearestTarget);
+                }
             }
         }
     }
+    public override void UpgradeApplyConcreteStructure()
+    {
+    }
+}
+
+
+[Serializable]
+public struct TowerData
+{
+    public BaseWeaponSO weaponData;
 }

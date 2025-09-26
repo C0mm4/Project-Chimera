@@ -16,8 +16,9 @@ MonoBehaviour:
   Name: "\uB098\uBB34 \uD65C"
   Damage: 5
   ScanRange: 10
-  AttackCooldown: 2
-  ProjectileID: Pref_440000
+  AttackCooldown: 1
+  ProjectilePrefab: {fileID: 1132359506795249663, guid: d952e2730b7e6f44aac46955debea853,
+    type: 3}
   ProjectileCount: 1
   ProjectileSpeed: 3
   ProjectileArcHeight: 3

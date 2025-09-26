@@ -8,12 +8,13 @@ public class FlyingAIController : AIControllerBase
 
     protected override void ChaseTarget()
     {
+        
         Vector3 dir = Target.position - transform.position;
         dir.y = 0;
 
         Quaternion rot = Quaternion.LookRotation(dir);
         transform.rotation = rot;
-
+        
         if (!shouldStop)
         {
             characterController.Move(dir.normalized * 3f * Time.fixedDeltaTime);
@@ -28,6 +29,22 @@ public class FlyingAIController : AIControllerBase
     {
         base.Awake();
         characterController = GetComponent<CharacterController>();
+
+        transform.position = new Vector3(transform.position.x, 3f, transform.position.z);
     }
-    
+
+    protected override bool IsAttackable()
+    {
+        if (Target == null) return false;
+
+        Vector3 groundPosition = transform.position;
+        groundPosition.y = 0;
+
+        LayerMask targetLayer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
+        int count = Physics.OverlapSphereNonAlloc(groundPosition, AttackRange, overlaps, targetLayer);
+        if (count == 0) return false;
+
+        return true;
+
+    }
 }

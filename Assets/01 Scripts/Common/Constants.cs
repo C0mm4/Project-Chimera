@@ -1,8 +1,9 @@
 public enum SceneType
 {
     Intro,
-    Town,
-    Battle
+    Title,
+    InPlay,
+
 }
 
 public enum WeaponTypes
