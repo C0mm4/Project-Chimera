@@ -8,4 +8,7 @@ public class Wall : StructureBase
     {
 
     }
+    public override void UpgradeApplyConcreteStructure()
+    {
+    }
 }

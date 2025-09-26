@@ -11,7 +11,7 @@ public abstract class StructureBase : MonoBehaviour
     [SerializeField] protected InteractionZone interactionZone; // 정진규: 건물도 업그레이드 하려면 필요
     
     private GameObject currentModelInstance; // 현재 생성된 건물 오브젝트를 기억(레벨)
-    public int CurrentLevel { get; private set; }
+//    public int CurrentLevel { get; private set; }
 
     public void Heal()
     {
@@ -20,11 +20,13 @@ public abstract class StructureBase : MonoBehaviour
 
     public virtual void SetDataSO(StructureSO statData) // 정진규: BaseStatusSO 에서 StructureSO로 변경
     {
+        this.statData = statData;
+
         structureData.maxHealth = statData.maxHealth;
         structureData.currentHealth = structureData.maxHealth;
-        CopyStatusData(statData);
-        this.statData = statData;
-        this.CurrentLevel = 1;
+        structureData.CurrentLevel = 1;
+
+        CopyStatusData(this.statData);
         UpdateModel();
     }
 
@@ -54,8 +56,7 @@ public abstract class StructureBase : MonoBehaviour
 
     private void Update()
     {
-        if (originData != null)
-            UpdateEffect();
+        UpdateEffect();
     }
 
     protected virtual void BuildEffect()
@@ -123,13 +124,13 @@ public abstract class StructureBase : MonoBehaviour
 
 
         // 더 이상 다음 레벨 건물이 없을 때
-        if (CurrentLevel >= statData.GetMaxLevel())
+        if (structureData.CurrentLevel >= statData.GetMaxLevel())
         {
             Debug.Log("최고 레벨입니다.");
             return;
         }
 
-        int nextLevel = CurrentLevel + 1;
+        int nextLevel = structureData.CurrentLevel + 1;
 
         // 베이스 건물의 레벨이 부족할 때
         if (nextLevel >= PlayerBaseManager.Instance.CurrentBaseLevel)
@@ -138,7 +139,7 @@ public abstract class StructureBase : MonoBehaviour
             return;
         }
 
-        int requiredCost = statData.levelProgressionData[CurrentLevel - 1].upgradeCost;
+        int requiredCost = statData.levelProgressionData[structureData.CurrentLevel - 1].upgradeCost;
         // if (GameManager.Instance.Gold < requiredCost) return;
 
         ConfirmUpgrade();
@@ -147,24 +148,29 @@ public abstract class StructureBase : MonoBehaviour
     // 업그레이드 수락 메서드
     public virtual void ConfirmUpgrade()
     {
-        int requiredCost = statData.levelProgressionData[CurrentLevel - 1].upgradeCost;
+        // todo : 레벨 업 테이블 SO 만들어서 그거 로드해서 사용하는걸로 수정 필요
+        int requiredCost = statData.levelProgressionData[structureData.CurrentLevel - 1].upgradeCost;
+
         // GameManager.Instance.Gold -= requiredCost; (골드 게임매니저에 있을거면)
 
         var upgrade = statData.upgradeData;
         if (upgrade == null) return;
 
         // 자신의 레벨 상태를 올립니다.
-        CurrentLevel++;
+        structureData.CurrentLevel++;
 
         // 복제된 SO 데이터의 스탯을 직접 수정합니다.
-        statData.maxHealth += upgrade.maxHealthIncrease;
-        statData.currentHealth = statData.maxHealth;
+        structureData.maxHealth += upgrade.maxHealthIncrease;
+        structureData.currentHealth = statData.maxHealth;
 
-        Debug.Log($"{statData.name.Replace("SO", "(Instance)")} 업그레이드! -> Lv.{CurrentLevel}");
+        Debug.Log($"{name.Replace("SO", "(Instance)")} 업그레이드! -> Lv.{structureData.CurrentLevel}");
 
         // 레벨에 맞는 외형으로 교체합니다.
         UpdateModel();
+        UpgradeApplyConcreteStructure();
     }
+
+    public abstract void UpgradeApplyConcreteStructure();
 
     // 외형 오브젝트 업그레이드
     private void UpdateModel()
@@ -174,7 +180,7 @@ public abstract class StructureBase : MonoBehaviour
             Destroy(currentModelInstance); // 오브젝트 풀로 교체 필요?
         }
 
-        string modelKey = statData.levelProgressionData[CurrentLevel - 1].modelAddressableKey;
+        string modelKey = statData.levelProgressionData[structureData.CurrentLevel - 1].modelAddressableKey;
 
         //if (!string.IsNullOrEmpty(modelKey))
         //{
@@ -191,4 +197,6 @@ public struct StructureData
 {
     public float currentHealth;
     public float maxHealth;
+
+    public int CurrentLevel;
 }

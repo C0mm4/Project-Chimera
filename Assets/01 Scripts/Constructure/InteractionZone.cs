@@ -69,5 +69,4 @@ public class InteractionZone : MonoBehaviour
         progressImage.fillAmount = progressValue;
         Debug.Log("인터랙션 존 나감");
     }
-    
 }

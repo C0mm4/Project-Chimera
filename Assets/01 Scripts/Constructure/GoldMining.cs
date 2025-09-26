@@ -37,6 +37,9 @@ public class GoldMining : StructureBase
 
         // 골드 획득량 감소 처리
     }
+    public override void UpgradeApplyConcreteStructure()
+    {
+    }
 }
 
 [Serializable]

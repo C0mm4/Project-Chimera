@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class BasementStructure : StructureBase
 {
-
     public override void CopyStatusData(BaseStatusSO statData)
     {
 
-        
     }
 
     private void OnEnable()
     {
         StageManager.Instance.Basement = this;
+
+        ObjectPoolManager.Instance.CreatePool("GoldMining", 1);
+        ObjectPoolManager.Instance.CreatePool("Tower", 1);
+        ObjectPoolManager.Instance.CreatePool("Wall", 1);
+        ObjectPoolManager.Instance.CreatePool("Barrack", 1);
     }
 
     public override void ConfirmUpgrade()
@@ -27,5 +30,9 @@ public class BasementStructure : StructureBase
         base.OnReturnToPool();
         // Todo: 베이스 레벨업을 해서 기존 건물을 풀에 넣기 전에 할 것
     }
+    public override void UpgradeApplyConcreteStructure()
+    {
+    }
 }
+
 

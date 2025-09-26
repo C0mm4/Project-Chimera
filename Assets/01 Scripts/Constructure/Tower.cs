@@ -65,6 +65,9 @@ public class Tower : StructureBase
             }
         }
     }
+    public override void UpgradeApplyConcreteStructure()
+    {
+    }
 }
 
 

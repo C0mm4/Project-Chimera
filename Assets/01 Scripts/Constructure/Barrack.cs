@@ -93,6 +93,10 @@ public class Barrack : StructureBase
 
         spawnUnits.Clear();
     }
+
+    public override void UpgradeApplyConcreteStructure()
+    {
+    }
 }
 
 [Serializable]
