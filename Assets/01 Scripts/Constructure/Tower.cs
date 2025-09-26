@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tower : StructureBase
 {
     [SerializeField] private BaseWeapon currentWeapon;
+    [SerializeField] private EnemyScanner scanner;
     private TowerSO data;
 
     public override void SetDataSO(BaseStatusSO statData)
@@ -22,6 +23,12 @@ public class Tower : StructureBase
         if (currentWeapon == null)
             currentWeapon = GetComponentInChildren<BaseWeapon>();
         currentWeapon.SetWeapon(weapon, transform);
+
+        if(scanner == null)
+            scanner = GetComponentInChildren<EnemyScanner>();
+
+        scanner.scanRange = currentWeapon.GetWeaponData().ScanRange;
+        scanner.detectCollider.radius = scanner.scanRange;
     }
 
     protected override void BuildEffect()
@@ -44,10 +51,12 @@ public class Tower : StructureBase
     {
         base.UpdateEffect();
         {
-            if (currentWeapon != null)
+            if (scanner != null && scanner.nearestTarget != null)
             {
-                // 타워도 스캐너
-                //currentWeapon.Attack();
+                if (currentWeapon != null)
+                {
+                    currentWeapon.Attack(scanner.nearestTarget);
+                }
             }
         }
     }
