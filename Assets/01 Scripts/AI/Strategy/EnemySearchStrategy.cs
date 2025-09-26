@@ -13,7 +13,7 @@ public class EnemySearchStrategy : ISearchStrategy
     {
         int count = Physics.OverlapSphereNonAlloc(Owner.position, SearchRange, overlaps, SearchLayerMask);
 
-        if (count < 1) return transform;
+        if (count < 1) return null;
 
         float minDist = 1000;
         int targetIdx = -1;

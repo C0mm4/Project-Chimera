@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
@@ -9,13 +10,16 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         public Transform defaultTransform;
     }
 
-    private Dictionary<string, Stack<GameObject>> pool = new Dictionary<string, Stack<GameObject>>();
-    private Dictionary<string, SavePool> poolOther = new Dictionary<string, SavePool>();
+    private Dictionary<(string,Transform), Stack<GameObject>> pool = new();
+    private Dictionary<string, SavePool> poolOther = new();
 
     //풀 생성
-    public void CreatePool(string _addressableName, Transform _defaultTransform = null, int _count = 1)
+    public void CreatePool(string _addressableName, Transform _defaultTransform , int _count = 1)
     {
-        if (pool.ContainsKey(_addressableName))
+
+        var key = (_addressableName, _defaultTransform);
+
+        if (pool.ContainsKey(key))
         {
             //이미 키값으로 생성된게 있음
             return;
@@ -34,7 +38,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             queue.Push(obj);
         }
 
-        pool.Add(_addressableName, queue);
+        pool.Add(key, queue);
 
         poolOther[_addressableName] = new SavePool
         {
@@ -45,16 +49,18 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     //풀에서 오브젝트 가져오기
-    public GameObject GetPool(string keyValue)
+    public GameObject GetPool(string keyValue, Transform _defaultTransform)
     {
 
-        if (!pool.ContainsKey(keyValue))
+        var key = (keyValue, _defaultTransform);
+
+        if (!pool.ContainsKey(key))
         {
             //키값 없음
             return null;
         }
 
-        Stack<GameObject> queue = pool[keyValue];
+        Stack<GameObject> queue = pool[key];
 
         if (queue.Count == 0)
         {
@@ -85,9 +91,11 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     //풀에다가 오브젝트 다시 집어넣기
-    public void ResivePool(string keyValue, GameObject obj)
+    public void ResivePool(string keyValue, GameObject obj, Transform _defaultTransform)
     {
-        if (!pool.ContainsKey(keyValue))
+        var key = (keyValue, _defaultTransform);
+
+        if (!pool.ContainsKey(key))
         {
             //키값 없음 , 오브젝트 파괴
             Destroy(obj);
@@ -97,30 +105,34 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         //오브젝트 비활성화 및 다시 키값에 반납
         obj.SetActive(false);
         obj.transform.SetParent(poolOther[keyValue].defaultTransform, false);
-        pool[keyValue].Push(obj);
+        pool[key].Push(obj);
     }
 
     //풀 삭제
-    public void ClearPool(string keyValue)
+    public void ClearPool(string keyValue, Transform _defaultTransform)
     {
-        if (!pool.ContainsKey(keyValue))
+        var key = (keyValue, _defaultTransform);
+
+        if (!pool.ContainsKey(key))
         {
             //키값 없음 구?지?
             return;
         }
 
         //오브젝트 삭제
-        foreach (GameObject obj in pool[keyValue])
+        foreach (GameObject obj in pool[key])
         {
             Destroy(obj);
         }
 
         //풀안의 키값 삭제
-        pool.Remove(keyValue);
+        pool.Remove(key);
     }
 
-    public bool ContainsPool(string keyValue) 
+    public bool ContainsPool(string keyValue, Transform _defaultTransform) 
     {
-        return pool.ContainsKey(keyValue);
+        var key = (keyValue, _defaultTransform);
+
+        return pool.ContainsKey(key);
     }
 }
