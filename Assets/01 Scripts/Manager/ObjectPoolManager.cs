@@ -13,35 +13,32 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     private Dictionary<string, SavePool> poolOther = new Dictionary<string, SavePool>();
 
     //풀 생성
-    public void CreatePool(string _keyValue, int _count = 1, Transform _defaultTransform = null)
+    public void CreatePool(string _addressableName, Transform _defaultTransform = null, int _count = 1)
     {
-        if (pool.ContainsKey(_keyValue))
+        if (pool.ContainsKey(_addressableName))
         {
             //이미 키값으로 생성된게 있음
             return;
         }
-
-        string _prefabPath = _keyValue;
 
         Stack<GameObject> queue = new Stack<GameObject>();
 
         for (int i = 0; i < _count; i++)
         {
             //로드+생성 후 오브젝트 끄기
-            GameObject obj = ResourceManager.Instance.Create<GameObject>(_prefabPath, _defaultTransform);
+            GameObject obj = ResourceManager.Instance.Create<GameObject>(_addressableName, _defaultTransform);
             obj.SetActive(false);
-            obj.name = _keyValue;
+            obj.name = _addressableName;
             
             //queue에 겜오브젝트 추가
             queue.Push(obj);
         }
 
-        pool.Add(_keyValue, queue);
+        pool.Add(_addressableName, queue);
 
-        //ㅇ
-        poolOther[_keyValue] = new SavePool
+        poolOther[_addressableName] = new SavePool
         {
-            prefabPath = _prefabPath,
+            prefabPath = _addressableName,
             defaultTransform = _defaultTransform
         };
 
@@ -50,7 +47,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     //풀에서 오브젝트 가져오기
     public GameObject GetPool(string keyValue)
     {
-        
 
         if (!pool.ContainsKey(keyValue))
         {

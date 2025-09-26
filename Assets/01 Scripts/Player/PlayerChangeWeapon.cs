@@ -10,10 +10,10 @@ public class PlayerChangeWeapon : MonoBehaviour
         //모든 무기 생성
 
         //검
-        ObjectPoolManager.Instance.CreatePool("Pref_500000", 1, weaponPrefab.transform);
+        ObjectPoolManager.Instance.CreatePool("Pref_500000", weaponPrefab.transform);
 
         //활
-        ObjectPoolManager.Instance.CreatePool("Pref_510000", 1, weaponPrefab.transform);
+        ObjectPoolManager.Instance.CreatePool("Pref_510000", weaponPrefab.transform);
 
         //테스트용
         ChangeWeapon(WeaponTypes.Bow);

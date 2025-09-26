@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAggroSearchStrategy : ISearchStrategy
 {
-    public Transform owner;
+    public Transform Owner;
 
     public float PlayerSearchRange;
     public float StructureSearchRange;
@@ -16,12 +16,12 @@ public class PlayerAggroSearchStrategy : ISearchStrategy
 
     public Transform SearchTarget()
     {
-        if (Physics.CheckSphere(owner.position, PlayerSearchRange, PlayerLayerMask))
+        if (Physics.CheckSphere(Owner.position, PlayerSearchRange, PlayerLayerMask))
         {
             return GameManager.Instance.Player.transform;
         }
        
-        int count = Physics.OverlapSphereNonAlloc(owner.position, StructureSearchRange, overlaps, StructureLayerMask);
+        int count = Physics.OverlapSphereNonAlloc(Owner.position, StructureSearchRange, overlaps, StructureLayerMask);
 
         if (count < 1) return StageManager.Instance.Basement.transform;
 
@@ -30,7 +30,7 @@ public class PlayerAggroSearchStrategy : ISearchStrategy
 
         for (int i = 0; i < count; ++i)
         {
-            float dist = Vector3.Distance(owner.position, overlaps[i].transform.position);
+            float dist = Vector3.Distance(Owner.position, overlaps[i].transform.position);
             if (dist < minDist)
             {
                 minDist = dist;

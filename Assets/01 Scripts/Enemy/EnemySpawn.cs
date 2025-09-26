@@ -149,7 +149,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
         foreach (var spawnInfo in stageData[key])
         {
             // 풀 생성
-            ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, 1, enemyTransform);
+            ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, enemyTransform);
 
             // 몬스터 스폰
             SpawnMonster(

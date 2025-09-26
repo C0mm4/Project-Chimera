@@ -29,9 +29,5 @@ public class FlyingAIController : AIControllerBase
         base.Awake();
         characterController = GetComponent<CharacterController>();
     }
-
-    protected override void InitStrategy()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }
