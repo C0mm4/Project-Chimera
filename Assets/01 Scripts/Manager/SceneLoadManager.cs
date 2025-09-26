@@ -16,9 +16,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     private void Awake()
     {
         // 씬 클래스와 enum 매핑
-//        _scenes.Add(SceneType.Intro, new IntroScene());
-//        _scenes.Add(SceneType.Town, new TownScene());
-//        _scenes.Add(SceneType.Battle, new BattleScene());
+        _scenes.Add(SceneType.Intro, new IntroScene());
+        _scenes.Add(SceneType.Title, new TitleScene());
+        _scenes.Add(SceneType.InPlay, new InPlayScene());
     }
 
     public void LoadScene(SceneType sceneType)

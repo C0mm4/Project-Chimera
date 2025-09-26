@@ -25,11 +25,6 @@ public class EnemySpawn : Singleton<EnemySpawn>
         boxColliders = transform.GetComponentsInChildren<BoxCollider>();
     }
 
-    private void Start()
-    {
-        //스테이지 불러오는 부분은 다른 스크립트에서 불러와도됨
-        StartStage(1);
-    }
 
     public IEnumerator SpawnMonster(MonsterSpawnInfo info, int waveIndex)
     {
@@ -226,7 +221,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
 
         // 스테이지 생성 시 활성화 bool array 초기화
         isActivateWave = new bool[stageData[key].Count];
-
+        StageManager.Instance.state = StageState.InPlay;
         // 웨이브별 소환 정보 담는 딕셔너리 초기화
         waveSpawnDict.Clear();
         for (int i = 0; i < stageData[key].Count; i++)
@@ -242,6 +237,30 @@ public class EnemySpawn : Singleton<EnemySpawn>
     {
         waveSpawnDict[waveIndex].Remove(go);
         go.GetComponent<EnemyController>().OnDeathStageHandler -= OnWaveEnemyDeath;
+
+        if (CheckStageClear())
+        {
+            StageManager.Instance.StageClear();
+        }
     }
 
+    public bool CheckStageClear()
+    {
+        // 활성화 되지 않은 웨이브가 있으면 false 반환
+        foreach(var b in isActivateWave)
+        {
+            if (!b) return false;
+        }
+
+        int waveCount = waveSpawnDict.Count;
+        for(int i = 0; i < waveCount; i++)
+        {
+            if (waveSpawnDict.ContainsKey(i))
+            {
+                if (waveSpawnDict[i].Count > 0) return false;
+            }
+        }
+
+        return true;
+    }
 }
