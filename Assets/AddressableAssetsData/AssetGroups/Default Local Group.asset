@@ -58,12 +58,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f8eeaeab4a1a5441ba7ce58704b73fd
-    m_Address: stage02
+    m_Address: Stage_ID600001
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 421f014b3bd0567429e1e1f8f5570be8
-    m_Address: stage01
+    m_Address: Stage_ID600000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -73,12 +73,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8561a66f4b3392d4ab59693f4f618f25
-    m_Address: SwordMan
+    m_Address: SO_ID450000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 643dd1672a5fef244bfaf0faf85004f1
-    m_Address: Archer
+    m_Address: SO_ID460000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
