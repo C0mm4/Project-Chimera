@@ -57,7 +57,8 @@ public class ConstructureSeed : MonoBehaviour
 
             // SO Data로드 후 주입
             obj.GetComponent<StructureBase>().SetDataSO(so);
-            ObjectPoolManager.Instance.ResivePool("", gameObject);
+            //ObjectPoolManager.Instance.ResivePool("", gameObject);
+            Destroy(gameObject);
         }
     }
 }

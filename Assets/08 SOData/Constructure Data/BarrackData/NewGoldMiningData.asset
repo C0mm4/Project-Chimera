@@ -15,5 +15,14 @@ MonoBehaviour:
   currentHealth: 30
   maxHealth: 30
   moveSpeed: 0
+  prefabKey: 
+  levelProgressionData:
+  - upgradeCost: 0
+    modelAddressableKey: GoldMining
+  - upgradeCost: 0
+    modelAddressableKey: GoldMining
+  - upgradeCost: 100
+    modelAddressableKey: GoldMining
+  upgradeData: {fileID: 11400000, guid: 0f1daabaabbd9c54fa11b45da09d4041, type: 2}
   AddGoldDropRate: 0
   AddGoldGetRate: 0

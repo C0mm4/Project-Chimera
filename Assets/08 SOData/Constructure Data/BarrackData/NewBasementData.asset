@@ -9,20 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48584c447f4bbf145b8968fdaa50e3b1, type: 3}
-  m_Name: NewTowerData
+  m_Script: {fileID: 11500000, guid: 0c72064007936d948925b52ed6b360d8, type: 3}
+  m_Name: NewBasementData
   m_EditorClassIdentifier: 
-  currentHealth: 50
-  maxHealth: 50
+  currentHealth: 0
+  maxHealth: 1000
   moveSpeed: 0
   prefabKey: 
   levelProgressionData:
   - upgradeCost: 0
-    modelAddressableKey: Tower
+    modelAddressableKey: Basement
   - upgradeCost: 0
-    modelAddressableKey: Tower
+    modelAddressableKey: Basement
   - upgradeCost: 100
-    modelAddressableKey: Tower
+    modelAddressableKey: Basement
   upgradeData: {fileID: 11400000, guid: 0f1daabaabbd9c54fa11b45da09d4041, type: 2}
-  weaponData: {fileID: 11400000, guid: c667bc405ed0ef64f99f9b3564ddde11, type: 2}
-  weaponDataID: 560001
