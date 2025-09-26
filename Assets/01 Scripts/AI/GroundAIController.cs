@@ -27,28 +27,7 @@ public class GroundAIController : AIControllerBase
     }
 
 
-    public void OnHit(Transform instigator)
-    {
-
-        // Debug.Log($"에너미 주위 반지름 {PlayerDetectRange} 이내에 플레이어 있는지 감지");
-
-        // bool checkPlayer = Physics.CheckSphere(transform.position, PlayerDetectRange, PlayerLayerMask);
-
-        // if (checkPlayer)
-        // {
-        // Debug.Log("플레이어 찾음");
-        //playerChaseStartTime = Time.time;
-        //Target = GameManager.Instance.Player.transform;
-        // }
-        Debug.Log($"{instigator.name}");
-        if (instigator.CompareTag("Player"))
-        {
-            playerChaseElapseTime = 0f;
-
-        }
-
-        Target = instigator;
-    }
+    
 
     private void OnPathFailed()
     {
@@ -58,7 +37,14 @@ public class GroundAIController : AIControllerBase
 
     protected override void ChaseTarget()
     {
-        agent.SetDestination(Target.position);
+        if (shouldStop)
+        {
+            agent.SetDestination(transform.position);
+        }
+        else
+        {
+            agent.SetDestination(Target.position);
+        }
     }
 
     
