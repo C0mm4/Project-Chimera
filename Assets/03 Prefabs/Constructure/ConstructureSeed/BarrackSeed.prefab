@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6756010540594930366}
   - component: {fileID: 8091017815679276745}
   - component: {fileID: 1890222827404905230}
-  - component: {fileID: 3869336293580546426}
   m_Layer: 0
   m_Name: BarrackSeed
   m_TagString: Untagged
@@ -85,20 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3869336293580546426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2588481747115859208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 553408d88dd5043458ea26f9a593a4ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 3
-  interactionZone: {fileID: 7289269879044619410}
 --- !u!1001 &929130704207112812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,15 +173,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 929130704207112812}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7289269879044619410 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7623572887425046270, guid: 83f53671cb626fb48b3a6dd2cf915966,
-    type: 3}
-  m_PrefabInstance: {fileID: 929130704207112812}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1f2f2104e86ba74b923e5a0680878ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
