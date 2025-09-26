@@ -123,8 +123,10 @@ public class StructureBase : MonoBehaviour
             return;
         }
 
+        int nextLevel = CurrentLevel + 1;
+
         // 베이스 건물의 레벨이 부족할 때
-        if (CurrentLevel >= PlayerBaseManager.Instance.CurrentBaseLevel)
+        if (nextLevel >= PlayerBaseManager.Instance.CurrentBaseLevel)
         {
             Debug.Log($"베이스 레벨이 부족합니다. (필요 베이스 레벨: {statData.GetMaxLevel()})"); // 여기를 GetMaxLevel()로 변경하는 것이 더 명확할 수 있습니다.
             return;
