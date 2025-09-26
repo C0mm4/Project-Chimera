@@ -35,7 +35,7 @@ public class Barrack : StructureBase
     protected override void BuildEffect()
     {
         base.BuildEffect();
-        ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey,  4, transform);
+        //ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey,  4, transform);
     }
 
     protected override void DestroyEffect()

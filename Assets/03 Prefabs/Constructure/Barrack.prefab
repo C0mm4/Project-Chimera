@@ -135,5 +135,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652c5d87555650c4e89be882f4479792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statData: {fileID: 0}
+  statData: {fileID: 11400000, guid: fb6d53f31b0850a4bad7061f98727a84, type: 2}
   currentSpawnCount: 0
