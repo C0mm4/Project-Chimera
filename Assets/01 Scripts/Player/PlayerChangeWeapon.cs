@@ -1,22 +1,43 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerChangeWeapon : MonoBehaviour
 {
     //무기 생성 위치
     [SerializeField] private GameObject weaponPrefab;
+    public Transform throwObjects;
 
     private void Awake()
     {
         //모든 무기 생성
 
         //검
-        ObjectPoolManager.Instance.CreatePool("Pref_500000", 1, weaponPrefab.transform);
+        ObjectPoolManager.Instance.CreatePool("Pref_500000", weaponPrefab.transform);
 
         //활
-        ObjectPoolManager.Instance.CreatePool("Pref_510000", 1, weaponPrefab.transform);
+        ObjectPoolManager.Instance.CreatePool("Pref_510000", weaponPrefab.transform);
 
         //테스트용
-        ChangeWeapon(WeaponTypes.Bow);
+        //ChangeWeapon(WeaponTypes.Sword);
+    }
+
+    public void Update()
+    {
+        //테스트용
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (!ObjectPoolManager.Instance.ContainsPool("Pref_510000", weaponPrefab.transform))
+                ObjectPoolManager.Instance.GetPool("Pref_510000", weaponPrefab.transform);
+
+            ChangeWeapon(WeaponTypes.Bow);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if(!ObjectPoolManager.Instance.ContainsPool("Pref_500000", weaponPrefab.transform))
+                ObjectPoolManager.Instance.GetPool("Pref_500000", weaponPrefab.transform);
+            ChangeWeapon(WeaponTypes.Sword);
+        }
+ 
     }
 
     public void ChangeWeapon(WeaponTypes name)
@@ -26,9 +47,9 @@ public class PlayerChangeWeapon : MonoBehaviour
         //무기 바꾸기전 다 반환
         foreach (Transform transforms in weaponPrefab.transform)
         {
-            ObjectPoolManager.Instance.ResivePool(transforms.name, transforms.gameObject);
+            ObjectPoolManager.Instance.ResivePool(transforms.name, transforms.gameObject, weaponPrefab.transform);
         }
-        
+
         //플레이어와 같은 위치에 있는 어택에 접근
         PlayerAttack playerAttack = GetComponent<PlayerAttack>();
 
@@ -36,11 +57,20 @@ public class PlayerChangeWeapon : MonoBehaviour
         if (playerAttack != null)
         {
             //name의 프리팹 무기 오브젝트를 활성화
-            GameObject weaponGameobject = ObjectPoolManager.Instance.GetPool(keyValue);
+            GameObject weaponGameobject = ObjectPoolManager.Instance.GetPool(keyValue, weaponPrefab.transform);
 
-            //무기.. weapon으로 되어있어서 일단 넣 모르겠다
+            //장착된 무기 변경
             BaseWeapon changeWeapon = weaponGameobject.GetComponent<BaseWeapon>();
             playerAttack.EquipNewWeapon(changeWeapon);
+
+            
+            if (name == WeaponTypes.Bow)
+            {
+                //플레이어 화살있는 Transform, bow를 생성하면 start에서 화살을 만들고 있어서 Transform은 따로 설정할 필요는 없음
+                //throwObjects = weaponGameobject.transform;
+            }
+            else throwObjects = null;
+            
         }
     }
 
