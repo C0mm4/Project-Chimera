@@ -36,6 +36,7 @@ public abstract class StructureBase : MonoBehaviour
     {
         if (interactionZone != null)
         {
+            // interactionZone.OnInteract += UIManager.Instance.OpenPopupUI<UpgradePopupUI>;
             interactionZone.OnInteract += TryStartUpgrade;
         }
 

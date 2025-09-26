@@ -38,6 +38,11 @@ public abstract class AIControllerBase : MonoBehaviour
     protected virtual void OnEnable()
     {
         playerChaseElapseTime = 0f;
+
+    }
+
+    private void Start()
+    {
         Target = searchStrategy.SearchTarget();
 
     }
@@ -91,7 +96,13 @@ public abstract class AIControllerBase : MonoBehaviour
     public void OnHit(Transform instigator)
     {
         if (SearchType == AISearchType.BaseOnly) return;
-        
+
+        Debug.Log($"{instigator.name} 한테 맞았음");
+
+        if (SearchType == AISearchType.General)
+        {
+            Debug.Log($"{instigator.name} 한테 맞았음");
+        }
         if (instigator.CompareTag("Player"))
         {
             playerChaseElapseTime = 0f;
