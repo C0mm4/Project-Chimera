@@ -5,17 +5,17 @@ using UnityEngine;
 public class Bow : BaseWeapon
 {
     private RangedWeaponSO RangedData => weaponData as RangedWeaponSO;
-    protected void Awake()
+    protected void Start()
     {
-        if (RangedData.ProjectilePrefab != null)
+        if (RangedData.ProjectileID != null)
         {
-            ObjectPoolManager.Instance.CreatePool(RangedData.ProjectilePrefab.name,null, 10);
+            ObjectPoolManager.Instance.CreatePool(RangedData.ProjectileID,transform, 10);
         }
     }
 
     protected override void PerformAttack(Transform target)
     {
-        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(RangedData.ProjectilePrefab.name);
+        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(RangedData.ProjectileID);
 
         Projectile projectile = projectileObj.GetComponent<Projectile>();
         if (projectile != null)

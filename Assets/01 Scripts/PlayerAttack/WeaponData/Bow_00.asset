@@ -17,8 +17,7 @@ MonoBehaviour:
   Damage: 5
   ScanRange: 10
   AttackCooldown: 2
-  ProjectilePrefab: {fileID: 1132359506795249663, guid: d952e2730b7e6f44aac46955debea853,
-    type: 3}
+  ProjectileID: Pref_440000
   ProjectileCount: 1
   ProjectileSpeed: 3
   ProjectileArcHeight: 3

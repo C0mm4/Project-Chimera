@@ -24,7 +24,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
     private void Start()
     {
         //스테이지 불러오는 부분은 다른 스크립트에서 불러와도됨
-        StartStage(2);
+        //StartStage(1);
     }
 
     public void SpawnMonster(string name,int enemycount,int spawnpoint,int spawncount = 1,float time = 1f)
