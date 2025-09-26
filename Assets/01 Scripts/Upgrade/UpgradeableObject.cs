@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class UpgradeableObject : MonoBehaviour
 {
-
+    public bool hasBeenInteractedWith = false;
 }

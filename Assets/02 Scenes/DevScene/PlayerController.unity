@@ -575,6 +575,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 0995e55f3dfcc9f4fbca34d1a6d9c72f, type: 2}
+--- !u!114 &777365631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1547074566940918521, guid: bb8b763cdae1edf41baa6fb7d062bcde,
+    type: 3}
+  m_PrefabInstance: {fileID: 7264650468195087355}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e8c60cd5ec72b46b0ba1cf57c60768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +699,11 @@ PrefabInstance:
       propertyPath: currentWeapon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1376762594354324604, guid: a92b1c6607e64fb43b8f81df88f957e2,
+        type: 3}
+      propertyPath: upgradePanel
+      value: 
+      objectReference: {fileID: 777365631}
     - target: {fileID: 4865030376591887468, guid: a92b1c6607e64fb43b8f81df88f957e2,
         type: 3}
       propertyPath: m_Name
@@ -1186,6 +1203,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarrackSeed
       objectReference: {fileID: 0}
+    - target: {fileID: 4590137237068893076, guid: b006e119bc999644fb52542c67e2fef0,
+        type: 3}
+      propertyPath: hasBeenInteractedWith
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6756010540594930366, guid: b006e119bc999644fb52542c67e2fef0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1249,11 +1271,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1148565260114500306, guid: bb8b763cdae1edf41baa6fb7d062bcde,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7104009629299484381, guid: bb8b763cdae1edf41baa6fb7d062bcde,
         type: 3}
       propertyPath: m_Name
@@ -1357,6 +1374,11 @@ PrefabInstance:
     - target: {fileID: 7939131957200141094, guid: bb8b763cdae1edf41baa6fb7d062bcde,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058955557112952090, guid: bb8b763cdae1edf41baa6fb7d062bcde,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

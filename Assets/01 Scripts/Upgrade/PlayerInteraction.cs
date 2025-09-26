@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField] private UpgradePopupUI upgradePanel;
+    [SerializeField]
+    private UpgradePopupUI upgradePanel;
+
+    void Start()
+    {
+        if (upgradePanel != null)
+        {
+            upgradePanel.gameObject.SetActive(false);
+            upgradePanel.Initialize(this);
+        }
+    }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<UpgradeableObject>() != null)
-        {
-            Debug.Log("업그레이드 오브젝트 감지!");
+        UpgradeableObject objectToInteract = other.GetComponent<UpgradeableObject>();
 
-            if (upgradePanel != null)
+        if (objectToInteract != null && !objectToInteract.hasBeenInteractedWith)
+        {
+            if (upgradePanel != null && !upgradePanel.gameObject.activeInHierarchy)
             {
-                upgradePanel.Open();
+                upgradePanel.gameObject.SetActive(true);
+                Time.timeScale = 0f;
+
+                objectToInteract.hasBeenInteractedWith = true;
             }
-            else
-            {
-                Debug.LogError("PlayerInteraction 스크립트에 UpgradePanel이 연결되지 않았습니다!");
-            }
+        }
+    }
+
+    public void CloseUIAndResumeGame()
+    {
+        if (upgradePanel != null)
+        {
+            upgradePanel.gameObject.SetActive(false);
+            Time.timeScale = 1f;
         }
     }
 }

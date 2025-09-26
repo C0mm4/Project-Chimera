@@ -5,32 +5,25 @@ public class UpgradePopupUI : MonoBehaviour
 {
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button closeButton;
-    [SerializeField] private Button backgroundButton;
+
+    private PlayerInteraction playerInteraction;
+
+    public void Initialize(PlayerInteraction owner)
+    {
+        playerInteraction = owner;
+    }
 
     void Start()
     {
-        upgradeButton.onClick.AddListener(Close);
-        closeButton.onClick.AddListener(Close);
+        upgradeButton.onClick.AddListener(CloseUI);
+        closeButton.onClick.AddListener(CloseUI);
+    }
 
-        if (backgroundButton != null)
+    void CloseUI()
+    {
+        if (playerInteraction != null)
         {
-            backgroundButton.onClick.AddListener(Close);
+            playerInteraction.CloseUIAndResumeGame();
         }
-
-        gameObject.SetActive(false);
-    }
-
-    public void Open()
-    {
-        gameObject.SetActive(true);
-        Time.timeScale = 0f;      
-        Debug.Log("업그레이드 창 열림 & 게임 일시정지");
-    }
-
-    public void Close()
-    {
-        gameObject.SetActive(false);
-        Time.timeScale = 1f;        
-        Debug.Log("업그레이드 창 닫힘 & 게임 재개");
     }
 }
