@@ -5,6 +5,7 @@ public class BarrackUnit : CharacterStats
     public Vector3 unitPosition { get; set; }
     private Vector3 unitRotation;
 
+
     protected override void Awake()
     {
         unitRotation = transform.rotation.eulerAngles;
@@ -23,5 +24,7 @@ public class BarrackUnit : CharacterStats
         base.Death();
         BarrackUnitSpawn.Instance.nowUnit--;
     }
+
+
 
 }
