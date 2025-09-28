@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450b621c108f8df48ad82248391c27e3, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  Id: 0
-  Name: 
-  Damage: 0
-  ScanRange: 0
-  AttackCooldown: 0
-  ProjectilePrefab: {fileID: 0}
+  Name: "\uD65C"
+  Damage: 10
+  ScanRange: 5
+  AttackCooldown: 1
+  ProjectilID: Pref_440000
   ProjectileCount: 1
   ProjectileSpeed: 3
   ProjectileArcHeight: 3
