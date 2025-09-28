@@ -1,13 +1,15 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BarrackUnitAI : AIControllerBase
 {
+    [SerializeField] private BaseWeapon currentWeapon;
+
     NavMeshAgent agent;
 
     Vector3 randomTargetOffset;
 
+    public WeaponTypes weaponTypes;
 
     protected override void Awake()
     {
@@ -41,17 +43,11 @@ public class BarrackUnitAI : AIControllerBase
             dir.y = 0f;
             TargetGroundDistance = dir.magnitude;
 
-            if (IsAttackable())
-            {
-                shouldStop = true;
-                TryAttack();
-            }
-            else
-            {
-                shouldStop = false;
-            }
+            currentWeapon.Attack(Target);
         }
     }
+
+
 
     protected override void ChaseTarget()
     {

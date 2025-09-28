@@ -22,7 +22,6 @@ public enum AISearchType
 }
 
 
-
 public static class Path
 {
     public const string Prefab = "Prefab/";
