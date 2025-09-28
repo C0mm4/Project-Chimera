@@ -122,17 +122,17 @@ public class EnemySpawn : Singleton<EnemySpawn>
             {
                 //오브젝트 풀에서 name키값의 오브젝트 가져옮
                 //가져오면서 active ture로 변하니 따로 설정할필요 X
-                GameObject enemy = ObjectPoolManager.Instance.GetPool(info.keyName);
-                enemy.name = info.keyName;
+                GameObject enemy = ObjectPoolManager.Instance.GetPool(info.keyName, enemyTransform);
                 
                 if (enemy != null)
                 {
+                    enemy.name = info.keyName;
                     Vector3 spawnPos = SpawnOutRange(box, usedPositions, outRangeValue);
                     enemy.transform.position = spawnPos;
+                    enemy.GetComponent<EnemyController>().Initialize(waveIndex);
+                    enemy.GetComponent<EnemyController>().OnDeathStageHandler += OnWaveEnemyDeath;
+                    waveSpawnDict[waveIndex].Add(enemy);
                 }
-                enemy.GetComponent<EnemyController>().Initialize(waveIndex);
-                enemy.GetComponent<EnemyController>().OnDeathStageHandler += OnWaveEnemyDeath;
-                waveSpawnDict[waveIndex].Add(enemy);
             }
 
             yield return new WaitForSeconds(info.delayBetweenSpawnRepeat);
