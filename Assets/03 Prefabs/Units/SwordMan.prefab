@@ -14,8 +14,10 @@ GameObject:
   - component: {fileID: 6302277103138682167}
   - component: {fileID: 4480040122828714565}
   - component: {fileID: -2103529850722483235}
+  - component: {fileID: 8293211165190411662}
   - component: {fileID: -8968621036011651683}
-  m_Layer: 14
+  - component: {fileID: 4812049575605636938}
+  m_Layer: 15
   m_Name: SwordMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,11 +153,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originData: {fileID: 11400000, guid: daa17af936d1fdd49b55d74971cae976, type: 2}
-  Owner: {fileID: 0}
-  SearchRange: 0
-  SearchLayerMask:
+  unitPosition: {fileID: 0}
+--- !u!114 &8293211165190411662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3488525418530341777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50da58e00bc2ab64d861f4cd851b3f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Target>k__BackingField: {fileID: 0}
+  PlayerDetectRange: 0
+  StructureDetectRange: 0
+  AttackRange: 1
+  PlayerChaseTime: 0
+  AttackCoolTime: 1
+  TargetGroundDistance: 0
+  PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  StructureLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  SearchType: 4
 --- !u!195 &-8968621036011651683
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -178,6 +202,18 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4812049575605636938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3488525418530341777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a714f1f63dfc24086183077c8d87f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4683568819651337012
 GameObject:
   m_ObjectHideFlags: 0

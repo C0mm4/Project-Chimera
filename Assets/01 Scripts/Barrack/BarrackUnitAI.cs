@@ -1,30 +1,70 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class BarrackUnitAI : MonoBehaviour
+public class BarrackUnitAI : AIControllerBase
 {
-    public float SearchRange;
-    public LayerMask SearchLayerMask;
+    NavMeshAgent agent;
 
-    Collider[] overlaps = new Collider[10];
-    public Transform SearchTarget()
+    Vector3 randomTargetOffset;
+
+
+    protected override void Awake()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, SearchRange, overlaps, SearchLayerMask);
+        base.Awake();
+        agent = GetComponent<NavMeshAgent>();
+        randomTargetOffset = Random.insideUnitSphere;
+    }
 
-        if (count < 1) return StageManager.Instance.Basement.transform;
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
 
-        float minDist = 44444;
-        int targetIdx = -1;
+    protected override void Update()
+    {
 
-        for (int i = 0; i < count; ++i)
+
+        if (Target == null)
         {
-            float dist = Vector3.Distance(transform.position, overlaps[i].transform.position);
-            if (dist < minDist)
-            {
-                minDist = dist;
-                targetIdx = i;
-            }
+            Target = searchStrategy.SearchTarget();
         }
 
-        return overlaps[targetIdx].transform;
+        if (Target != null)
+        {
+            if (attackCoolDown > 0)
+            {
+                attackCoolDown = Mathf.Clamp(attackCoolDown - Time.deltaTime, 0, attackCoolDown);
+            }
+
+            Vector3 dir = Target.position - transform.position;
+            dir.y = 0f;
+            TargetGroundDistance = dir.magnitude;
+
+            if (IsAttackable())
+            {
+                shouldStop = true;
+                TryAttack();
+            }
+            else
+            {
+                shouldStop = false;
+            }
+        }
     }
+
+    protected override void ChaseTarget()
+    {
+        if (shouldStop)
+        {
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+            if(Target != null)
+            agent.SetDestination(Target.position + randomTargetOffset);
+        }
+    }
+
 }

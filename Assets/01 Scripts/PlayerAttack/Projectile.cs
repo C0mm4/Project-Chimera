@@ -148,7 +148,6 @@ public class Projectile : MonoBehaviour
         if (horizontalDistance < 0.2f)
         {
             //gameObject.SetActive(false);
-            Debug.Log("CheckFor :"+ name);
             ObjectPoolManager.Instance.ResivePool(name, gameObject, transform.parent);
         }
     }
@@ -168,7 +167,6 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.TryGetComponent<CharacterStats>(out var status))
             {
                 status.TakeDamage(Instigator, damage);
-                Debug.Log("Ontrigger :" + name);
                 ObjectPoolManager.Instance.ResivePool(name, gameObject,transform.parent);
             }
         }

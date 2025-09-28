@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 676113374779587857}
   - component: {fileID: 1331652547629816350}
   - component: {fileID: 5768940597133513677}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
-  data: {fileID: 0}
 --- !u!114 &7157907637376111968
 MonoBehaviour:
   m_ObjectHideFlags: 0
