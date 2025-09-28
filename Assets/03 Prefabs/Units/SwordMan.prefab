@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originData: {fileID: 11400000, guid: daa17af936d1fdd49b55d74971cae976, type: 2}
-  data: {fileID: 11400000, guid: daa17af936d1fdd49b55d74971cae976, type: 2}
 --- !u!114 &7300889940457431723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,13 +169,15 @@ MonoBehaviour:
   StructureDetectRange: 0
   AttackRange: 1
   PlayerChaseTime: 0
-  TargetDist: 0
+  AttackCoolTime: 0
+  TargetGroundDistance: 0
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 1024
   StructureLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  SearchType: 0
 --- !u!195 &-8968621036011651683
 NavMeshAgent:
   m_ObjectHideFlags: 0

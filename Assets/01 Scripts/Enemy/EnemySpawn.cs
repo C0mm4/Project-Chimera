@@ -122,7 +122,9 @@ public class EnemySpawn : Singleton<EnemySpawn>
             {
                 //오브젝트 풀에서 name키값의 오브젝트 가져옮
                 //가져오면서 active ture로 변하니 따로 설정할필요 X
-                GameObject enemy = ObjectPoolManager.Instance.GetPool(info.keyName);
+                Debug.Log(info.keyName);
+                GameObject enemy = ObjectPoolManager.Instance.GetPool(info.keyName,enemyTransform);
+
                 enemy.name = info.keyName;
                 
                 if (enemy != null)
@@ -203,7 +205,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
     //스테이지 번호 찾아서 해당 몬스터 스테이지 생성
     public void StartStage(int stageNumber)
     {
-        string key = $"stage{stageNumber:D2}";
+        string key = $"SO_6{stageNumber:D5}";
 
         if (stageData.ContainsKey(key))
         {
@@ -214,7 +216,6 @@ public class EnemySpawn : Singleton<EnemySpawn>
         {
             // SO 데이터 가져와서 넣기
             var handle = ResourceManager.Instance.Load<StageWaveSO>(key);
-
             StageWaveSO waveSO = handle;
             stageData[key] = waveSO.monsters;
         }
@@ -227,6 +228,8 @@ public class EnemySpawn : Singleton<EnemySpawn>
         for (int i = 0; i < stageData[key].Count; i++)
         {
             var spawnInfo = stageData[key][i];
+
+            Debug.Log(spawnInfo.keyName);
             ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, enemyTransform);
             // 웨이브 스폰 정보 클리어
             StartCoroutine(SpawnMonster(spawnInfo, i));

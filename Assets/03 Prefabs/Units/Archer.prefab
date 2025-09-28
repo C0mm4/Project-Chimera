@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originData: {fileID: 11400000, guid: f6b45c3dd678a5a458798beec1c6edb0, type: 2}
-  data: {fileID: 11400000, guid: f6b45c3dd678a5a458798beec1c6edb0, type: 2}
 --- !u!1 &4683568819651337012
 GameObject:
   m_ObjectHideFlags: 0
