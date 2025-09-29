@@ -31,12 +31,14 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(Transform instigator, float damageAmount)
     {
-//        Debug.Log(data);
-//        if (data == null) return;
+
+        //        Debug.Log(data);
+        //        if (data == null) return;
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
-        Debug.Log("때리는 주체(Transform) : " + instigator.name);
+        Debug.Log("때리는 주체 : " + instigator);
+        Debug.Log(data.currentHealth);
 
         float percent = data.currentHealth / data.maxHealth;
         OnHealthChanged?.Invoke(percent);
