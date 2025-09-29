@@ -145,6 +145,7 @@ MonoBehaviour:
     CurrentLevel: 0
   statData: {fileID: 0}
   interactionZone: {fileID: 5789040607290296674}
+  structureCollider: {fileID: 5734643578374958214}
 --- !u!1001 &4150791518444937116
 PrefabInstance:
   m_ObjectHideFlags: 0

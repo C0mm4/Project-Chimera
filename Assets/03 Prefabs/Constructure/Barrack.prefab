@@ -145,6 +145,7 @@ MonoBehaviour:
     CurrentLevel: 0
   statData: {fileID: 11400000, guid: fb6d53f31b0850a4bad7061f98727a84, type: 2}
   interactionZone: {fileID: 6421397309389542285}
+  structureCollider: {fileID: 5734643578374958214}
   currentSpawnCount: 0
   barrackData:
     spawnUnitKey: 

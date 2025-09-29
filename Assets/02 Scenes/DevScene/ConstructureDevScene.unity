@@ -1044,6 +1044,7 @@ MonoBehaviour:
     CurrentLevel: 0
   statData: {fileID: 0}
   interactionZone: {fileID: 0}
+  structureCollider: {fileID: 1422829813}
 --- !u!4 &1700056476 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8625695982660654986, guid: 559539f3e44c94e4592c12e50e3c7b87,
