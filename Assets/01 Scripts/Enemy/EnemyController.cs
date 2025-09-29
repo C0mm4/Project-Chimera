@@ -14,17 +14,6 @@ public class EnemyController : CharacterStats
         body = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
-    {
-        if (body == null) return;
-//        body.velocity *= 0.3f;
-        if(body.velocity.sqrMagnitude <= 0.01f)
-        {
-            //kinematic body는 지원안한다고 경고뜸 확인바람
-            body.velocity = Vector3.zero;
-        }
-    }
-
     [SerializeField] private int spawnWaveIndex;
     public void Initialize(int spawnWaveIndex)
     {
