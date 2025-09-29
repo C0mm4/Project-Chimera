@@ -119,8 +119,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363aa8b4c038b384895669399249f4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originData: {fileID: 0}
+  data:
+    currentHealth: 0
+    maxHealth: 0
+    moveSpeed: 0
+  structureData:
+    CurrentLevel: 0
   statData: {fileID: 0}
   interactionZone: {fileID: 665018230325946417}
+  structureCollider: {fileID: 5607322925584442562}
 --- !u!1001 &6986984802599075535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,10 +137,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 517342876002345013}
     m_Modifications:
+    - target: {fileID: 3616759345718841758, guid: 83f53671cb626fb48b3a6dd2cf915966,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4487986204893616768, guid: 83f53671cb626fb48b3a6dd2cf915966,
         type: 3}
       propertyPath: m_Name
       value: InteractionZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487986204893616768, guid: 83f53671cb626fb48b3a6dd2cf915966,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5690382690896890111, guid: 83f53671cb626fb48b3a6dd2cf915966,
         type: 3}

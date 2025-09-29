@@ -30,6 +30,8 @@ public abstract class AIControllerBase : MonoBehaviour
 
     protected Collider[] overlaps = new Collider[10];
 
+    public BaseWeapon weapon;
+
     protected virtual void Awake()
     {
         InitializeStrategy();
@@ -53,6 +55,11 @@ public abstract class AIControllerBase : MonoBehaviour
         if (Target.gameObject.CompareTag("Player"))
         {
             playerChaseElapseTime += Time.deltaTime;
+        }
+
+        if (!Target.gameObject.activeInHierarchy)
+        {
+            Target = null;
         }
 
         if (playerChaseElapseTime > PlayerChaseTime)
@@ -96,8 +103,9 @@ public abstract class AIControllerBase : MonoBehaviour
     public void OnHit(Transform instigator)
     {
         if (SearchType == AISearchType.BaseOnly) return;
-
-        Debug.Log($"{instigator.name} 한테 맞았음");
+        {
+            Debug.Log($"{instigator.name} 한테 맞았음");
+        } 
 
         if (SearchType == AISearchType.General)
         {
@@ -138,6 +146,11 @@ public abstract class AIControllerBase : MonoBehaviour
         int count = Physics.OverlapSphereNonAlloc(transform.position, AttackRange, overlaps, targetLayer);
 
         if (count < 1) return;
+
+        if(weapon != null)
+        {
+            weapon.Attack(Target);
+        }
 
         Debug.Log("공격");
         Debug.DrawRay(transform.position, Target.position - transform.position, Color.red, 3f);

@@ -4,13 +4,22 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerAttack))]
 public class PlayerController : MonoBehaviour
 {
     private Vector2 TargetVelocity;
     [SerializeField] private float rotationSpeed = 10f; // 회전 속도 조절
-
+    [SerializeField] private Transform horseTrans;
+    [SerializeField] private Transform modelTrans;
     [SerializeField] private float MoveSpeed = 5f;
     private bool isDash = false;
+
+    PlayerAttack playerAttack;
+
+    private void Awake()
+    {
+        playerAttack = GetComponent<PlayerAttack>();
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -29,20 +38,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    [SerializeField] private bool Test1 = false;
-
     private void FixedUpdate()
     {
         Vector2 movDelta = TargetVelocity;
 
-        Vector3 forward = transform.forward;
-        Vector2 rotationDir = new Vector2(forward.x, forward.z);
-
         movDelta *= (isDash ? 2 : 1) * Time.fixedDeltaTime * MoveSpeed;
-
-        // Test Code 바라보는 방향에 맞춰서 이동하는 로직
-        if(Test1)
-            movDelta = Vector2.Dot(movDelta, rotationDir) * rotationDir;
 
         transform.position += new Vector3(movDelta.x, 0, movDelta.y);
         
@@ -52,7 +52,11 @@ public class PlayerController : MonoBehaviour
             float targetAngle = Mathf.Atan2(TargetVelocity.x, TargetVelocity.y) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            horseTrans.rotation = Quaternion.Lerp(horseTrans.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            if (!playerAttack.isAttacking)
+            {
+                modelTrans.rotation = Quaternion.Lerp(modelTrans.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            }
         }
     }
     

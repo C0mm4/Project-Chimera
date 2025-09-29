@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 5256699851470951728}
   - component: {fileID: 6730183750590233641}
   - component: {fileID: 6578421660771126825}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Grownd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,10 +426,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7972622147305123923}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf2ceb1c87a1b7e4b95b830a8a60a6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageDataSO: []
   enemyTransform: {fileID: 4895570517166565796}
+  waveList: []
   outRangeValue: 1

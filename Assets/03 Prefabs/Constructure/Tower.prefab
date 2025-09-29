@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5734643578374958214}
   - component: {fileID: 776012579842471849}
   - component: {fileID: 7433247069215483799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,9 +138,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20b3408835aff14caac841b95bac085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originData: {fileID: 0}
+  data:
+    currentHealth: 0
+    maxHealth: 0
+    moveSpeed: 0
+  structureData:
+    CurrentLevel: 0
   statData: {fileID: 0}
   interactionZone: {fileID: 7923633399867514345}
+  structureCollider: {fileID: 5734643578374958214}
   currentWeapon: {fileID: 0}
+  scanner: {fileID: 0}
+  towerdata:
+    weaponData: {fileID: 0}
 --- !u!1001 &304619416291822359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,10 +160,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7143962170385069361}
     m_Modifications:
+    - target: {fileID: 3616759345718841758, guid: 83f53671cb626fb48b3a6dd2cf915966,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4487986204893616768, guid: 83f53671cb626fb48b3a6dd2cf915966,
         type: 3}
       propertyPath: m_Name
       value: InteractionZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487986204893616768, guid: 83f53671cb626fb48b3a6dd2cf915966,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5690382690896890111, guid: 83f53671cb626fb48b3a6dd2cf915966,
         type: 3}
@@ -285,10 +306,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2590323421009868669, guid: 021a122b9e0fc814992186c6fdcc4575,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7284873441885026486, guid: 021a122b9e0fc814992186c6fdcc4575,
         type: 3}
       propertyPath: m_Name
       value: Bow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284873441885026486, guid: 021a122b9e0fc814992186c6fdcc4575,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8586296523868868393, guid: 021a122b9e0fc814992186c6fdcc4575,
         type: 3}
@@ -300,18 +331,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 021a122b9e0fc814992186c6fdcc4575, type: 3}
---- !u!114 &3925147928213456158 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7365781287275157151, guid: 021a122b9e0fc814992186c6fdcc4575,
-    type: 3}
-  m_PrefabInstance: {fileID: 5782743076955444097}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 433aa55c85e370946a386d05a5f282b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5986146907248200028 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 239674662140926685, guid: 021a122b9e0fc814992186c6fdcc4575,
@@ -381,23 +400,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyScanner
       objectReference: {fileID: 0}
+    - target: {fileID: 8536405884162763100, guid: dcb4725b4284f9b439691bba32927ec1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcb4725b4284f9b439691bba32927ec1, type: 3}
---- !u!114 &6887598092601888692 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 898785380251984336, guid: dcb4725b4284f9b439691bba32927ec1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6047359529720114788}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 894d6b7ddc141314dbd4c66ae57d3b46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &9219379652009007402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3178795325825251150, guid: dcb4725b4284f9b439691bba32927ec1,

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    [SerializeField] private BaseStatusSO originData;
+    [SerializeField] protected BaseStatusSO originData;
 
-    AIControllerBase aiController;
+    protected AIControllerBase aiController;
 
-    public StatusData data;
+    [SerializeField] public StatusData data;
 
 
-    public event Action<float, float> OnHealthChanged;
+    public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
     
@@ -18,22 +18,30 @@ public class CharacterStats : MonoBehaviour
     {
         aiController = GetComponent<AIControllerBase>();
         
-        data.maxHealth = originData.maxHealth;
+        if(originData != null)
+        {
+            data.maxHealth = originData.maxHealth;
 
-        data.currentHealth = data.maxHealth;
-        data.moveSpeed = originData.moveSpeed;
+            data.currentHealth = data.maxHealth;
+            data.moveSpeed = originData.moveSpeed;
+        }
     }
 
 
 
     public void TakeDamage(Transform instigator, float damageAmount)
     {
-//        Debug.Log(data);
-//        if (data == null) return;
+
+        //        Debug.Log(data);
+        //        if (data == null) return;
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
-        OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
+        Debug.Log("때리는 주체 : " + instigator);
+        Debug.Log(data.currentHealth);
+
+        float percent = data.currentHealth / data.maxHealth;
+        OnHealthChanged?.Invoke(percent);
         if (aiController != null)
         {
             aiController.OnHit(instigator);
@@ -50,11 +58,9 @@ public class CharacterStats : MonoBehaviour
     {
         
     }
-
-    // 적이랑 플레이어랑 같이 쓸수있게 해놓았어요.
 }
 
-
+[Serializable]
 public struct StatusData
 {
     public float currentHealth;

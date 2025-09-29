@@ -8,14 +8,14 @@ public class Tower : StructureBase
     [SerializeField] private BaseWeapon currentWeapon;
     [SerializeField] private EnemyScanner scanner;
 
-    [SerializeField] private TowerData data;
+    [SerializeField] private TowerData towerdata;
 
     public override void CopyStatusData(BaseStatusSO statData)
     {
         TowerSO so = statData as TowerSO;
         
-        data.weaponData = DataManager.Instance.GetSOData<BaseWeaponSO>(so.weaponDataID);
-        SetWeaponData(data.weaponData);
+        towerdata.weaponData = DataManager.Instance.GetSOData<BaseWeaponSO>(so.weaponDataID);
+        SetWeaponData(towerdata.weaponData);
     }
 
     public override void SetDataSO(StructureSO statData)
