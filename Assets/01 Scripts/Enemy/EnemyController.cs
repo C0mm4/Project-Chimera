@@ -9,7 +9,6 @@ public class EnemyController : CharacterStats
     [SerializeField] private Rigidbody body;
     [SerializeField] private Transform weaponTrans;
     private EnemyData enemyData;
-    [SerializeField] AIControllerBase aiController;
     BaseWeapon weapon;
 
     protected override void Awake()

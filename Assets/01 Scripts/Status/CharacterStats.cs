@@ -5,7 +5,7 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] protected BaseStatusSO originData;
 
-    AIControllerBase aiController;
+    protected AIControllerBase aiController;
 
     [SerializeField] public StatusData data;
 
