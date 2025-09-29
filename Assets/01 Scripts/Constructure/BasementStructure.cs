@@ -9,14 +9,22 @@ public class BasementStructure : StructureBase
 
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        StageManager.Instance.Basement = this;
+        base.OnEnable();
 
-        ObjectPoolManager.Instance.CreatePool("GoldMining", StageManager.Instance.Stage.StructureTrans ,1);
-        ObjectPoolManager.Instance.CreatePool("Tower", StageManager.Instance.Stage.StructureTrans, 1);
-        ObjectPoolManager.Instance.CreatePool("Wall", StageManager.Instance.Stage.StructureTrans, 1);
-        ObjectPoolManager.Instance.CreatePool("Barrack", StageManager.Instance.Stage.StructureTrans, 1);
+        StageManager.Instance.Basement = this;
+        StageManager.Instance.OnStageFail += OnFail;
+
+        ObjectPoolManager.Instance.CreatePool("GoldMining", StageManager.Instance.Stage.StructureTrans);
+        ObjectPoolManager.Instance.CreatePool("Tower", StageManager.Instance.Stage.StructureTrans);
+        ObjectPoolManager.Instance.CreatePool("Wall", StageManager.Instance.Stage.StructureTrans);
+        ObjectPoolManager.Instance.CreatePool("Barrack", StageManager.Instance.Stage.StructureTrans);
+    }
+
+    private void OnFail()
+    {
+        Debug.Log("스테이지 실패 시 해야할 작업");
     }
 
     public override void ConfirmUpgrade()
@@ -32,6 +40,15 @@ public class BasementStructure : StructureBase
     }
     public override void UpgradeApplyConcreteStructure()
     {
+    }
+
+
+    protected override void Death()
+    {
+        base.Death();
+        Debug.Log("베이스먼트 데스 함수");
+        StageManager.Instance.FailStage();
+        
     }
 }
 

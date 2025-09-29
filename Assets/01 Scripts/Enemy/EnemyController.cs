@@ -7,22 +7,16 @@ public class EnemyController : CharacterStats
 {
     public event Action<int, GameObject> OnDeathStageHandler;
     [SerializeField] private Rigidbody body;
+    [SerializeField] private Transform weaponTrans;
+    private EnemyData enemyData;
+    BaseWeapon weapon;
 
     protected override void Awake()
     {
         base.Awake();
         body = GetComponent<Rigidbody>();
-    }
-
-    private void FixedUpdate()
-    {
-        if (body == null) return;
-//        body.velocity *= 0.3f;
-        if(body.velocity.sqrMagnitude <= 0.01f)
-        {
-            //kinematic body는 지원안한다고 경고뜸 확인바람
-            body.velocity = Vector3.zero;
-        }
+        body.freezeRotation = true;
+        body.isKinematic = true;
     }
 
     [SerializeField] private int spawnWaveIndex;
@@ -30,11 +24,31 @@ public class EnemyController : CharacterStats
     {
         this.spawnWaveIndex = spawnWaveIndex;
         data.currentHealth = data.maxHealth;
+        enemyData = originData as EnemyData;
+        ObjectPoolManager.Instance.CreatePool(enemyData.WeaponID, weaponTrans, 1);
+        var obj = ObjectPoolManager.Instance.GetPool(enemyData.WeaponID, weaponTrans);
+        if(obj != null)
+        {
+            weapon = obj.GetComponent<BaseWeapon>();
+            weapon.InstigatorTrans = transform;
+        }
+
+        aiController = GetComponent<AIControllerBase>();
+        if (aiController != null && obj != null)
+        {
+            aiController.weapon = weapon;
+        }
     }
 
     protected override void Death()
     {
         base.Death();
+
+        // 사망 시 무기 풀링 초기화
+        var poolName = weapon.gameObject.name;
+        ObjectPoolManager.Instance.ResivePool(poolName, weapon.gameObject, weaponTrans);
+        ObjectPoolManager.Instance.ClearPool(poolName, weaponTrans);
+
         OnDeathStageHandler?.Invoke(spawnWaveIndex, gameObject);
     }
 }

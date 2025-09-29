@@ -8,11 +8,29 @@ public class PlayerAttack : MonoBehaviour
     // 인스펙터 창에서 현재 장착 중인 무기를 연결해줄 변수
     [SerializeField] private BaseWeapon currentWeapon;
     [SerializeField] private EnemyScanner scanner;
-    
+    [SerializeField] private Transform modelTrans;
+    [SerializeField] private float rotationSpeed = 10f;
+
+    public bool isAttacking { get; private set; }
     private void Start()
     {
         // 게임 시작 시, 현재 무기의 데이터에 맞춰 스캐너 범위 설정
         ApplyWeaponScanRange();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isAttacking && scanner.nearestTarget != null)
+        {
+            Vector3 dir = scanner.nearestTarget.position - transform.position;
+
+            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
+            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+            modelTrans.rotation = Quaternion.Lerp(modelTrans.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+
+        }
     }
 
     private void Update()
@@ -22,8 +40,13 @@ public class PlayerAttack : MonoBehaviour
         {
             if (currentWeapon != null)
             {
+                isAttacking = true;
                 currentWeapon.Attack(scanner.nearestTarget);
             }
+        }
+        else
+        {
+            isAttacking = false;
         }
     }
 

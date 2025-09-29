@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class StageManager : Singleton<StageManager>
     // public Spawner spawner; 
     public BasementStructure Basement;
     public Stage Stage;
+
+    public event Action OnStageFail;
+    public event Action OnStageClear;
 
     [SerializeField] private int stageN;
     public static GameData data;
@@ -31,10 +35,20 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
+    public void FailStage()
+    {
+        state = StageState.Ready;
+        Debug.Log("스테이지 실패");
+        OnStageFail?.Invoke();
+    }
+
     public void StageClear()
     {
         state = StageState.Ready;
         data.MaxClearStage = data.CurrentStage++;
+        Debug.Log("스테이지 클리어");
+
+        OnStageClear?.Invoke();
     }
 
     public void NextStage()

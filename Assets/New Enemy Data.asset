@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8dd6571861f204284259a61d201e7a, type: 3}
   m_Name: New Enemy Data
   m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 30
+  moveSpeed: 2
   enemyName: "\uC801 \uC774\uB984"
   tier: 1
-  maxHealth: 30
   damage: 5
-  moveSpeed: 2
+  WeaponID: Pref_510000
+  targetDetectrange: 0
+  playerFollowTime: 0
+  attackDistance: 0
+  attackRate: 0
   description: "\uC801 \uC124\uBA85"

@@ -1,36 +1,52 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
-public abstract class StructureBase : MonoBehaviour
+public abstract class StructureBase : CharacterStats
 {
 	[Header("Inspector 연결")]
     [SerializeField] private StructureData structureData;
     [SerializeField] protected StructureSO statData; // 정진규: BaseStatusSO 에서 StructureSO로 변경
     [SerializeField] protected InteractionZone interactionZone; // 정진규: 건물도 업그레이드 하려면 필요
-    
+    [SerializeField] Collider structureCollider;
+    [SerializeField] private NavMeshObstacle obstacle;
+
     private GameObject currentModelInstance; // 현재 생성된 건물 오브젝트를 기억(레벨)
-//    public int CurrentLevel { get; private set; }
+                                             //    public int CurrentLevel { get; private set; }
+
+    public bool isAlive = true;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        structureCollider = GetComponent<Collider>();
+        obstacle = GetComponent<NavMeshObstacle>();
+    }
 
     public void Heal()
     {
-        structureData.currentHealth = structureData.maxHealth;
+        data.currentHealth = data.maxHealth;
     }
 
     public virtual void SetDataSO(StructureSO statData) // 정진규: BaseStatusSO 에서 StructureSO로 변경
     {
-        this.statData = statData;
-
-        structureData.maxHealth = statData.maxHealth;
-        structureData.currentHealth = structureData.maxHealth;
+        originData = statData;
+        this.statData = originData as StructureSO;
+        data.maxHealth = statData.maxHealth;
+        data.currentHealth = data.maxHealth;
         structureData.CurrentLevel = 1;
-
-        CopyStatusData(this.statData);
+        StageManager.Instance.OnStageClear -= Revive;
+        StageManager.Instance.OnStageClear += Revive;
+        StageManager.Instance.OnStageFail -= Revive;
+        StageManager.Instance.OnStageFail += Revive;
+        Revive();
+        CopyStatusData(originData);
         UpdateModel();
     }
 
     public abstract void CopyStatusData(BaseStatusSO statData);
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         if (interactionZone != null)
         {
@@ -38,24 +54,25 @@ public abstract class StructureBase : MonoBehaviour
             interactionZone.OnInteract += TryStartUpgrade;
         }
 
-        if (statData != null)
+        if (originData != null)
             BuildEffect();
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         if (interactionZone != null)
         {
             interactionZone.OnInteract -= TryStartUpgrade;
         }
 
-        if (statData != null)
+        if (originData != null)
             DestroyEffect();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        UpdateEffect();
+        if(isAlive)
+            UpdateEffect();
     }
 
     protected virtual void BuildEffect()
@@ -71,6 +88,29 @@ public abstract class StructureBase : MonoBehaviour
     protected virtual void UpdateEffect()
     {
 
+    }
+
+    protected override void Death()
+    {
+        base.Death();
+        Debug.Log("스트럭쳐 베이스의 데스함수");
+        structureCollider.enabled = false;
+        GetComponent<Renderer>().material.color = Color.red;
+        obstacle.enabled = false;
+        tag = "IsDead";
+        isAlive = false;
+//        ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject, StageManager.Instance.Stage.StructureTrans);
+        
+    }
+
+    protected void Revive()
+    {
+        structureCollider.enabled = true;
+        GetComponent<Renderer>().material.color = Color.white;
+        isAlive = true;
+        obstacle.enabled = true;
+        tag = "IsAlive";
+        Heal();
     }
 
     // 업그레이드 시도 메서드
@@ -159,8 +199,8 @@ public abstract class StructureBase : MonoBehaviour
         structureData.CurrentLevel++;
 
         // 복제된 SO 데이터의 스탯을 직접 수정합니다.
-        structureData.maxHealth += upgrade.maxHealthIncrease;
-        structureData.currentHealth = statData.maxHealth;
+        data.maxHealth += upgrade.maxHealthIncrease;
+        data.currentHealth = statData.maxHealth;
 
         Debug.Log($"{name.Replace("SO", "(Instance)")} 업그레이드! -> Lv.{structureData.CurrentLevel}");
 
@@ -178,7 +218,7 @@ public abstract class StructureBase : MonoBehaviour
         {
             Destroy(currentModelInstance); // 오브젝트 풀로 교체 필요?
         }
-
+        Debug.Log(statData);
         string modelKey = statData.levelProgressionData[structureData.CurrentLevel - 1].modelAddressableKey;
 
         //if (!string.IsNullOrEmpty(modelKey))
@@ -194,8 +234,5 @@ public abstract class StructureBase : MonoBehaviour
 [Serializable]
 public struct StructureData
 {
-    public float currentHealth;
-    public float maxHealth;
-
     public int CurrentLevel;
 }
