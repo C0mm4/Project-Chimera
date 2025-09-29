@@ -8,6 +8,12 @@ public class PlayerStatus : CharacterStats
     private void OnEnable()
     {
         GameManager.Instance.Player = this;
+        StageManager.Instance.OnStageFail += OnFail;
+    }
+
+    private void OnFail()
+    {
+        Debug.Log("스테이지 실패했을 때 플레이어 처리");
     }
 
     protected override void Awake()
@@ -22,4 +28,10 @@ public class PlayerStatus : CharacterStats
         gaugebarUI.SetFillPercent(percent);
     }
 
+    protected override void Death()
+    {
+        base.Death();
+
+        StageManager.Instance.FailStage();
+    }
 }
