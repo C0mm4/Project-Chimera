@@ -39,6 +39,7 @@ public abstract class StructureBase : CharacterStats
         StageManager.Instance.OnStageClear += Revive;
         StageManager.Instance.OnStageFail -= Revive;
         StageManager.Instance.OnStageFail += Revive;
+        Revive();
         CopyStatusData(originData);
         UpdateModel();
     }
@@ -96,6 +97,7 @@ public abstract class StructureBase : CharacterStats
         structureCollider.enabled = false;
         GetComponent<Renderer>().material.color = Color.red;
         obstacle.enabled = false;
+        tag = "IsDead";
         isAlive = false;
 //        ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject, StageManager.Instance.Stage.StructureTrans);
         
@@ -107,6 +109,7 @@ public abstract class StructureBase : CharacterStats
         GetComponent<Renderer>().material.color = Color.white;
         isAlive = true;
         obstacle.enabled = true;
+        tag = "IsAlive";
         Heal();
     }
 
