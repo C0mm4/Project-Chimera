@@ -95,8 +95,7 @@ public class Barrack : StructureBase
         if (obj != null)
         {
             spawnUnits.Add(obj);
-            BarrackUnit unit = obj.GetComponent<BarrackUnit>();
-            unit.unitPosition = savePosition[index];
+            BarrackUnitStatus unit = obj.GetComponent<BarrackUnitStatus>();
             unit.transform.position = savePosition[index];
             unit.spawnIndex = index;
             activateSpawnIndex[index] = true;
@@ -118,7 +117,7 @@ public class Barrack : StructureBase
     {
     }
 
-    public void UnitDespawn(BarrackUnit unit)
+    public void UnitDespawn(BarrackUnitStatus unit)
     {
         currentSpawnCount--;
         activateSpawnIndex[unit.spawnIndex] = false;

@@ -24,7 +24,7 @@ public class BarrackUnit : CharacterStats
     {
         //사망시
         base.Death();
-        spawnBarrack.UnitDespawn(this);
+//        spawnBarrack.UnitDespawn(this);
 
         BarrackUnitSpawn.Instance.nowUnit--;
     }

@@ -4,6 +4,9 @@ public class BarrackUnitStatus : CharacterStats
 {
     public Transform unitPosition;
 
+    private Barrack spawnBarrack;
+    public int spawnIndex;
+
     protected override void Awake()
     {
         unitPosition = transform;
@@ -24,6 +27,7 @@ public class BarrackUnitStatus : CharacterStats
     {
         //사망시
         base.Death();
+        spawnBarrack.UnitDespawn(this);
         BarrackUnitSpawn.Instance.nowUnit--;
     }
 
