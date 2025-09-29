@@ -19,7 +19,7 @@ public abstract class StructureBase : CharacterStats
     public virtual void SetDataSO(StructureSO statData) // 정진규: BaseStatusSO 에서 StructureSO로 변경
     {
         originData = statData;
-        statData = originData as StructureSO;
+        this.statData = originData as StructureSO;
         structureData.maxHealth = statData.maxHealth;
         structureData.currentHealth = structureData.maxHealth;
         structureData.CurrentLevel = 1;
@@ -183,7 +183,7 @@ public abstract class StructureBase : CharacterStats
         {
             Destroy(currentModelInstance); // 오브젝트 풀로 교체 필요?
         }
-
+        Debug.Log(statData);
         string modelKey = statData.levelProgressionData[structureData.CurrentLevel - 1].modelAddressableKey;
 
         //if (!string.IsNullOrEmpty(modelKey))

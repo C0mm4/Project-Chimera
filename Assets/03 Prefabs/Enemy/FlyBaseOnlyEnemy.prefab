@@ -158,7 +158,7 @@ MonoBehaviour:
   StructureLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  SearchType: 3
+  SearchType: 2
 --- !u!143 &5419135027450507300
 CharacterController:
   m_ObjectHideFlags: 0

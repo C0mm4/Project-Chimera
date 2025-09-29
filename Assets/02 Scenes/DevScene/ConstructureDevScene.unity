@@ -729,7 +729,7 @@ PrefabInstance:
     - target: {fileID: 5132329635517327919, guid: 40429878c8c84df46b20970cf55380aa,
         type: 3}
       propertyPath: type
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1037,6 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363aa8b4c038b384895669399249f4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originData: {fileID: 0}
   structureData:
     currentHealth: 0
     maxHealth: 0
@@ -1092,7 +1093,7 @@ PrefabInstance:
     - target: {fileID: 3520593354245107103, guid: 559539f3e44c94e4592c12e50e3c7b87,
         type: 3}
       propertyPath: type
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5661076073944139052, guid: 559539f3e44c94e4592c12e50e3c7b87,
         type: 3}
