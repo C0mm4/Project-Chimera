@@ -147,6 +147,7 @@ MonoBehaviour:
     CurrentLevel: 0
   statData: {fileID: 0}
   interactionZone: {fileID: 7923633399867514345}
+  structureCollider: {fileID: 5734643578374958214}
   currentWeapon: {fileID: 0}
   scanner: {fileID: 0}
   towerdata:

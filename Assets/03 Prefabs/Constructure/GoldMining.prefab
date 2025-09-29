@@ -145,6 +145,7 @@ MonoBehaviour:
     CurrentLevel: 0
   statData: {fileID: 0}
   interactionZone: {fileID: 6806623825656642472}
+  structureCollider: {fileID: 5734643578374958214}
   goldMiningdata:
     AddGoldDropRate: 0
     AddGoldGetRate: 0

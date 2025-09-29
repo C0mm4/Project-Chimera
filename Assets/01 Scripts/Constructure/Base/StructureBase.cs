@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class StructureBase : CharacterStats
 {
@@ -7,9 +8,20 @@ public abstract class StructureBase : CharacterStats
     [SerializeField] private StructureData structureData;
     [SerializeField] protected StructureSO statData; // 정진규: BaseStatusSO 에서 StructureSO로 변경
     [SerializeField] protected InteractionZone interactionZone; // 정진규: 건물도 업그레이드 하려면 필요
-    
+    [SerializeField] Collider structureCollider;
+    [SerializeField] private NavMeshObstacle obstacle;
+
     private GameObject currentModelInstance; // 현재 생성된 건물 오브젝트를 기억(레벨)
-//    public int CurrentLevel { get; private set; }
+                                             //    public int CurrentLevel { get; private set; }
+
+    public bool isAlive = true;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        structureCollider = GetComponent<Collider>();
+        obstacle = GetComponent<NavMeshObstacle>();
+    }
 
     public void Heal()
     {
@@ -23,7 +35,8 @@ public abstract class StructureBase : CharacterStats
         data.maxHealth = statData.maxHealth;
         data.currentHealth = data.maxHealth;
         structureData.CurrentLevel = 1;
-
+        StageManager.Instance.OnEndStage -= Revive;
+        StageManager.Instance.OnEndStage += Revive;
         CopyStatusData(originData);
         UpdateModel();
     }
@@ -55,7 +68,8 @@ public abstract class StructureBase : CharacterStats
 
     private void Update()
     {
-        UpdateEffect();
+        if(isAlive)
+            UpdateEffect();
     }
 
     protected virtual void BuildEffect()
@@ -76,7 +90,21 @@ public abstract class StructureBase : CharacterStats
     protected override void Death()
     {
         base.Death();
-        ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject, StageManager.Instance.Stage.StructureTrans);
+        structureCollider.enabled = false;
+        GetComponent<Renderer>().material.color = Color.red;
+        obstacle.enabled = false;
+        isAlive = false;
+//        ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject, StageManager.Instance.Stage.StructureTrans);
+        
+    }
+
+    private void Revive()
+    {
+        structureCollider.enabled = true;
+        GetComponent<Renderer>().material.color = Color.white;
+        isAlive = true;
+        obstacle.enabled = true;
+        Heal();
     }
 
     // 업그레이드 시도 메서드
