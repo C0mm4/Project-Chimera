@@ -13,10 +13,10 @@ public class BasementStructure : StructureBase
     {
         StageManager.Instance.Basement = this;
 
-        ObjectPoolManager.Instance.CreatePool("GoldMining", null,1);
-        ObjectPoolManager.Instance.CreatePool("Tower", null,1);
-        ObjectPoolManager.Instance.CreatePool("Wall", null,1);
-        ObjectPoolManager.Instance.CreatePool("Barrack", null,1);
+        ObjectPoolManager.Instance.CreatePool("GoldMining", transform,1);
+        ObjectPoolManager.Instance.CreatePool("Tower", transform, 1);
+        ObjectPoolManager.Instance.CreatePool("Wall", transform, 1);
+        ObjectPoolManager.Instance.CreatePool("Barrack", transform, 1);
     }
 
     public override void ConfirmUpgrade()

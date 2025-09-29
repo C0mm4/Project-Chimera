@@ -933,6 +933,7 @@ MonoBehaviour:
   structureData:
     currentHealth: 0
     maxHealth: 0
+    CurrentLevel: 0
   statData: {fileID: 0}
   interactionZone: {fileID: 0}
 --- !u!1001 &2072604912
@@ -1088,17 +1089,17 @@ PrefabInstance:
     - target: {fileID: 4052969435767734928, guid: bb8b763cdae1edf41baa6fb7d062bcde,
         type: 3}
       propertyPath: m_ReferenceResolution.x
-      value: 760
+      value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 4052969435767734928, guid: bb8b763cdae1edf41baa6fb7d062bcde,
         type: 3}
       propertyPath: m_ReferenceResolution.y
-      value: 1080
+      value: 1280
       objectReference: {fileID: 0}
     - target: {fileID: 4408919283767094142, guid: bb8b763cdae1edf41baa6fb7d062bcde,
         type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 0.5019608
       objectReference: {fileID: 0}
     - target: {fileID: 7104009629299484381, guid: bb8b763cdae1edf41baa6fb7d062bcde,
         type: 3}

@@ -26,7 +26,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
 
                     GameObject go = new GameObject(typeof(T).ToString() + " (Singleton)");
                     _instance = go.AddComponent<T>();
-                    
                     if (!Application.isBatchMode)
                     {
                         if (Application.isPlaying)
@@ -56,5 +55,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
     {
         isQuitting = true;
     }
+
 
 }

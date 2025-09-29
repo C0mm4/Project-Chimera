@@ -9,21 +9,52 @@ public class StageManager : Singleton<StageManager>
     public BasementStructure Basement;
 
     [SerializeField] private int stageN;
+    public static GameData data;
 
     public StageState state = StageState.Ready;
+
+
+    private void Awake()
+    {
+        data = new GameData();
+        data.CurrentStage = 1;
+        state = StageState.Ready;
+    }
 
     // For Test
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.G) && state == StageState.Ready)
         {
-            EnemySpawn.Instance.StartStage(++stageN);
+            NextStage();
         }
     }
 
     public void StageClear()
     {
         state = StageState.Ready;
+        data.MaxClearStage = data.CurrentStage++;
+    }
+
+    public void NextStage()
+    {
+        EnemySpawn.Instance.StartStage(data.CurrentStage);
+    }
+
+    public void GetGold(int amount)
+    {
+        data.Gold += amount;
+        data.CollectedGolds += amount;
+    }
+
+    public bool ConsumeGold(int amount)
+    {
+        if (data.Gold < amount) return false;
+
+        data.Gold -= amount;
+        data.ConsumeGolds += amount;
+
+        return true;
     }
 }
 
