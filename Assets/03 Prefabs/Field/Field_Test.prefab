@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 5256699851470951728}
   - component: {fileID: 6730183750590233641}
   - component: {fileID: 6578421660771126825}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Grownd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
