@@ -30,7 +30,4 @@ public class BarrackUnitStatus : CharacterStats
         spawnBarrack.UnitDespawn(this);
         BarrackUnitSpawn.Instance.nowUnit--;
     }
-
-
-
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    [SerializeField] private BaseStatusSO originData;
+    [SerializeField] protected BaseStatusSO originData;
 
     AIControllerBase aiController;
 

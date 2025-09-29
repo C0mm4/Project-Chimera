@@ -11,6 +11,7 @@ public class EnemyData : BaseStatusSO
 
     [Header("능력치")]
     public float damage = 5f;
+    public string WeaponID;
 
     [Header("AI옵션")]
     public float targetDetectrange;
