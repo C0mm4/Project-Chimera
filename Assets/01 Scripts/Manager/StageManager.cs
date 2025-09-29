@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class StageManager : Singleton<StageManager>
 
     public StageState state = StageState.Ready;
 
+    public event Action OnEndStage;
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class StageManager : Singleton<StageManager>
     {
         state = StageState.Ready;
         data.MaxClearStage = data.CurrentStage++;
+        OnEndStage?.Invoke();
     }
 
     public void NextStage()
