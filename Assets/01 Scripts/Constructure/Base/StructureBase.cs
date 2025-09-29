@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class StructureBase : MonoBehaviour
+public abstract class StructureBase : CharacterStats
 {
 	[Header("Inspector 연결")]
     [SerializeField] private StructureData structureData;
@@ -18,13 +18,13 @@ public abstract class StructureBase : MonoBehaviour
 
     public virtual void SetDataSO(StructureSO statData) // 정진규: BaseStatusSO 에서 StructureSO로 변경
     {
-        this.statData = statData;
-
+        originData = statData;
+        statData = originData as StructureSO;
         structureData.maxHealth = statData.maxHealth;
         structureData.currentHealth = structureData.maxHealth;
         structureData.CurrentLevel = 1;
 
-        CopyStatusData(this.statData);
+        CopyStatusData(originData);
         UpdateModel();
     }
 
@@ -38,7 +38,7 @@ public abstract class StructureBase : MonoBehaviour
             interactionZone.OnInteract += TryStartUpgrade;
         }
 
-        if (statData != null)
+        if (originData != null)
             BuildEffect();
     }
 
@@ -49,7 +49,7 @@ public abstract class StructureBase : MonoBehaviour
             interactionZone.OnInteract -= TryStartUpgrade;
         }
 
-        if (statData != null)
+        if (originData != null)
             DestroyEffect();
     }
 
@@ -71,6 +71,11 @@ public abstract class StructureBase : MonoBehaviour
     protected virtual void UpdateEffect()
     {
 
+    }
+
+    protected override void Death()
+    {
+        base.Death();
     }
 
     // 업그레이드 시도 메서드
