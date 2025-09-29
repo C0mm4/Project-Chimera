@@ -31,12 +31,12 @@ public class BarrackUnitAI : AIControllerBase
     {
 
 
-        if (Target == null || Target == barrackUnitStatus.unitPosition)
+        if (Target == null )
         {
             Target = searchStrategy.SearchTarget();
         }
 
-        if (Target != null && Target != barrackUnitStatus.unitPosition)
+        if (Target != null )
         {
             if (attackCoolDown > 0)
             {

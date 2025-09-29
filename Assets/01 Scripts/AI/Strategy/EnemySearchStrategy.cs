@@ -36,7 +36,7 @@ public class EnemySearchStrategy : ISearchStrategy
             if (boxEnemy[i].GetComponent<CharacterController>() != null) i++;
         }
 
-        if (countCapsule < 1 && countBox < 1) return Owner.transform;
+        if (countCapsule < 1 && countBox < 1) return null;
 
         float minDist = 44444;
         int targetIdx = -1;
