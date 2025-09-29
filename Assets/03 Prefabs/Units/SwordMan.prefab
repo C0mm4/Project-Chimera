@@ -153,7 +153,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originData: {fileID: 11400000, guid: daa17af936d1fdd49b55d74971cae976, type: 2}
+  data:
+    currentHealth: 0
+    maxHealth: 0
+    moveSpeed: 0
   unitPosition: {fileID: 0}
+  spawnBarrack: {fileID: 0}
+  spawnIndex: 0
 --- !u!114 &8293211165190411662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +186,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   SearchType: 4
+  weapon: {fileID: 0}
   currentWeapon: {fileID: 0}
   weaponTypes: 0
 --- !u!195 &-8968621036011651683

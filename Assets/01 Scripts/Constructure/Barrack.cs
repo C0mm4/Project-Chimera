@@ -29,12 +29,8 @@ public class Barrack : StructureBase
         // 기존 소환된 애들 삭제 처리
         Clear();
         activateSpawnIndex = new bool[barrackData.spawnCount];
-        // 최초 설정 시 소환 유닛 개수만큼 소환
-        currentSpawnCount = 0;
-        for (int i = 0; i < barrackData.spawnCount; i++)
-        {
-            Spawn(i);
-        }
+
+        BuildEffect();
     }
 
     public override void CopyStatusData(BaseStatusSO statData)
@@ -49,6 +45,12 @@ public class Barrack : StructureBase
     {
         base.BuildEffect();
         SavePositions();
+        // 최초 설정 시 소환 유닛 개수만큼 소환
+        currentSpawnCount = 0;
+        for (int i = 0; i < barrackData.spawnCount; i++)
+        {
+            Spawn(i);
+        }
         //ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey,  4, transform);
     }
 
@@ -100,6 +102,7 @@ public class Barrack : StructureBase
             BarrackUnitStatus unit = obj.GetComponent<BarrackUnitStatus>();
             unit.transform.position = savePosition[index];
             unit.spawnIndex = index;
+            unit.spawnBarrack = this;
             activateSpawnIndex[index] = true;
             currentSpawnCount++;
         }
