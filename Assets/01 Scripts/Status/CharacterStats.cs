@@ -48,8 +48,7 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Death()
     {
-        //ResivePool 하면서 뒤에 Transform 제대로 적어야만 반환 가능 안그러면 오브젝트 파괴 (신명철)
-        ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject);
+        
     }
 
     // 적이랑 플레이어랑 같이 쓸수있게 해놓았어요.

@@ -237,11 +237,16 @@ public class EnemySpawn : Singleton<EnemySpawn>
     {
         waveSpawnDict[waveIndex].Remove(go);
         go.GetComponent<EnemyController>().OnDeathStageHandler -= OnWaveEnemyDeath;
-
+        ResiveEnemyPool(go);
         if (CheckStageClear())
         {
             StageManager.Instance.StageClear();
         }
+    }
+
+    public void ResiveEnemyPool(GameObject go)
+    {
+        ObjectPoolManager.Instance.ResivePool(go.name, go, enemyTransform);
     }
 
     public bool CheckStageClear()

@@ -28,6 +28,6 @@ MonoBehaviour:
   - upgradeCost: 1000
     modelAddressableKey: Barrack
   upgradeData: {fileID: 11400000, guid: 0f1daabaabbd9c54fa11b45da09d4041, type: 2}
-  spawnUnitKey: TestUnit
+  spawnUnitKey: Pref_470000
   spawnCount: 4
   spawnRate: 1
