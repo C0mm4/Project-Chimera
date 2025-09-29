@@ -7,7 +7,7 @@ public class CharacterStats : MonoBehaviour
 
     AIControllerBase aiController;
 
-    public StatusData data;
+    [SerializeField] public StatusData data;
 
 
     public event Action<float> OnHealthChanged;
@@ -58,7 +58,7 @@ public class CharacterStats : MonoBehaviour
     // 적이랑 플레이어랑 같이 쓸수있게 해놓았어요.
 }
 
-
+[Serializable]
 public struct StatusData
 {
     public float currentHealth;

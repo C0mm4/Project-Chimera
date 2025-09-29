@@ -30,6 +30,8 @@ public abstract class AIControllerBase : MonoBehaviour
 
     protected Collider[] overlaps = new Collider[10];
 
+    public BaseWeapon weapon;
+
     protected virtual void Awake()
     {
         InitializeStrategy();
@@ -138,6 +140,11 @@ public abstract class AIControllerBase : MonoBehaviour
         int count = Physics.OverlapSphereNonAlloc(transform.position, AttackRange, overlaps, targetLayer);
 
         if (count < 1) return;
+
+        if(weapon != null)
+        {
+            weapon.Attack(Target);
+        }
 
         Debug.Log("공격");
         Debug.DrawRay(transform.position, Target.position - transform.position, Color.red, 3f);

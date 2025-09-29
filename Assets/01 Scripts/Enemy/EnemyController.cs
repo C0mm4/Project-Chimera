@@ -9,6 +9,7 @@ public class EnemyController : CharacterStats
     [SerializeField] private Rigidbody body;
     [SerializeField] private Transform weaponTrans;
     private EnemyData enemyData;
+    [SerializeField] AIControllerBase aiController;
     BaseWeapon weapon;
 
     protected override void Awake()
@@ -30,6 +31,13 @@ public class EnemyController : CharacterStats
         if(obj != null)
         {
             weapon = obj.GetComponent<BaseWeapon>();
+            weapon.InstigatorTrans = transform;
+        }
+
+        aiController = GetComponent<AIControllerBase>();
+        if (aiController != null && obj != null)
+        {
+            aiController.weapon = weapon;
         }
     }
 

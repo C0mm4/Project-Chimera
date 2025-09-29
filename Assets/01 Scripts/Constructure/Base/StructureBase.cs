@@ -13,15 +13,15 @@ public abstract class StructureBase : CharacterStats
 
     public void Heal()
     {
-        structureData.currentHealth = structureData.maxHealth;
+        data.currentHealth = data.maxHealth;
     }
 
     public virtual void SetDataSO(StructureSO statData) // 정진규: BaseStatusSO 에서 StructureSO로 변경
     {
         originData = statData;
         this.statData = originData as StructureSO;
-        structureData.maxHealth = statData.maxHealth;
-        structureData.currentHealth = structureData.maxHealth;
+        data.maxHealth = statData.maxHealth;
+        data.currentHealth = data.maxHealth;
         structureData.CurrentLevel = 1;
 
         CopyStatusData(originData);
@@ -164,8 +164,8 @@ public abstract class StructureBase : CharacterStats
         structureData.CurrentLevel++;
 
         // 복제된 SO 데이터의 스탯을 직접 수정합니다.
-        structureData.maxHealth += upgrade.maxHealthIncrease;
-        structureData.currentHealth = statData.maxHealth;
+        data.maxHealth += upgrade.maxHealthIncrease;
+        data.currentHealth = statData.maxHealth;
 
         Debug.Log($"{name.Replace("SO", "(Instance)")} 업그레이드! -> Lv.{structureData.CurrentLevel}");
 
@@ -199,8 +199,5 @@ public abstract class StructureBase : CharacterStats
 [Serializable]
 public struct StructureData
 {
-    public float currentHealth;
-    public float maxHealth;
-
     public int CurrentLevel;
 }

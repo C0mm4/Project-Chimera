@@ -6,13 +6,13 @@ using UnityEngine;
 public class GoldMining : StructureBase
 {
     //   private GoldMiningSO data;
-    [SerializeField] private GoldMiningData data;
+    [SerializeField] private GoldMiningData goldMiningdata;
 
     public override void CopyStatusData(BaseStatusSO statData)
     {
         GoldMiningSO so = statData as GoldMiningSO;
-        data.AddGoldDropRate = so.AddGoldDropRate;
-        data.AddGoldGetRate = so.AddGoldGetRate;
+        goldMiningdata.AddGoldDropRate = so.AddGoldDropRate;
+        goldMiningdata.AddGoldGetRate = so.AddGoldGetRate;
     }
 
     public override void SetDataSO(StructureSO statData)
