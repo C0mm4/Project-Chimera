@@ -141,11 +141,14 @@ MonoBehaviour:
     currentHealth: 0
     maxHealth: 0
     moveSpeed: 0
+  gaugebarUI: {fileID: 0}
   structureData:
     CurrentLevel: 0
   statData: {fileID: 11400000, guid: fb6d53f31b0850a4bad7061f98727a84, type: 2}
   interactionZone: {fileID: 6421397309389542285}
   structureCollider: {fileID: 5734643578374958214}
+  obstacle: {fileID: 0}
+  isAlive: 1
   currentSpawnCount: 0
   barrackData:
     spawnUnitKey: 

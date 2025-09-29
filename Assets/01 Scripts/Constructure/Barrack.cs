@@ -92,9 +92,9 @@ public class Barrack : StructureBase
         // 소환 시도 시 풀 생성 안되어있으면 삭제
         if (!ObjectPoolManager.Instance.ContainsPool(barrackData.spawnUnitKey,transform))
         {
-            ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, transform, 4 );
+            ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, transform);
         }
-        var obj = ObjectPoolManager.Instance.GetPool(barrackData.spawnUnitKey, transform);
+        GameObject obj = ObjectPoolManager.Instance.GetPool(barrackData.spawnUnitKey, transform);
         if (obj != null)
         {
             spawnUnits.Add(obj);

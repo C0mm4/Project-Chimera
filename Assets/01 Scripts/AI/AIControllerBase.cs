@@ -200,7 +200,8 @@ public abstract class AIControllerBase : MonoBehaviour
 
                 enemyStrategy.Owner = transform;
                 enemyStrategy.SearchLayerMask = LayerMask.GetMask("Enemy");
-                enemyStrategy.SearchRange = 10f;
+                //유닛 AI 탐지범위 [공격범위랑은 다름]
+                enemyStrategy.SearchRange = 15f;
                 searchStrategy = enemyStrategy;
                 break;
         }
