@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: stage01
   m_EditorClassIdentifier: 
   monsters:
-  - keyName: Pref_400000
-    prefabName: Pref_400000
+  - keyName: Pref_400001
+    prefabName: Pref_400001
     spawnEnemyCount: 1
     spawnPointIndex: 0
     SpawnRepeatCount: 2
@@ -22,8 +22,8 @@ MonoBehaviour:
     delayBetweenWave: 0
     delayType: 0
     checkPrevWaveIndexes: 
-  - keyName: Pref_400000
-    prefabName: Pref_400000
+  - keyName: Pref_400004
+    prefabName: Pref_400004
     spawnEnemyCount: 4
     spawnPointIndex: 0
     SpawnRepeatCount: 2

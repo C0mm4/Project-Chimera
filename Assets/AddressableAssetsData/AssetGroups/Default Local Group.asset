@@ -48,12 +48,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f8eeaeab4a1a5441ba7ce58704b73fd
-    m_Address: stage02
+    m_Address: SO_600002
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 421f014b3bd0567429e1e1f8f5570be8
-    m_Address: stage
+    m_Address: SO_600001
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 57c303e6917c4304383863baaffd6b42
-    m_Address: stage01
+    m_Address: SO_600000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -158,7 +158,27 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c667bc405ed0ef64f99f9b3564ddde11
-    m_Address: SO_560000
+    m_Address: SO_560001
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 643dd1672a5fef244bfaf0faf85004f1
+    m_Address: Pref_480000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8561a66f4b3392d4ab59693f4f618f25
+    m_Address: Pref_470000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8561a66f4b3392d4ab59693f4f618f25
+    m_Address: a
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 643dd1672a5fef244bfaf0faf85004f1
+    m_Address: Assets/03 Prefabs/Units/Archer.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

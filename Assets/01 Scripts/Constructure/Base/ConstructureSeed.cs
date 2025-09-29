@@ -51,7 +51,7 @@ public class ConstructureSeed : MonoBehaviour
 
         if(keyName != "" && so != null)
         {
-            var obj = ObjectPoolManager.Instance.GetPool(keyName);
+            var obj = ObjectPoolManager.Instance.GetPool(keyName, StageManager.Instance.Stage.StructureTrans);
             obj.transform.position = transform.position;
             obj.transform.rotation = transform.rotation;
 

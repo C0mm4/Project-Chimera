@@ -203,7 +203,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
     //스테이지 번호 찾아서 해당 몬스터 스테이지 생성
     public void StartStage(int stageNumber)
     {
-        string key = $"stage{stageNumber:D2}";
+        string key = $"SO_6{stageNumber:D5}";
 
         if (stageData.ContainsKey(key))
         {
@@ -237,11 +237,16 @@ public class EnemySpawn : Singleton<EnemySpawn>
     {
         waveSpawnDict[waveIndex].Remove(go);
         go.GetComponent<EnemyController>().OnDeathStageHandler -= OnWaveEnemyDeath;
-
+        ResiveEnemyPool(go);
         if (CheckStageClear())
         {
             StageManager.Instance.StageClear();
         }
+    }
+
+    public void ResiveEnemyPool(GameObject go)
+    {
+        ObjectPoolManager.Instance.ResivePool(go.name, go, enemyTransform);
     }
 
     public bool CheckStageClear()

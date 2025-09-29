@@ -13,7 +13,8 @@ public class Bow : BaseWeapon
 
     protected override void PerformAttack(Transform target)
     {
-        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(RangedData.ProjectilID);
+        Debug.Log("performattack : " + transform);
+        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(RangedData.ProjectilID,transform);
 
         Projectile projectile = projectileObj.GetComponent<Projectile>();
         if (projectile != null)

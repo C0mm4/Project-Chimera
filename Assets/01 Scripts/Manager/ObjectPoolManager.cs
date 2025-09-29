@@ -45,7 +45,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             defaultTransform = _defaultTransform
         };
 
-        Debug.Log(addressableKey);
     }
 
     //풀에서 오브젝트 가져오기

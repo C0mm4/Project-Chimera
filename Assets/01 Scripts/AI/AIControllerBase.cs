@@ -182,6 +182,14 @@ public abstract class AIControllerBase : MonoBehaviour
 
                 searchStrategy = baseOnlyStrategy;
                 break;
+            case AISearchType.Enemy:
+                EnemySearchStrategy enemyStrategy = new EnemySearchStrategy();
+
+                enemyStrategy.Owner = transform;
+                enemyStrategy.SearchLayerMask = LayerMask.GetMask("Enemy");
+                enemyStrategy.SearchRange = 10f;
+                searchStrategy = enemyStrategy;
+                break;
         }
     }
     

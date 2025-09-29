@@ -18,8 +18,8 @@ public enum AISearchType
     PlayerFirst,
     DistanceFirst,
     BaseOnly,
+    Enemy
 }
-
 
 
 public static class Path

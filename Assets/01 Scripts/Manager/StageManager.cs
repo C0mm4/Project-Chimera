@@ -7,6 +7,7 @@ public class StageManager : Singleton<StageManager>
     // Spawner spawner;
     // public Spawner spawner; 
     public BasementStructure Basement;
+    public Stage Stage;
 
     [SerializeField] private int stageN;
     public static GameData data;
