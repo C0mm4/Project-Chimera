@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    [SerializeField] private BaseStatusSO originData;
+    [SerializeField] protected BaseStatusSO originData;
 
     AIControllerBase aiController;
 
     public StatusData data;
 
 
-    public event Action<float, float> OnHealthChanged;
+    public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
     
@@ -18,10 +18,13 @@ public class CharacterStats : MonoBehaviour
     {
         aiController = GetComponent<AIControllerBase>();
         
-        data.maxHealth = originData.maxHealth;
+        if(originData != null)
+        {
+            data.maxHealth = originData.maxHealth;
 
-        data.currentHealth = data.maxHealth;
-        data.moveSpeed = originData.moveSpeed;
+            data.currentHealth = data.maxHealth;
+            data.moveSpeed = originData.moveSpeed;
+        }
     }
 
 
@@ -33,7 +36,8 @@ public class CharacterStats : MonoBehaviour
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
-        OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
+        float percent = data.currentHealth / data.maxHealth;
+        OnHealthChanged?.Invoke(percent);
         if (aiController != null)
         {
             aiController.OnHit(instigator);

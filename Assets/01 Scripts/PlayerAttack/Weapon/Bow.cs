@@ -20,6 +20,7 @@ public class Bow : BaseWeapon
         if (projectile != null)
         {
             projectile.Initialize(transform, target, RangedData, InstigatorTrans);
+            projectile.transform.SetParent(null);
         }
     }
 }
