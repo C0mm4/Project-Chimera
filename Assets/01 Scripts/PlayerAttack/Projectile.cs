@@ -146,7 +146,8 @@ public class Projectile : MonoBehaviour
             new Vector3(lastKnownPosition.x, 0, lastKnownPosition.z)
             );
 
-        if (horizontalDistance < 0.2f)
+        // 0929: 거리로 확인 로직 + 시간이 지나면 삭제되도록 변경
+        if (horizontalDistance < 0.2f || timeElapsed >= flightDuration)
         {
             //gameObject.SetActive(false);
             //확인 필요 - SMC
