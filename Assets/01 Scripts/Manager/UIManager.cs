@@ -79,6 +79,16 @@ public class UIManager : Singleton<UIManager>
         --sortOrder;
     }
 
+    public void CloseAllPopupUI()
+    {
+        if (popupStack.Count == 0) return;
+
+        while (popupStack.Count > 0)
+        {
+            ClosePopupUI();
+        }
+    }
+
     public T GetUI<T>() where T : UIBase
     {
         if (_isCleaning) return null;
