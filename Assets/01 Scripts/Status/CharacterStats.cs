@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    [SerializeField] private BaseStatusSO originData;
+    [SerializeField] protected BaseStatusSO originData;
 
     AIControllerBase aiController;
 
@@ -18,10 +18,13 @@ public class CharacterStats : MonoBehaviour
     {
         aiController = GetComponent<AIControllerBase>();
         
-        data.maxHealth = originData.maxHealth;
+        if(originData != null)
+        {
+            data.maxHealth = originData.maxHealth;
 
-        data.currentHealth = data.maxHealth;
-        data.moveSpeed = originData.moveSpeed;
+            data.currentHealth = data.maxHealth;
+            data.moveSpeed = originData.moveSpeed;
+        }
     }
 
 

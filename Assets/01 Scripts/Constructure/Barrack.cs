@@ -17,6 +17,8 @@ public class Barrack : StructureBase
     //유닛 위치 저장
     [SerializeField] private List<Vector3> savePosition = new List<Vector3>();
 
+
+
     public override void SetDataSO(StructureSO data)
     {
         Debug.Log("SetData");
