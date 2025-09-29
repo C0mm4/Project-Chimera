@@ -7,19 +7,10 @@ public class BarrackUnitStatus : CharacterStats
     public Barrack spawnBarrack;
     public int spawnIndex;
 
-    protected override void Awake()
-    {
-        unitPosition = transform;
-        //테스트용
-//        unitPosition.position = new Vector3(-5.5f, 0.48f, -7.63f);
-
-    }
-    
-
     private void OnEnable()
     {
         //이 부분에 초기화 넣어주면됨
-        transform.position = unitPosition.position;
+        //transform.position = unitPosition.position;
         transform.rotation = Quaternion.identity;
     }
 
