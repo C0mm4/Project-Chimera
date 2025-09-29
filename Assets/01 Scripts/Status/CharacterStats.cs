@@ -9,11 +9,12 @@ public class CharacterStats : MonoBehaviour
 
     [SerializeField] public StatusData data;
 
-
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
-    
+
+    public GaugeBarUI gaugebarUI;
+
     protected virtual void Awake()
     {
         aiController = GetComponent<AIControllerBase>();
@@ -24,6 +25,14 @@ public class CharacterStats : MonoBehaviour
 
             data.currentHealth = data.maxHealth;
             data.moveSpeed = originData.moveSpeed;
+        }
+
+        if (gaugebarUI == null)
+        {
+            ObjectPoolManager.Instance.CreatePool("Pref_110000", transform);
+
+            GameObject obj = ObjectPoolManager.Instance.GetPool("Pref_110000", transform);
+            gaugebarUI = obj.GetComponent<GaugeBarUI>();
         }
     }
 
@@ -41,7 +50,9 @@ public class CharacterStats : MonoBehaviour
         Debug.Log(data.currentHealth);
 
         float percent = data.currentHealth / data.maxHealth;
-        OnHealthChanged?.Invoke(percent);
+        //OnHealthChanged?.Invoke(percent);
+        //데미지를 받을때 여기밖에 안거치는거같음
+        UpdateHealthUI(percent);
         if (aiController != null)
         {
             aiController.OnHit(instigator);
@@ -58,6 +69,12 @@ public class CharacterStats : MonoBehaviour
     {
         
     }
+
+    private void UpdateHealthUI(float percent)
+    {
+        gaugebarUI.SetFillPercent(percent);
+    }
+
 }
 
 [Serializable]

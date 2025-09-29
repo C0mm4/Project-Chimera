@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38baab6913c4458459c57b26d9143504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originData: {fileID: 0}
+  originData: {fileID: 11400000, guid: 5b34a610fe65b8543a2f611527820cc6, type: 2}
   data:
     currentHealth: 0
     maxHealth: 0
@@ -146,6 +146,8 @@ MonoBehaviour:
   statData: {fileID: 0}
   interactionZone: {fileID: 5789040607290296674}
   structureCollider: {fileID: 5734643578374958214}
+  obstacle: {fileID: 0}
+  isAlive: 1
 --- !u!1001 &4150791518444937116
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -154,13 +154,13 @@ public class Projectile : MonoBehaviour
             new Vector3(transform.position.x, 0, transform.position.z),
             new Vector3(lastKnownPosition.x, 0, lastKnownPosition.z)
             );
-        Debug.Log("거리 or 시간 변수 측정중");
+        //Debug.Log("거리 or 시간 변수 측정중");
 
         // 0929: 거리로 확인 로직 + 시간이 지나면 삭제되도록 변경
         if (horizontalDistance < 0.2f || timeElapsed >= flightDuration)
         {
             //gameObject.SetActive(false);
-            Debug.Log("거리 or 시간 변수 조건 충족");
+            //Debug.Log("거리 or 시간 변수 조건 충족");
             //확인 필요 - SMC
             ObjectPoolManager.Instance.ResivePool(name, gameObject, transform.parent);
         }
@@ -174,14 +174,14 @@ public class Projectile : MonoBehaviour
         string name = gameObject.name;
         name = name.Replace("(Clone)", "");
 
+        Debug.Log("부딪힌 Transform : " + collision.transform);
         // 부딪힌 상대가 지정한 타겟이 맞는지 확인
-        if (targetTransform != null && collision.transform == targetTransform)
+        if ((targetTransform != null && collision.transform == targetTransform) )
         {
             // 타겟이 맞다면 데미지를 준다.
             if (collision.gameObject.TryGetComponent<CharacterStats>(out var status))
             {
                 status.TakeDamage(Instigator, damage);
-                //확인 필요 - SMC
 
                 Debug.Log("발사체 트리거 닿음");
                 ObjectPoolManager.Instance.ResivePool(name,  gameObject, weaponTransform);

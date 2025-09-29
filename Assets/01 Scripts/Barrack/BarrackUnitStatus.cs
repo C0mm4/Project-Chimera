@@ -19,7 +19,7 @@ public class BarrackUnitStatus : CharacterStats
     private void OnEnable()
     {
         //이 부분에 초기화 넣어주면됨
-//        transform.position = unitPosition.position;
+        //        transform.position = unitPosition.position;
         transform.rotation = Quaternion.identity;
     }
 
@@ -30,4 +30,6 @@ public class BarrackUnitStatus : CharacterStats
         spawnBarrack.UnitDespawn(this);
 //        BarrackUnitSpawn.Instance.nowUnit--;
     }
+
+
 }

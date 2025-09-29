@@ -187,7 +187,6 @@ MonoBehaviour:
     m_Bits: 0
   SearchType: 4
   weapon: {fileID: 1596385982016722005}
-  currentWeapon: {fileID: 0}
   weaponTypes: 0
 --- !u!195 &-8968621036011651683
 NavMeshAgent:

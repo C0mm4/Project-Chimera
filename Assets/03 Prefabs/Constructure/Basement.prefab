@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363aa8b4c038b384895669399249f4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originData: {fileID: 0}
+  originData: {fileID: 11400000, guid: ab11e458040aea6469b84afdd86eaf9c, type: 2}
   data:
     currentHealth: 0
     maxHealth: 0
@@ -129,6 +129,8 @@ MonoBehaviour:
   statData: {fileID: 0}
   interactionZone: {fileID: 665018230325946417}
   structureCollider: {fileID: 5607322925584442562}
+  obstacle: {fileID: 0}
+  isAlive: 1
 --- !u!1001 &6986984802599075535
 PrefabInstance:
   m_ObjectHideFlags: 0

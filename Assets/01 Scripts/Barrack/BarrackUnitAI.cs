@@ -9,13 +9,10 @@ public class BarrackUnitAI : AIControllerBase
 
     public WeaponTypes weaponTypes;
 
-    private BarrackUnitStatus barrackUnitStatus;
-
     protected override void Awake()
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
-        barrackUnitStatus = GetComponent<BarrackUnitStatus>();
 
         randomTargetOffset = Random.insideUnitSphere;
 
