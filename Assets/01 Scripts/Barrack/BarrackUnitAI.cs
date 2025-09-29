@@ -3,8 +3,6 @@ using UnityEngine.AI;
 
 public class BarrackUnitAI : AIControllerBase
 {
-    [SerializeField] private BaseWeapon currentWeapon;
-
     NavMeshAgent agent;
 
     Vector3 randomTargetOffset;
@@ -20,6 +18,8 @@ public class BarrackUnitAI : AIControllerBase
         barrackUnitStatus = GetComponent<BarrackUnitStatus>();
 
         randomTargetOffset = Random.insideUnitSphere;
+
+        Target = null;
     }
 
     protected override void OnEnable()
@@ -30,14 +30,20 @@ public class BarrackUnitAI : AIControllerBase
     protected override void Update()
     {
 
+        if (Target != null && !Target.gameObject.activeInHierarchy)
+        {
+            Target = null;
+        }
 
         if (Target == null )
         {
             Target = searchStrategy.SearchTarget();
         }
 
+
         if (Target != null )
         {
+
             if (attackCoolDown > 0)
             {
                 attackCoolDown = Mathf.Clamp(attackCoolDown - Time.deltaTime, 0, attackCoolDown);
@@ -69,7 +75,7 @@ public class BarrackUnitAI : AIControllerBase
         if (count < 1) return;
 
         //타입별 공격
-        currentWeapon.Attack(Target);
+        weapon.Attack(Target);
 
     }
 

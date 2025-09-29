@@ -57,6 +57,11 @@ public abstract class AIControllerBase : MonoBehaviour
             playerChaseElapseTime += Time.deltaTime;
         }
 
+        if (!Target.gameObject.activeInHierarchy)
+        {
+            Target = null;
+        }
+
         if (playerChaseElapseTime > PlayerChaseTime)
         {
             Target = null;
