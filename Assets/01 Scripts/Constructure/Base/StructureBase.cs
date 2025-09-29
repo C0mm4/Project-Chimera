@@ -76,6 +76,7 @@ public abstract class StructureBase : CharacterStats
     protected override void Death()
     {
         base.Death();
+        ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject, StageManager.Instance.Stage.StructureTrans);
     }
 
     // 업그레이드 시도 메서드
