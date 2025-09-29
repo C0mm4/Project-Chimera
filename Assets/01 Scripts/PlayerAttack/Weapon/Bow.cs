@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bow : BaseWeapon
@@ -7,15 +5,15 @@ public class Bow : BaseWeapon
     private RangedWeaponSO RangedData => weaponData as RangedWeaponSO;
     protected void Awake()
     {
-        if (RangedData.ProjectilePrefab != null)
+        if (RangedData.ProjectilID != null)
         {
-            ObjectPoolManager.Instance.CreatePool(RangedData.ProjectilePrefab.name, 10);
+            ObjectPoolManager.Instance.CreatePool(RangedData.ProjectilID, transform, 10 );
         }
     }
 
     protected override void PerformAttack(Transform target)
     {
-        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(RangedData.ProjectilePrefab.name);
+        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(RangedData.ProjectilID);
 
         Projectile projectile = projectileObj.GetComponent<Projectile>();
         if (projectile != null)

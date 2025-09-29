@@ -10,7 +10,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (objectToInteract != null && !objectToInteract.hasBeenInteractedWith && UIManager.Instance.PopupStackCount == 0)
         {
-            UIManager.Instance.OpenPopupUI<UpgradePopupUI>(objectToInteract);
+            //UIManager.Instance.OpenPopupUI<UpgradePopupUI>(objectToInteract);
         }
     }
 }

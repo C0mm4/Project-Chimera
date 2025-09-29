@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GoldMining : StructureBase
 {
-    private GoldMiningSO data;
+    //   private GoldMiningSO data;
+    [SerializeField] private GoldMiningData data;
 
-    public override void SetDataSO(BaseStatusSO statData)
+    public override void CopyStatusData(BaseStatusSO statData)
+    {
+        GoldMiningSO so = statData as GoldMiningSO;
+        data.AddGoldDropRate = so.AddGoldDropRate;
+        data.AddGoldGetRate = so.AddGoldGetRate;
+    }
+
+    public override void SetDataSO(StructureSO statData)
     {
         DestroyEffect();
 
         base.SetDataSO(statData);
         
-        data = statData as GoldMiningSO;
         BuildEffect();
     }
 
@@ -29,4 +37,14 @@ public class GoldMining : StructureBase
 
         // 골드 획득량 감소 처리
     }
+    public override void UpgradeApplyConcreteStructure()
+    {
+    }
+}
+
+[Serializable]
+public struct GoldMiningData
+{
+    public float AddGoldDropRate;
+    public float AddGoldGetRate;
 }

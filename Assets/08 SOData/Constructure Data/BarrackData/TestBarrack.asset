@@ -15,6 +15,19 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 50
   moveSpeed: 0
+  prefabKey: 
+  levelProgressionData:
+  - upgradeCost: 0
+    modelAddressableKey: Barrack
+  - upgradeCost: 0
+    modelAddressableKey: Barrack
+  - upgradeCost: 100
+    modelAddressableKey: Barrack
+  - upgradeCost: 500
+    modelAddressableKey: Barrack
+  - upgradeCost: 1000
+    modelAddressableKey: Barrack
+  upgradeData: {fileID: 11400000, guid: 0f1daabaabbd9c54fa11b45da09d4041, type: 2}
   spawnUnitKey: TestUnit
   spawnCount: 4
   spawnRate: 1

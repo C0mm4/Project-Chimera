@@ -30,7 +30,14 @@ public class FlyingAIController : AIControllerBase
         base.Awake();
         characterController = GetComponent<CharacterController>();
 
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
         transform.position = new Vector3(transform.position.x, 3f, transform.position.z);
+
     }
 
     protected override bool IsAttackable()

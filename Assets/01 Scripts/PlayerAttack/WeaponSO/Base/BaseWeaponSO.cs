@@ -3,7 +3,6 @@ using UnityEngine;
 public class BaseWeaponSO : ScriptableObject
 {
     [Header("Base Data")]
-    public int Id;
     public string Name;
     // 무기 설명
     // 아이콘 등 추가 가능

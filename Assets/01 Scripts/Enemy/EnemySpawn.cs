@@ -13,6 +13,10 @@ public class EnemySpawn : Singleton<EnemySpawn>
 
     private Dictionary<string, List<MonsterSpawnInfo>> stageData = new Dictionary<string, List<MonsterSpawnInfo>>();
 
+    private Dictionary<int, List<GameObject>> waveSpawnDict = new();
+    [SerializeField] List<GameObject> waveList;
+    private bool[] isActivateWave;
+
     //오브젝트의 크기값 비교해서 넣으면됨
     public float outRangeValue = 0.5f;
 
@@ -21,25 +25,90 @@ public class EnemySpawn : Singleton<EnemySpawn>
         boxColliders = transform.GetComponentsInChildren<BoxCollider>();
     }
 
-    private void Start()
-    {
-        //스테이지 불러오는 부분은 다른 스크립트에서 불러와도됨
-        StartStage(2);
-    }
 
-    public void SpawnMonster(string name,int enemycount,int spawnpoint,int spawncount = 1,float time = 1f)
+    public IEnumerator SpawnMonster(MonsterSpawnInfo info, int waveIndex)
     {
-        if (enemycount <= 0 || spawnpoint < 0 || spawnpoint >= boxColliders.Length ) return;
+        if (info.spawnEnemyCount <= 0 || info.spawnPointIndex < 0 || info.spawnPointIndex >= boxColliders.Length)
+        {
+            yield break;
+        }
+        else
+        {
+            // 이전 웨이브 데이터가 없으면 바로 소환으로
+            if(info.checkPrevWaveIndexes.Count > 0)
+            {
+                // n초 뒤 생성되는 웨이브
+                if (info.delayType == 1)
+                {
+                    yield return new WaitForSeconds(info.delayBetweenWave);
+                }
+                // 이전 웨이브의 소환이 마무리 된 이후 생성되는 웨이브
+                else if (info.delayType == 2 || info.delayType == 3)
+                {
+                    bool isActivePrevWaves = false;
+                    // 이전 웨이브 활성화까지 대기
+                    while (!isActivePrevWaves)
+                    {
+                        isActivePrevWaves = true;
+                        foreach(var index in info.checkPrevWaveIndexes)
+                        {
+                            if (!isActivateWave[index])
+                            {
+                                isActivePrevWaves = false;
+                                break;
+                            }
+                        }
 
-        StartCoroutine(SpawnMonsterCoroutine(name, enemycount, spawnpoint, spawncount,time));
+                        if (isActivePrevWaves)
+                        {
+                            break;
+                        }
+                        yield return null;
+                    }
+
+                    // 이전 웨이브 소환몹 사라질때까지 대기하는 웨이브
+                    if(info.delayType == 2)
+                    {
+                        bool isAllClearPrevWaves = false;
+
+                        while (!isAllClearPrevWaves) 
+                        { 
+                            isAllClearPrevWaves = true;
+                            foreach(var index in info.checkPrevWaveIndexes)
+                            {
+                                if(waveSpawnDict[index].Count > 0)
+                                {
+                                    isAllClearPrevWaves = false;
+                                    break;
+                                }
+
+                                if (isAllClearPrevWaves)
+                                {
+                                    break;
+                                }
+                            }
+                            yield return null;
+                        }
+
+                    }
+
+                    // Wave간 딜레이만큼 대기
+                    yield return new WaitForSeconds(info.delayBetweenWave);
+                }
+            }
+            // 웨이브 스폰 정보 생성
+            StartCoroutine(SpawnMonsterCoroutine(info, waveIndex));
+        }
             
     }
 
-    private IEnumerator SpawnMonsterCoroutine(string name, int enemycount, int spawnpoint, int spawncount, float time = 1f)
+    private IEnumerator SpawnMonsterCoroutine(MonsterSpawnInfo info, int waveIndex)
     {
-        BoxCollider box = boxColliders[spawnpoint];
+        BoxCollider box = boxColliders[info.spawnPointIndex];
 
-        for (int wave = 0; wave < spawncount; wave++)
+        waveSpawnDict[waveIndex] = new();
+//        waveList = waveSpawnDict[waveIndex];
+        for (int wave = 0; wave < info.SpawnRepeatCount; wave++)
         {
             //랜덤으로 뿌려진 위치 기록용
             List<Vector3> usedPositions = new List<Vector3>();
@@ -49,22 +118,27 @@ public class EnemySpawn : Singleton<EnemySpawn>
                 usedPositions.Add(child.position);
             }
 
-            for (int i = 0; i < enemycount; i++)
+            for (int i = 0; i < info.spawnEnemyCount; i++)
             {
                 //오브젝트 풀에서 name키값의 오브젝트 가져옮
                 //가져오면서 active ture로 변하니 따로 설정할필요 X
-                GameObject enemy = ObjectPoolManager.Instance.GetPool(name);
-                enemy.name = name;
-
+                GameObject enemy = ObjectPoolManager.Instance.GetPool(info.keyName, enemyTransform);
+                
                 if (enemy != null)
                 {
+                    enemy.name = info.keyName;
                     Vector3 spawnPos = SpawnOutRange(box, usedPositions, outRangeValue);
                     enemy.transform.position = spawnPos;
+                    enemy.GetComponent<EnemyController>().Initialize(waveIndex);
+                    enemy.GetComponent<EnemyController>().OnDeathStageHandler += OnWaveEnemyDeath;
+                    waveSpawnDict[waveIndex].Add(enemy);
                 }
             }
 
-            yield return new WaitForSeconds(time); 
+            yield return new WaitForSeconds(info.delayBetweenSpawnRepeat);
         }
+        isActivateWave[waveIndex] = true;
+        Debug.Log($"{waveIndex} 활성화 트리거 작동");
     }
 
     private Vector3 SpawnOutRange(BoxCollider boxcoll,List<Vector3> position,float distanceMin)
@@ -145,21 +219,48 @@ public class EnemySpawn : Singleton<EnemySpawn>
             stageData[key] = waveSO.monsters;
         }
 
-        //몬스터 스폰부분
-        foreach (var spawnInfo in stageData[key])
+        // 스테이지 생성 시 활성화 bool array 초기화
+        isActivateWave = new bool[stageData[key].Count];
+        StageManager.Instance.state = StageState.InPlay;
+        // 웨이브별 소환 정보 담는 딕셔너리 초기화
+        waveSpawnDict.Clear();
+        for (int i = 0; i < stageData[key].Count; i++)
         {
-            // 풀 생성
-            ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, 1, enemyTransform);
-
-            // 몬스터 스폰
-            SpawnMonster(
-                spawnInfo.keyName,
-                spawnInfo.enemyCount,
-                spawnInfo.spawnPoint,
-                spawnInfo.spawnCount,
-                spawnInfo.spawnTime
-            );
+            var spawnInfo = stageData[key][i];
+            ObjectPoolManager.Instance.CreatePool(spawnInfo.keyName, enemyTransform);
+            // 웨이브 스폰 정보 클리어
+            StartCoroutine(SpawnMonster(spawnInfo, i));
         }
     }
 
+    public void OnWaveEnemyDeath(int waveIndex, GameObject go)
+    {
+        waveSpawnDict[waveIndex].Remove(go);
+        go.GetComponent<EnemyController>().OnDeathStageHandler -= OnWaveEnemyDeath;
+
+        if (CheckStageClear())
+        {
+            StageManager.Instance.StageClear();
+        }
+    }
+
+    public bool CheckStageClear()
+    {
+        // 활성화 되지 않은 웨이브가 있으면 false 반환
+        foreach(var b in isActivateWave)
+        {
+            if (!b) return false;
+        }
+
+        int waveCount = waveSpawnDict.Count;
+        for(int i = 0; i < waveCount; i++)
+        {
+            if (waveSpawnDict.ContainsKey(i))
+            {
+                if (waveSpawnDict[i].Count > 0) return false;
+            }
+        }
+
+        return true;
+    }
 }
