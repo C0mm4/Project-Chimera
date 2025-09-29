@@ -1177,7 +1177,12 @@ PrefabInstance:
     - target: {fileID: 1813784046355803044, guid: 33c07014574202a4f9f29aade05c0e16,
         type: 3}
       propertyPath: waveList.Array.size
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813784046355803044, guid: 33c07014574202a4f9f29aade05c0e16,
+        type: 3}
+      propertyPath: stageDataSO.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2037039534447463364, guid: 33c07014574202a4f9f29aade05c0e16,
         type: 3}
