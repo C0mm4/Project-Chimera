@@ -10,7 +10,7 @@ public class CharacterStats : MonoBehaviour
     public StatusData data;
 
 
-    public event Action<float, float> OnHealthChanged;
+    public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
     
@@ -33,7 +33,8 @@ public class CharacterStats : MonoBehaviour
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
 
-        OnHealthChanged?.Invoke(data.currentHealth, data.maxHealth);
+        float percent = data.currentHealth / data.maxHealth;
+        OnHealthChanged?.Invoke(percent);
         if (aiController != null)
         {
             aiController.OnHit(instigator);
