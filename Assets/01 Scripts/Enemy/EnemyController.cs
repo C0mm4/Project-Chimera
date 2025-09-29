@@ -30,6 +30,13 @@ public class EnemyController : CharacterStats
         if(obj != null)
         {
             weapon = obj.GetComponent<BaseWeapon>();
+            weapon.InstigatorTrans = transform;
+        }
+
+        aiController = GetComponent<AIControllerBase>();
+        if (aiController != null && obj != null)
+        {
+            aiController.weapon = weapon;
         }
     }
 

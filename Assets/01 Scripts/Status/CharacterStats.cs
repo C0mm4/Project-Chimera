@@ -5,9 +5,9 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] protected BaseStatusSO originData;
 
-    AIControllerBase aiController;
+    protected AIControllerBase aiController;
 
-    public StatusData data;
+    [SerializeField] public StatusData data;
 
 
     public event Action<float> OnHealthChanged;
@@ -31,10 +31,14 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(Transform instigator, float damageAmount)
     {
-//        Debug.Log(data);
-//        if (data == null) return;
+
+        //        Debug.Log(data);
+        //        if (data == null) return;
         data.currentHealth -= damageAmount;
         data.currentHealth = Mathf.Clamp(data.currentHealth, 0, data.maxHealth);
+
+        Debug.Log("때리는 주체 : " + instigator);
+        Debug.Log(data.currentHealth);
 
         float percent = data.currentHealth / data.maxHealth;
         OnHealthChanged?.Invoke(percent);
@@ -56,7 +60,7 @@ public class CharacterStats : MonoBehaviour
     }
 }
 
-
+[Serializable]
 public struct StatusData
 {
     public float currentHealth;

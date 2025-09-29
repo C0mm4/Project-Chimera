@@ -38,7 +38,7 @@ public abstract class BaseWeapon : MonoBehaviour
         {
             return; // 타겟이 없으면 아무것도 안 함
         }
-
+        
         PerformAttack(target);
         // 마지막 공격 시간 갱신
         lastAttackTime = Time.time;

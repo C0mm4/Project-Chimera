@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf6b09bf85635b46a0055ad5dd526be, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  Id: 1
   Name: "\uBC0B\uBC0B\uD55C \uAC80"
-  Damage: 20
+  Damage: 1
   ScanRange: 4
   AttackCooldown: 1
   AttackRadius: 5
