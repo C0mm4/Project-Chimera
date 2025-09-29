@@ -27,12 +27,6 @@ public class Sword : BaseWeapon
     protected override void PerformAttack(Transform target)
     {
         // 공격 방향으로 플레이어(또는 무기)의 방향을 돌립니다.
-        transform.root.LookAt(target); // transform.root는 플레이어 전체를 의미
-
-        Vector3 currentRotation = transform.root.eulerAngles;
-        currentRotation.x = 0;
-        currentRotation.z = 0;
-        transform.root.eulerAngles = currentRotation;
 
         // Todo: 애니메이션 시작, 검기 VFX 추가, 사운드 추가
 
