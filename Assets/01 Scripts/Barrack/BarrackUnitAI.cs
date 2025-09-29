@@ -43,11 +43,52 @@ public class BarrackUnitAI : AIControllerBase
             dir.y = 0f;
             TargetGroundDistance = dir.magnitude;
 
-            currentWeapon.Attack(Target);
+            if (IsAttackable())
+            {
+                shouldStop = true;
+                TryAttack();
+            }
+            else
+            {
+                shouldStop = false;
+            }
         }
     }
 
+    protected override bool IsAttackable()
+    {
+        if (Target == null) return false;
 
+        LayerMask targetLayer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, AttackRange, overlaps, targetLayer);
+
+        if (count == 0) return false;
+
+        return true;
+    }
+
+    protected override void TryAttack()
+    {
+        if (attackCoolDown > 0f) return;
+
+        LayerMask targetLayer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, AttackRange, overlaps, targetLayer);
+
+        if (count < 1) return;
+
+        //타입별 공격
+        switch (weaponTypes)
+        {
+            case WeaponTypes.Bow:
+                currentWeapon.Attack(Target);
+                break;
+            case WeaponTypes.Sword:
+                attackCoolDown = AttackCoolTime;
+                break;
+        }
+
+       
+    }
 
     protected override void ChaseTarget()
     {

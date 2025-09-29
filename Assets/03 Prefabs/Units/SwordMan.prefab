@@ -180,7 +180,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   SearchType: 4
-  weaponTypes: 1
+  currentWeapon: {fileID: 0}
+  weaponTypes: 0
 --- !u!195 &-8968621036011651683
 NavMeshAgent:
   m_ObjectHideFlags: 0
