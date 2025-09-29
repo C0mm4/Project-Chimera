@@ -98,8 +98,9 @@ public abstract class AIControllerBase : MonoBehaviour
     public void OnHit(Transform instigator)
     {
         if (SearchType == AISearchType.BaseOnly) return;
-
-        Debug.Log($"{instigator.name} 한테 맞았음");
+        {
+            Debug.Log($"{instigator.name} 한테 맞았음");
+        } 
 
         if (SearchType == AISearchType.General)
         {

@@ -172,13 +172,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8561a66f4b3392d4ab59693f4f618f25
-    m_Address: a
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 643dd1672a5fef244bfaf0faf85004f1
-    m_Address: Assets/03 Prefabs/Units/Archer.prefab
+  - m_GUID: af360fe984361e94d8604eff86d7ae2e
+    m_Address: SO_100000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

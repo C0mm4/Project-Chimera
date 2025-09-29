@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public Player Player;
+    public PlayerStatus Player;
 
     public void GameStart()
     {
