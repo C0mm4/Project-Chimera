@@ -57,7 +57,7 @@ public abstract class AIControllerBase : MonoBehaviour
             playerChaseElapseTime += Time.deltaTime;
         }
 
-        if (!Target.gameObject.activeInHierarchy)
+        if (!Target.gameObject.activeInHierarchy || Target.CompareTag("IsDead"))
         {
             Target = null;
         }
