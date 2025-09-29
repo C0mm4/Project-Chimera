@@ -7,6 +7,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Transform Instigator;
+    private Transform weaponTransform;
 
     [SerializeField] private Transform targetTransform;      // 현재 타겟의 위치
     private Vector3 startPosition;          // 발사체 시작 위치(플레이어 or 무기)
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour
     private float timeElapsed;
 
 
-    public void Initialize(Transform start, Transform target, RangedWeaponSO weaponData, Transform instigator)
+    public void Initialize(Transform start, Transform target, RangedWeaponSO weaponData, Transform instigator, Transform weaponTransform)
     {
         this.transform.position = start.position;
         this.startPosition = start.position;
@@ -37,7 +38,7 @@ public class Projectile : MonoBehaviour
         this.lastPosition = transform.position;
 
         this.Instigator = instigator;
-
+        this.weaponTransform = weaponTransform;  
         if (targetTransform != null)
         {
             lastKnownPosition = targetTransform.position;
@@ -169,7 +170,7 @@ public class Projectile : MonoBehaviour
             {
                 status.TakeDamage(Instigator, damage);
                 //확인 필요 - SMC
-                ObjectPoolManager.Instance.ResivePool(name, gameObject,transform.parent);
+                ObjectPoolManager.Instance.ResivePool(name,  gameObject, weaponTransform);
             }
         }
     }
