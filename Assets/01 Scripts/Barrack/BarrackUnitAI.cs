@@ -11,10 +11,14 @@ public class BarrackUnitAI : AIControllerBase
 
     public WeaponTypes weaponTypes;
 
+    private BarrackUnitStatus barrackUnitStatus;
+
     protected override void Awake()
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
+        barrackUnitStatus = GetComponent<BarrackUnitStatus>();
+
         randomTargetOffset = Random.insideUnitSphere;
     }
 
@@ -27,12 +31,12 @@ public class BarrackUnitAI : AIControllerBase
     {
 
 
-        if (Target == null)
+        if (Target == null || Target == barrackUnitStatus.unitPosition)
         {
             Target = searchStrategy.SearchTarget();
         }
 
-        if (Target != null)
+        if (Target != null && Target != barrackUnitStatus.unitPosition)
         {
             if (attackCoolDown > 0)
             {

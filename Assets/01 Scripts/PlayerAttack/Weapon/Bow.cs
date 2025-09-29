@@ -7,13 +7,14 @@ public class Bow : BaseWeapon
     {
         if (RangedData.ProjectilID != null)
         {
-            ObjectPoolManager.Instance.CreatePool(RangedData.ProjectilID, transform.parent, 10 );
+            ObjectPoolManager.Instance.CreatePool(RangedData.ProjectilID, transform, 10 );
         }
     }
 
     protected override void PerformAttack(Transform target)
     {
-        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(RangedData.ProjectilID,transform.parent);
+        Debug.Log("performattack : " + transform);
+        GameObject projectileObj = ObjectPoolManager.Instance.GetPool(RangedData.ProjectilID,transform);
 
         Projectile projectile = projectileObj.GetComponent<Projectile>();
         if (projectile != null)
