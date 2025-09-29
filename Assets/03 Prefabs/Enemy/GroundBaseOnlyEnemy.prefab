@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4433808953472503156}
   - component: {fileID: 4331323729434802015}
   - component: {fileID: 3545886616242170152}
-  - component: {fileID: 5551393689686872404}
   - component: {fileID: 8043903073778823055}
+  - component: {fileID: -3802969174360405614}
   m_Layer: 10
   m_Name: GroundBaseOnlyEnemy
   m_TagString: Untagged
@@ -149,20 +149,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5551393689686872404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1351730876993104746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2270d163f3d604e44a64654c407d561e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
-  data: {fileID: 0}
 --- !u!114 &8043903073778823055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +162,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropData: {fileID: 11400000, guid: 20b726dd2251f9d4e9b8cd2ec39f79f4, type: 2}
+--- !u!114 &-3802969174360405614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351730876993104746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a1fd6a269cad74e81b84aafa2d938b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
+  body: {fileID: 0}
+  spawnWaveIndex: 0
 --- !u!1 &3551319245752979013
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +188,7 @@ GameObject:
   - component: {fileID: 3289862913092930767}
   - component: {fileID: 6993417907598756234}
   - component: {fileID: 6266012355347424172}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

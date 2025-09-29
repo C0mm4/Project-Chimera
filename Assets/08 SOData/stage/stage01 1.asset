@@ -25,7 +25,7 @@ MonoBehaviour:
   - keyName: Pref_410002
     prefabName: Pref_410002
     spawnEnemyCount: 1
-    spawnPointIndex: 0
+    spawnPointIndex: 1
     SpawnRepeatCount: 1
     delayBetweenSpawnRepeat: 0
     delayBetweenWave: 0
@@ -40,9 +40,9 @@ MonoBehaviour:
     delayBetweenWave: 0
     delayType: 0
     checkPrevWaveIndexes: 
-  - keyName: Pref_410004
-    prefabName: Pref_410004
-    spawnEnemyCount: 1
+  - keyName: Pref_400001
+    prefabName: Pref_400001
+    spawnEnemyCount: 5
     spawnPointIndex: 0
     SpawnRepeatCount: 1
     delayBetweenSpawnRepeat: 0

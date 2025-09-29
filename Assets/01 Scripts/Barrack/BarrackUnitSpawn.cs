@@ -15,7 +15,7 @@ public class BarrackUnitSpawn : Singleton<BarrackUnitSpawn>
     private float nowTime;
 
     //유닛 위치 저장
-    private List<Vector3> savePosition = new List<Vector3>();
+    private List<Vector3> savePosition = new();
 
     private void Start()
     {
@@ -57,9 +57,9 @@ public class BarrackUnitSpawn : Singleton<BarrackUnitSpawn>
             {
                 GameObject unit = ObjectPoolManager.Instance.GetPool(keyvalue);
 
-                BarrackUnit position = unit.GetComponent<BarrackUnit>();
-                position.unitPosition = savePosition[i];
-                position.transform.position = savePosition[i];
+                BarrackUnitStatus position = unit.GetComponent<BarrackUnitStatus>();
+                position.unitPosition.position = savePosition[i];
+                position.unitPosition.rotation = Quaternion.identity;
 
             }
 
