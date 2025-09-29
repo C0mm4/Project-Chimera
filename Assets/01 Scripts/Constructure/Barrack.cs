@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Barrack : StructureBase
 {
@@ -99,6 +100,8 @@ public class Barrack : StructureBase
         {
             spawnUnits.Add(obj);
             BarrackUnitStatus unit = obj.GetComponent<BarrackUnitStatus>();
+            NavMeshAgent navmesh = obj.GetComponent<NavMeshAgent>();
+            navmesh.Warp(savePosition[index]);
             unit.transform.position = savePosition[index];
             unit.spawnIndex = index;
             unit.spawnBarrack = this;

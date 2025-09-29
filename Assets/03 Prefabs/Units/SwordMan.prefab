@@ -157,6 +157,7 @@ MonoBehaviour:
     currentHealth: 0
     maxHealth: 0
     moveSpeed: 0
+  gaugebarUI: {fileID: 0}
   unitPosition: {fileID: 0}
   spawnBarrack: {fileID: 0}
   spawnIndex: 0

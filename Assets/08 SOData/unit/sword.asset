@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8dd6571861f204284259a61d201e7a, type: 3}
   m_Name: sword
   m_EditorClassIdentifier: 
-  currentHealth: 10
-  maxHealth: 10
+  currentHealth: 80
+  maxHealth: 80
   moveSpeed: 1
   enemyName: "\uAC80"
   tier: 1
   damage: 5
+  WeaponID: 
   targetDetectrange: 0
   playerFollowTime: 0
   attackDistance: 0
