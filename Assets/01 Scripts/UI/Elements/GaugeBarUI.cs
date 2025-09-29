@@ -8,6 +8,7 @@ public class GaugeBarUI : MonoBehaviour
     [SerializeField] Vector3 offset;
     [SerializeField] Image fillFront;
     [SerializeField] Image fillBack;
+    [SerializeField] Transform fillArea;
 
     [Header("게이지 바 색상")]
     [SerializeField] Color fillFrontNormalColor;
@@ -22,6 +23,7 @@ public class GaugeBarUI : MonoBehaviour
     AnimationCurve curve;
     float frontValue;
     float backValue;
+    float changeElapsed;
 
     Coroutine lerpCoroutine;
 
@@ -40,6 +42,17 @@ public class GaugeBarUI : MonoBehaviour
 
     private void Update()
     {
+        if (changeElapsed > 0)
+        {
+            changeElapsed -= Time.deltaTime;
+
+        }
+
+        if (changeElapsed <= 0f)
+        {
+            HideGaugeBar();
+        }
+
         if (frontValue < frontLowThreshold)
         {
             if (fillFront.color != fillFrontLowValueColor)
@@ -79,6 +92,16 @@ public class GaugeBarUI : MonoBehaviour
             SetFillPercent(frontValue + 0.1f);
         }
     }
+    
+    private void HideGaugeBar()
+    {
+        fillArea.gameObject.SetActive(false);
+    }
+
+    private void ShowGaugeBar()
+    {
+        fillArea.gameObject.SetActive(true);
+    }
 
     private void LateUpdate()
     {
@@ -89,6 +112,12 @@ public class GaugeBarUI : MonoBehaviour
 
     public void SetFillPercent(float percent)
     {
+        if (!fillArea.gameObject.activeInHierarchy)
+        {
+            ShowGaugeBar();
+        }
+        changeElapsed = 3f;
+
         frontValue = percent;
         fillFront.fillAmount = frontValue;
 
