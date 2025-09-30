@@ -168,6 +168,7 @@ MonoBehaviour:
     currentHealth: 0
     maxHealth: 0
     moveSpeed: 0
+  gaugebarUI: {fileID: 0}
   body: {fileID: 0}
   weaponTrans: {fileID: 846381757726497125}
   spawnWaveIndex: 0
@@ -263,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 846381757726497125}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

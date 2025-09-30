@@ -53,8 +53,5 @@ public class EnemyController : CharacterStats
         OnDeathStageHandler?.Invoke(spawnWaveIndex, gameObject);
     }
 
-    private void UpdateHealthUI(float percent)
-    {
-        gaugebarUI.SetFillPercent(percent);
-    }
+
 }

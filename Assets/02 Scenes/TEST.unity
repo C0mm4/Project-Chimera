@@ -598,7 +598,7 @@ PrefabInstance:
     - target: {fileID: 932154220346713607, guid: a92b1c6607e64fb43b8f81df88f957e2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.154
       objectReference: {fileID: 0}
     - target: {fileID: 932154220346713607, guid: a92b1c6607e64fb43b8f81df88f957e2,
         type: 3}
@@ -608,7 +608,7 @@ PrefabInstance:
     - target: {fileID: 932154220346713607, guid: a92b1c6607e64fb43b8f81df88f957e2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3.087
       objectReference: {fileID: 0}
     - target: {fileID: 932154220346713607, guid: a92b1c6607e64fb43b8f81df88f957e2,
         type: 3}
@@ -1035,11 +1035,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363aa8b4c038b384895669399249f4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originData: {fileID: 0}
+  originData: {fileID: 11400000, guid: ab11e458040aea6469b84afdd86eaf9c, type: 2}
   data:
     currentHealth: 0
     maxHealth: 0
     moveSpeed: 0
+  gaugebarUI: {fileID: 0}
   structureData:
     CurrentLevel: 0
   statData: {fileID: 0}
