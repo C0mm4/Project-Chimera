@@ -49,7 +49,10 @@ public class FlyingAIController : AIControllerBase
         if (groundHit.collider)
         {
             Debug.Log(groundHit.point.y);
+            characterController.enabled = false;
             transform.position = new Vector3(transform.position.x, groundHit.point.y + 3f, transform.position.z);
+            characterController.enabled = true;
+
         }
     }
 
