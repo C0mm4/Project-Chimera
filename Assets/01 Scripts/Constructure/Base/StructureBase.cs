@@ -14,13 +14,15 @@ public abstract class StructureBase : CharacterStats
     private GameObject currentModelInstance; // 현재 생성된 건물 오브젝트를 기억(레벨)
                                              //    public int CurrentLevel { get; private set; }
 
+    private Renderer meshRender;
     public bool isAlive = true;
 
     protected override void Awake()
     {
         base.Awake();
-        structureCollider = GetComponent<Collider>();
+        structureCollider = GetComponentInChildren<Collider>();
         obstacle = GetComponent<NavMeshObstacle>();
+        meshRender = GetComponentInChildren<Renderer>();
     }
 
     public void Heal()
@@ -95,7 +97,7 @@ public abstract class StructureBase : CharacterStats
         base.Death();
         Debug.Log("스트럭쳐 베이스의 데스함수");
         structureCollider.enabled = false;
-        GetComponent<Renderer>().material.color = Color.red;
+        meshRender.material.color = Color.red;
         obstacle.enabled = false;
         tag = "IsDead";
         isAlive = false;
@@ -106,7 +108,7 @@ public abstract class StructureBase : CharacterStats
     protected void Revive()
     {
         structureCollider.enabled = true;
-        GetComponent<Renderer>().material.color = Color.white;
+        meshRender.material.color = Color.white;
         isAlive = true;
         obstacle.enabled = true;
         tag = "IsAlive";

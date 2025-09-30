@@ -16,10 +16,7 @@ public class BasementStructure : StructureBase
         StageManager.Instance.Basement = this;
         StageManager.Instance.OnStageFail += OnFail;
 
-        ObjectPoolManager.Instance.CreatePool("GoldMining", StageManager.Instance.Stage.StructureTrans);
-        ObjectPoolManager.Instance.CreatePool("Tower", StageManager.Instance.Stage.StructureTrans);
-        ObjectPoolManager.Instance.CreatePool("Wall", StageManager.Instance.Stage.StructureTrans);
-        ObjectPoolManager.Instance.CreatePool("Barrack", StageManager.Instance.Stage.StructureTrans);
+        
     }
 
     private void OnFail()

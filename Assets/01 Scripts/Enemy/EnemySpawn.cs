@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.AI;
 
 public class EnemySpawn : Singleton<EnemySpawn>
 {
@@ -128,9 +129,11 @@ public class EnemySpawn : Singleton<EnemySpawn>
                 {
                     enemy.name = info.keyName;
                     Vector3 spawnPos = SpawnOutRange(box, usedPositions, outRangeValue);
-                    enemy.transform.position = spawnPos;
+//                    enemy.transform.position = spawnPos;
                     enemy.GetComponent<EnemyController>().Initialize(waveIndex);
                     enemy.GetComponent<EnemyController>().OnDeathStageHandler += OnWaveEnemyDeath;
+                    var agent = enemy.GetComponent<NavMeshAgent>();
+                    agent.Warp(spawnPos);
                     waveSpawnDict[waveIndex].Add(enemy);
                 }
             }
