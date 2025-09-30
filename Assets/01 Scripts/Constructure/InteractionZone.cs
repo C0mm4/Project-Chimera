@@ -33,21 +33,29 @@ public class InteractionZone : MonoBehaviour
 
     private void Update()
     {
-        if (shouldInteract)
+        if(StageManager.Instance.state == StageState.Ready)
         {
-            elapsedTime += Time.deltaTime;
-            progressValue = Mathf.Clamp01(elapsedTime / InteractionTime);
-            progressImage.fillAmount = progressValue;
-
-            if (elapsedTime >= InteractionTime)
+            if (shouldInteract)
             {
-                Debug.Log("인터랙션 호출하기");
-                OnInteract?.Invoke();
-                progressValue = 0f;
-                shouldInteract = false;
-            }
-            progressImage.fillAmount = progressValue;
+                elapsedTime += Time.deltaTime;
+                progressValue = Mathf.Clamp01(elapsedTime / InteractionTime);
+                progressImage.fillAmount = progressValue;
 
+                if (elapsedTime >= InteractionTime)
+                {
+                    Debug.Log("인터랙션 호출하기");
+                    OnInteract?.Invoke();
+                    progressValue = 0f;
+                    shouldInteract = false;
+                }
+                progressImage.fillAmount = progressValue;
+
+            }
+        }
+        else
+        {
+            elapsedTime = 0; 
+            progressImage.fillAmount = 0;
         }
     }
 

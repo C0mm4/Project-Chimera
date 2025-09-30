@@ -25,10 +25,7 @@ public abstract class StructureBase : CharacterStats
         meshRender = GetComponentInChildren<Renderer>();
     }
 
-    public void Heal()
-    {
-        data.currentHealth = data.maxHealth;
-    }
+
 
     public virtual void SetDataSO(StructureSO statData) // 정진규: BaseStatusSO 에서 StructureSO로 변경
     {
@@ -108,16 +105,14 @@ public abstract class StructureBase : CharacterStats
         
     }
 
-    public void Revive()
+    protected override void Revive()
     {
-        Debug.Log("부활");
-
+        base.Revive();
         structureCollider.enabled = true;
         meshRender.material.color = Color.white;
         isAlive = true;
         obstacle.enabled = true;
         tag = "IsAlive";
-        Heal();
     }
 
     // 업그레이드 시도 메서드
