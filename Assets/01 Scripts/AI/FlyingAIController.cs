@@ -48,6 +48,7 @@ public class FlyingAIController : AIControllerBase
         Physics.Raycast(transform.position, Vector3.down, out groundHit, 10f, LayerMask.GetMask("Ground"));
         if (groundHit.collider)
         {
+            Debug.Log(groundHit.point.y);
             transform.position = new Vector3(transform.position.x, groundHit.point.y + 3f, transform.position.z);
         }
     }
