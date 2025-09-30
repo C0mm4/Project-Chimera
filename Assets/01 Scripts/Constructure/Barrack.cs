@@ -19,13 +19,20 @@ public class Barrack : StructureBase
     //유닛 위치 저장
     [SerializeField] private List<Vector3> savePosition = new List<Vector3>();
 
-
+    
 
     public override void SetDataSO(StructureSO data)
     {
         Debug.Log("SetData");
         // 데이터 변경 전 풀링 삭제
         ObjectPoolManager.Instance.ClearPool(barrackData.spawnUnitKey, transform);
+
+        /*
+        for (int i = 0; i < spawnUnits.Count; i++)
+        {
+            BarrackUnitStatus unit = spawnUnits[i].GetComponent<BarrackUnitStatus>();
+            spawnUnits[i].transform.position = unit.unitPosition.position;
+        }*/
 
         base.SetDataSO(data);
         // 기존 소환된 애들 삭제 처리
