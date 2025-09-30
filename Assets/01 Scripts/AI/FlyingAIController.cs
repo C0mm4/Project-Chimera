@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlyingAIController : AIControllerBase
 {
     CharacterController characterController;
+    RaycastHit groundHit = new();
 
     protected override void ChaseTarget()
     {
@@ -28,16 +29,27 @@ public class FlyingAIController : AIControllerBase
     protected override void Awake()
     {
         base.Awake();
+        
         characterController = GetComponent<CharacterController>();
-
+       
     }
 
     protected override void Update()
     {
         base.Update();
 
-        transform.position = new Vector3(transform.position.x, 3f, transform.position.z);
+        //transform.position = new Vector3(transform.position.x, 3f, transform.position.z);
 
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        Physics.Raycast(transform.position, Vector3.down, out groundHit, 10f, LayerMask.GetMask("Ground"));
+        if (groundHit.collider)
+        {
+            transform.position = new Vector3(transform.position.x, groundHit.point.y + 3f, transform.position.z);
+        }
     }
 
     protected override bool IsAttackable()

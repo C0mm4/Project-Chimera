@@ -152,8 +152,19 @@ public class EnemySpawn : Singleton<EnemySpawn>
                 if (enemy != null)
                 {
                     enemy.name = info.keyName;
+                    
                     Vector3 spawnPos = SpawnOutRange(box, usedPositions, outRangeValue);
+
+                    // 임시 나중에 리팩토링할 때 바꿔야할 거 같음
+                    CharacterController controller = enemy.GetComponent<CharacterController>();
+                    if (controller != null)
+                    {
+                        controller.enabled = false;
+                        enemy.transform.position = spawnPos;
+                        controller.enabled = true;
+                    }
                     enemy.transform.position = spawnPos;
+
                     enemy.GetComponent<EnemyController>().Initialize(waveIndex);
                     enemy.GetComponent<EnemyController>().OnDeathStageHandler += OnWaveEnemyDeath;
                     var agent = enemy.GetComponent<NavMeshAgent>();
