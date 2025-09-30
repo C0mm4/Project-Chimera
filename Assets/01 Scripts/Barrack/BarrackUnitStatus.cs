@@ -7,8 +7,9 @@ public class BarrackUnitStatus : CharacterStats
     public Barrack spawnBarrack;
     public int spawnIndex;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         //이 부분에 초기화 넣어주면됨
         //transform.position = unitPosition.position;
         transform.rotation = Quaternion.identity;

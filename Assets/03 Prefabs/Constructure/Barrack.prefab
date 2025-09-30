@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2526425128255999587
+--- !u!1 &860388819725018473
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7143962170385069361}
-  - component: {fileID: 45784949714804106}
-  - component: {fileID: 1096184842114800228}
-  - component: {fileID: 5734643578374958214}
-  - component: {fileID: 2313937696779601695}
-  - component: {fileID: 5700287948918507066}
+  - component: {fileID: 1770013243170249647}
+  - component: {fileID: 2314886797223349766}
+  - component: {fileID: 7023932972598104433}
+  - component: {fileID: 6689593248371613055}
   m_Layer: 6
-  m_Name: Barrack
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7143962170385069361
+--- !u!4 &1770013243170249647
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2526425128255999587}
+  m_GameObject: {fileID: 860388819725018473}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.241467, y: -15.497318, z: -5.057724}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 9090921681175973260}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 7143962170385069361}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &45784949714804106
+--- !u!33 &2314886797223349766
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2526425128255999587}
+  m_GameObject: {fileID: 860388819725018473}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1096184842114800228
+--- !u!23 &7023932972598104433
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2526425128255999587}
+  m_GameObject: {fileID: 860388819725018473}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -87,13 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5734643578374958214
+--- !u!65 &6689593248371613055
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2526425128255999587}
+  m_GameObject: {fileID: 860388819725018473}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -108,6 +105,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2526425128255999587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7143962170385069361}
+  - component: {fileID: 2313937696779601695}
+  - component: {fileID: 5700287948918507066}
+  m_Layer: 6
+  m_Name: Barrack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7143962170385069361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526425128255999587}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1770013243170249647}
+  - {fileID: 9090921681175973260}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &2313937696779601695
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -146,7 +178,7 @@ MonoBehaviour:
     CurrentLevel: 0
   statData: {fileID: 11400000, guid: fb6d53f31b0850a4bad7061f98727a84, type: 2}
   interactionZone: {fileID: 6421397309389542285}
-  structureCollider: {fileID: 5734643578374958214}
+  structureCollider: {fileID: 6689593248371613055}
   obstacle: {fileID: 0}
   isAlive: 1
   currentSpawnCount: 0
@@ -186,7 +218,7 @@ PrefabInstance:
     - target: {fileID: 5690382690896890111, guid: 83f53671cb626fb48b3a6dd2cf915966,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5690382690896890111, guid: 83f53671cb626fb48b3a6dd2cf915966,
         type: 3}

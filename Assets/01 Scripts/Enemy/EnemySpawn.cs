@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.AI;
 
 public class EnemySpawn : Singleton<EnemySpawn>
 {
@@ -25,6 +26,30 @@ public class EnemySpawn : Singleton<EnemySpawn>
         boxColliders = transform.GetComponentsInChildren<BoxCollider>();
     }
 
+    private void OnEnable()
+    {
+        StageManager.Instance.OnStageFail += OnStageFail;
+    }
+
+    private void OnStageFail()
+    {
+        StopAllCoroutines();
+
+        int count = waveSpawnDict.Count;
+        for (int i = 0; i < count; ++i)
+        {
+            int count2 = waveSpawnDict[i].Count;
+            for (int j = count2 - 1; j >= 0; --j)
+            {
+                GameObject go = waveSpawnDict[i][j];
+                waveSpawnDict[i].Remove(go);
+                go.GetComponent<EnemyController>().OnDeathStageHandler -= OnWaveEnemyDeath;
+                ResiveEnemyPool(go);
+
+            }
+        }
+
+    }
 
     public IEnumerator SpawnMonster(MonsterSpawnInfo info, int waveIndex)
     {
@@ -128,9 +153,11 @@ public class EnemySpawn : Singleton<EnemySpawn>
                 {
                     enemy.name = info.keyName;
                     Vector3 spawnPos = SpawnOutRange(box, usedPositions, outRangeValue);
-                    enemy.transform.position = spawnPos;
+//                    enemy.transform.position = spawnPos;
                     enemy.GetComponent<EnemyController>().Initialize(waveIndex);
                     enemy.GetComponent<EnemyController>().OnDeathStageHandler += OnWaveEnemyDeath;
+                    var agent = enemy.GetComponent<NavMeshAgent>();
+                    agent.Warp(spawnPos);
                     waveSpawnDict[waveIndex].Add(enemy);
                 }
             }
