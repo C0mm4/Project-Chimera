@@ -6,71 +6,76 @@ public class SettingUI : PopupUIBase
 {
     [Header("오디오")]
     [SerializeField] private AudioMixer mainMixer;
-    [SerializeField] private Slider masterSlider;
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider sfxSlider;
 
-    [Header("버튼")]
+    [Header("UI 요소 연결")]
+    [SerializeField] private Toggle musicToggle;
+    [SerializeField] private Toggle sfxToggle;
+    [SerializeField] private Toggle hapticsToggle; // 진동 토글
     [SerializeField] private Button backButton;
+
 
     protected override void OnOpen()
     {
         base.OnOpen();
 
-        // UI가 열릴 때, 저장된 값으로 슬라이더와 믹서를 초기화
-        InitializeSliders();
+        // UI가 열릴 때, 토글의 상태를 기본값으로 초기화합니다.
+        InitializeSettings();
 
-        // 슬라이더 값이 변경될 때마다 호출될 메서드를 연결
-        masterSlider.onValueChanged.AddListener(SetMasterVolume);
-        musicSlider.onValueChanged.AddListener(SetMusicVolume);
-        sfxSlider.onValueChanged.AddListener(SetEffectVolume);
-
+        // 토글의 상태가 변경될 때마다 호출될 함수를 연결합니다.
+        musicToggle.onValueChanged.AddListener(OnMusicToggleChanged);
+        sfxToggle.onValueChanged.AddListener(OnSFXToggleChanged);
+        hapticsToggle.onValueChanged.AddListener(OnHapticsToggleChanged);
         backButton.onClick.AddListener(OnBackButtonClicked);
     }
 
     protected override void OnClose()
     {
         base.OnClose();
-        // 리스너 제거
-        masterSlider.onValueChanged.RemoveAllListeners();
-        musicSlider.onValueChanged.RemoveAllListeners();
-        sfxSlider.onValueChanged.RemoveAllListeners();
+        // 연결했던 함수들을 깨끗하게 제거합니다.
+        musicToggle.onValueChanged.RemoveAllListeners();
+        sfxToggle.onValueChanged.RemoveAllListeners();
+        hapticsToggle.onValueChanged.RemoveAllListeners();
         backButton.onClick.RemoveAllListeners();
     }
 
-    private void InitializeSliders()
+    private void InitializeSettings()
     {
-        masterSlider.value = 1f;
-        musicSlider.value = 1f;
-        sfxSlider.value = 1f;
+        // 일단 저장 기능이 없으니 계속 On 상태로 시작하도록 설정
+        musicToggle.isOn = true;
+        sfxToggle.isOn = true;
+        hapticsToggle.isOn = true;
 
-        // 불러온 값으로 믹서 볼륨도 즉시 설정
-        SetMasterVolume(masterSlider.value);
-        SetMusicVolume(musicSlider.value);
-        SetEffectVolume(sfxSlider.value);
+        // 초기 상태에 맞춰 즉시 믹서 볼륨을 설정합니다.
+        OnMusicToggleChanged(musicToggle.isOn);
+        OnSFXToggleChanged(sfxToggle.isOn);
+        OnHapticsToggleChanged(hapticsToggle.isOn);
     }
 
 
     // =========== 슬라이더와 연결된 메서드들 ===========
 
-    public void SetMasterVolume(float value)
+    public void OnMusicToggleChanged(bool isOn)
     {
-        // 슬라이더 값(0.0001~1)을 믹서의 데시벨(-80~0)로 변환
-        mainMixer.SetFloat("MasterVolume", Mathf.Log10(value) * 20);
+        // isOn 값(true/false)에 따라 믹서 볼륨을 0dB(ON) 또는 -80dB(OFF)로 설정합니다.
+        mainMixer.SetFloat("BGMVolume", isOn ? 0f : -80f);
+        Debug.Log("음악 설정: " + (isOn ? "ON" : "OFF"));
     }
 
-    public void SetMusicVolume(float value)
+    public void OnSFXToggleChanged(bool isOn)
     {
-        mainMixer.SetFloat("BGMVolume", Mathf.Log10(value) * 20);
+        mainMixer.SetFloat("SFXVolume", isOn ? 0f : -80f);
+        Debug.Log("효과음 설정: " + (isOn ? "ON" : "OFF"));
     }
 
-    public void SetEffectVolume(float value)
+    public void OnHapticsToggleChanged(bool isOn)
     {
-        mainMixer.SetFloat("SFXVolume", Mathf.Log10(value) * 20);
+        // 진동 기능은 아직 구현하지 않았으므로, 상태 변경 로그만 남깁니다.
+        Debug.Log("진동 설정: " + (isOn ? "ON" : "OFF") + " (기능 미구현)");
     }
 
+    // 뒤로가기 버튼 기능
     private void OnBackButtonClicked()
     {
-        UIManager.Instance.ClosePopupUI(); // UIManager에게 팝업을 닫아달라고 요청
+        UIManager.Instance.ClosePopupUI();
     }
 }

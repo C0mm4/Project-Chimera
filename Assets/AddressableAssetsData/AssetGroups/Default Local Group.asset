@@ -192,6 +192,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e734182fc1a260a4fb3bfe9319a80b86
+    m_Address: UI/Elements/GameplayUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9abfee0c1c3423143829269723e4cc20
+    m_Address: UI/Elements/PauseUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9533c77767e6df4a8410d429ff98790
+    m_Address: Assets/03 Prefabs/UI/SettingUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4efd53647d131ee4c80040b144c5c629, type: 2}
   m_SchemaSet:

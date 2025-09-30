@@ -77,7 +77,7 @@ public class PauseUI : PopupUIBase
     private void OnRestartButtonClicked()
     {
         UIManager.Instance.ClosePopupUI(); // 현재 팝업 닫기
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnSettingsButtonClicked()
