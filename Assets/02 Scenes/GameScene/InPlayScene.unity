@@ -2221,6 +2221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StructureTrans: {fileID: 405843457}
   StructureSeedTrans: {fileID: 1425667615}
+  ObjDropTrans: {fileID: 0}
 --- !u!1 &1396399453
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,7 +3217,7 @@ PrefabInstance:
     - target: {fileID: 4052969435767734928, guid: bb8b763cdae1edf41baa6fb7d062bcde,
         type: 3}
       propertyPath: m_ReferenceResolution.y
-      value: 1280
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 4408919283767094142, guid: bb8b763cdae1edf41baa6fb7d062bcde,
         type: 3}
