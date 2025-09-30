@@ -203,7 +203,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e9533c77767e6df4a8410d429ff98790
-    m_Address: Assets/03 Prefabs/UI/SettingUI.prefab
+    m_Address: UI/Elements/SettingUI
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

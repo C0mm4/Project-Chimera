@@ -74,15 +74,16 @@ public class PauseUI : PopupUIBase
         UIManager.Instance.ClosePopupUI();
     }
 
+    private void OnSettingsButtonClicked()
+    {
+        //Debug.Log("설정 버튼 클릭 (미구현)");
+         UIManager.Instance.OpenPopupUI<SettingUI>();
+    }
+
     private void OnRestartButtonClicked()
     {
         UIManager.Instance.ClosePopupUI(); // 현재 팝업 닫기
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void OnSettingsButtonClicked()
-    {
-        Debug.Log("설정 버튼 클릭 (미구현)");
-        // UIManager.Instance.OpenPopupUI<SettingsUI>(); // 나중에 설정 UI를 띄움
-    }
 }
