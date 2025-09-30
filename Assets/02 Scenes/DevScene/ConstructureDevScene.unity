@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363aa8b4c038b384895669399249f4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originData: {fileID: 0}
+  originData: {fileID: 11400000, guid: ab11e458040aea6469b84afdd86eaf9c, type: 2}
   data:
     currentHealth: 0
     maxHealth: 0

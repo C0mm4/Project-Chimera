@@ -39,6 +39,11 @@ public class Projectile : MonoBehaviour
 
         this.Instigator = instigator;
         this.weaponTransform = weaponTransform;  
+
+        if(Instigator.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("EnemyAttack");
+        }
         if (targetTransform != null)
         {
             lastKnownPosition = targetTransform.position;
@@ -162,7 +167,7 @@ public class Projectile : MonoBehaviour
             //gameObject.SetActive(false);
             //Debug.Log("거리 or 시간 변수 조건 충족");
             //확인 필요 - SMC
-            ObjectPoolManager.Instance.ResivePool(name, gameObject, transform.parent);
+            ObjectPoolManager.Instance.ResivePool(name, gameObject, weaponTransform);
         }
     }
 
