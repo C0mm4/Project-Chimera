@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class GameplayUI : UIBase
 {
+    [Header("HUD 그룹")]
+    [SerializeField] private GameObject HUDGroup;
+
     [Header("UI 요소 연결")]
     [SerializeField] private Button pauseButton;
     [SerializeField] private TextMeshProUGUI goldText;
@@ -41,16 +44,16 @@ public class GameplayUI : UIBase
         // 팝업 UI가 열려있으면 일시정지 버튼을 숨김
         if (UIManager.Instance.PopupStackCount > 0)
         {
-            if (pauseButton.gameObject.activeSelf)
+            if (HUDGroup.gameObject.activeSelf)
             {
-                pauseButton.gameObject.SetActive(false);
+                HUDGroup.gameObject.SetActive(false);
             }
         }
         else
         {
-            if (!pauseButton.gameObject.activeSelf)
+            if (!HUDGroup.gameObject.activeSelf)
             {
-                pauseButton.gameObject.SetActive(true);
+                HUDGroup.gameObject.SetActive(true);
             }
         }
     }
