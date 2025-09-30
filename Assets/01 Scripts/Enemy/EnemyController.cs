@@ -46,6 +46,7 @@ public class EnemyController : CharacterStats
         base.Death();
 
         // 사망 시 무기 풀링 초기화
+        weapon.OnPoolingDisable();
         var poolName = weapon.gameObject.name;
         ObjectPoolManager.Instance.ResivePool(poolName, weapon.gameObject, weaponTrans);
         ObjectPoolManager.Instance.ClearPool(poolName, weaponTrans);
