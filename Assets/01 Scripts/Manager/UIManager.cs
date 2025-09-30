@@ -45,6 +45,12 @@ public class UIManager : Singleton<UIManager>
 
     public void OpenPopupUI<T>() where T : PopupUIBase
     {
+        if (popupStack.Count > 0)
+        {
+            var prevUI = popupStack.Peek(); // 스택에서 제거하지 않고 확인만 함
+            prevUI.gameObject.SetActive(false);
+        }
+
         var ui = GetUI<T>();
 
         ui?.OpenUI();
@@ -77,6 +83,12 @@ public class UIManager : Singleton<UIManager>
         }
 
         --sortOrder;
+
+        if (popupStack.Count > 0)
+        {
+            var newTopUI = popupStack.Peek();
+            newTopUI.gameObject.SetActive(true);
+        }
     }
 
     public void CloseAllPopupUI()

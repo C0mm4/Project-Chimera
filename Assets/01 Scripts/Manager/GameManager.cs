@@ -8,6 +8,11 @@ public class GameManager : Singleton<GameManager>
 
     public void GameStart()
     {
+       
+    }
 
+    private void Start()
+    {
+        UIManager.Instance.OpenUI<GameplayUI>();
     }
 }
