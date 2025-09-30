@@ -10,7 +10,8 @@ public class Barrack : StructureBase
 
     [SerializeField] private BarrackData barrackData;
 
-    private float lastSpawnTime;
+//    private float lastSpawnTime;
+    private float spawnWaitTime;
 
     private List<GameObject> spawnUnits = new();
     private bool[] activateSpawnIndex;
@@ -66,6 +67,28 @@ public class Barrack : StructureBase
         // 소환된 개수가 적으면, 주기적으로 소환
         if (currentSpawnCount < barrackData.spawnCount)
         {
+            spawnWaitTime += Time.deltaTime;
+            if(spawnWaitTime > barrackData.spawnRate)
+            {
+
+                int spawnIndex = -1;
+                for (int i = 0; i <= barrackData.spawnCount; i++)
+                {
+                    if (!activateSpawnIndex[i])
+                    {
+                        spawnIndex = i;
+                        break;
+                    }
+                }
+
+                if (spawnIndex != -1)
+                {
+                    Spawn(spawnIndex);
+                    spawnWaitTime = 0;
+                }
+
+            }
+            /*
             if (Time.time - lastSpawnTime >= barrackData.spawnRate)
             {
                 int spawnIndex = -1;
@@ -85,6 +108,7 @@ public class Barrack : StructureBase
                 }
 
             }
+            */
         }
     }
 

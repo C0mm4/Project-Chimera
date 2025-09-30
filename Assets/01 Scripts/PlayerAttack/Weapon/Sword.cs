@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Sword : BaseWeapon
 {
@@ -14,6 +15,8 @@ public class Sword : BaseWeapon
 
     protected void Awake()
     {
+        trailRenderer.enabled = false;
+
         if (attackHitbox == null)
         {
             attackHitbox = GetComponent<Collider>();
@@ -45,11 +48,21 @@ public class Sword : BaseWeapon
         attackHitbox.enabled = true;
         //if (trailRenderer != null) trailRenderer.emitting = true;
 
+        //시작시 
+        transform.DOLocalRotate(new Vector3(0, -90f, 0), MeleeData.hitboxActiveDuration / 3, RotateMode.LocalAxisAdd).SetEase(Ease.OutCubic).
+            OnComplete(() =>
+            {
+                transform.DOLocalRotate(new Vector3(0, 90f, 0), (MeleeData.hitboxActiveDuration / 3)*2, RotateMode.LocalAxisAdd).SetEase(Ease.OutCubic);
+            
+            });
+
+        trailRenderer.enabled = true;
         yield return new WaitForSeconds(MeleeData.hitboxActiveDuration);
 
         Debug.Log($"검 휘두르기 종료, 총 {targetsHitThisSwing.Count}명의 적을 타격했습니다.");
 
         attackHitbox.enabled = false;
+        trailRenderer.enabled = false;
         //if (trailRenderer != null) trailRenderer.emitting = false;
     }
 

@@ -80,6 +80,8 @@ public class CharacterStats : MonoBehaviour
         
     }
 
+
+
     private void UpdateHealthUI(float percent)
     {
         gaugebarUI.SetFillPercent(percent);

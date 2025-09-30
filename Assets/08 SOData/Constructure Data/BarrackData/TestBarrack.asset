@@ -30,4 +30,4 @@ MonoBehaviour:
   upgradeData: {fileID: 11400000, guid: 0f1daabaabbd9c54fa11b45da09d4041, type: 2}
   spawnUnitKey: Pref_470000
   spawnCount: 4
-  spawnRate: 1
+  spawnRate: 10

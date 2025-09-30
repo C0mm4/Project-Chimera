@@ -22,4 +22,5 @@ public class Bow : BaseWeapon
             projectile.transform.SetParent(null);
         }
     }
+
 }
