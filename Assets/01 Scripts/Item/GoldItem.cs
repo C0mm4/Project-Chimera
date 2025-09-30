@@ -27,6 +27,7 @@ public class GoldItem : MonoBehaviour
         hasLanded = false;
         col.isTrigger = false;
         rb.isKinematic = false;
+        rb.useGravity = true;
         rb.velocity = Vector3.zero;
         // 오브젝트 풀에서 재사용 될때를 위한 초기화임댜
 
@@ -81,6 +82,7 @@ public class GoldItem : MonoBehaviour
             isAbsorbing = true;
             hasLanded = true;
             col.isTrigger = true;
+            rb.useGravity = false;
         }
     }
 
@@ -93,6 +95,8 @@ public class GoldItem : MonoBehaviour
 
         // 오브젝트 풀로 반환.
         // ObjectPoolManager.Instance.ResivePool(poolKey, gameObject);
+        StageManager.Instance.GetGold(1);
+        ObjectPoolManager.Instance.ResivePool("Pref_700000", gameObject, StageManager.Instance.Stage.ObjDropTrans);
         gameObject.SetActive(false);
     }
 }

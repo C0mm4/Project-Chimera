@@ -32,7 +32,7 @@ public class ItemDropper : MonoBehaviour
 
     private void DropItem()
     {
-        if (dropData == null || dropData.itemPrefab == null)
+        if (dropData == null || dropData.ItemAddress == "")
         {
             Debug.LogWarning($"{gameObject.name}에 드롭할 아이템이 지정되지 않음");
             return;
@@ -41,7 +41,11 @@ public class ItemDropper : MonoBehaviour
         for (int i = 0; i < dropData.dropCount; i++)
         {
             // 적이 죽은 위치에 아이템 드롭
-            Instantiate(dropData.itemPrefab, transform.position, Quaternion.identity);
+            ObjectPoolManager.Instance.CreatePool(dropData.ItemAddress, StageManager.Instance.Stage.ObjDropTrans, 10);
+
+            var go = ObjectPoolManager.Instance.GetPool(dropData.ItemAddress, StageManager.Instance.Stage.ObjDropTrans);
+            go.transform.position = transform.position;
+            go.transform.rotation = transform.rotation;
         }
     }
 }

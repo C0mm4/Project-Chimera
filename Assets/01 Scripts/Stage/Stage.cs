@@ -6,7 +6,7 @@ public class Stage : MonoBehaviour
 {
     public Transform StructureTrans;
     public Transform StructureSeedTrans;
-
+    public Transform ObjDropTrans;
     private void Awake()
     {
         StageManager.Instance.Stage = this;

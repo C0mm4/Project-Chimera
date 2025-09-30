@@ -24,41 +24,44 @@ public class ConstructureSeed : MonoBehaviour
 
     private void Build()
     {
-        string keyName = "";
-        StructureSO so = null;
-        switch (type)
+        if (StageManager.Instance.ConsumeGold(2))
         {
-            case ConstructureType.GoldMining:
-                keyName = "GoldMining";
-                so = DataManager.Instance.GetSOData<GoldMiningSO>(310000);
-                break;
+            string keyName = "";
+            StructureSO so = null;
+            switch (type)
+            {
+                case ConstructureType.GoldMining:
+                    keyName = "GoldMining";
+                    so = DataManager.Instance.GetSOData<GoldMiningSO>(310000);
+                    break;
 
-            case ConstructureType.Tower:
-                keyName = "Tower";
-                so = DataManager.Instance.GetSOData<TowerSO>(320000);
-                break;
+                case ConstructureType.Tower:
+                    keyName = "Tower";
+                    so = DataManager.Instance.GetSOData<TowerSO>(320000);
+                    break;
 
-            case ConstructureType.Wall:
-                keyName = "Wall";
-                so = DataManager.Instance.GetSOData<WallSO>(340000);
-                break;
+                case ConstructureType.Wall:
+                    keyName = "Wall";
+                    so = DataManager.Instance.GetSOData<WallSO>(340000);
+                    break;
 
-            case ConstructureType.Barrack:
-                keyName = "Barrack";
-                so = DataManager.Instance.GetSOData<BarrackSO>(330000);
-                break;
-        }
+                case ConstructureType.Barrack:
+                    keyName = "Barrack";
+                    so = DataManager.Instance.GetSOData<BarrackSO>(330000);
+                    break;
+            }
 
-        if(keyName != "" && so != null)
-        {
-            var obj = ObjectPoolManager.Instance.GetPool(keyName, StageManager.Instance.Stage.StructureTrans);
-            obj.transform.position = transform.position;
-            obj.transform.rotation = transform.rotation;
+            if (keyName != "" && so != null)
+            {
+                var obj = ObjectPoolManager.Instance.GetPool(keyName, StageManager.Instance.Stage.StructureTrans);
+                obj.transform.position = transform.position;
+                obj.transform.rotation = transform.rotation;
 
-            // SO Data로드 후 주입
-            obj.GetComponent<StructureBase>().SetDataSO(so);
-            //ObjectPoolManager.Instance.ResivePool("", gameObject);
-            Destroy(gameObject);
+                // SO Data로드 후 주입
+                obj.GetComponent<StructureBase>().SetDataSO(so);
+                //ObjectPoolManager.Instance.ResivePool("", gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 }

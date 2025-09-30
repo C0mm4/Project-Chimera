@@ -13,7 +13,6 @@ public class StageManager : Singleton<StageManager>
     public event Action OnStageFail;
     public event Action OnStageClear;
 
-    [SerializeField] private int stageN;
     public static GameData data;
 
     public StageState state = StageState.Ready;
