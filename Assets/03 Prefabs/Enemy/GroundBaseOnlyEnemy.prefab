@@ -65,6 +65,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   SearchType: 0
+  weapon: {fileID: 0}
 --- !u!136 &4433808953472503156
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -163,6 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originData: {fileID: 11400000, guid: 33776b3ef61c980409894af562eccf6d, type: 2}
+  data:
+    currentHealth: 0
+    maxHealth: 0
+    moveSpeed: 0
   body: {fileID: 0}
   weaponTrans: {fileID: 846381757726497125}
   spawnWaveIndex: 0

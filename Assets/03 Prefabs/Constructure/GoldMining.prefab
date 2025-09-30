@@ -136,16 +136,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd818843498a4d04eb3cdfa35461dcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originData: {fileID: 0}
+  originData: {fileID: 11400000, guid: f43d7b3b20e2b7745aa970bf566cd069, type: 2}
   data:
     currentHealth: 0
     maxHealth: 0
     moveSpeed: 0
+  gaugebarUI: {fileID: 0}
   structureData:
     CurrentLevel: 0
   statData: {fileID: 0}
   interactionZone: {fileID: 6806623825656642472}
   structureCollider: {fileID: 5734643578374958214}
+  obstacle: {fileID: 0}
+  isAlive: 1
   goldMiningdata:
     AddGoldDropRate: 0
     AddGoldGetRate: 0

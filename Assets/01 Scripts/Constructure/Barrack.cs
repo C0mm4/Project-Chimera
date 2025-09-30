@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Barrack : StructureBase
 {
@@ -90,16 +91,17 @@ public class Barrack : StructureBase
     private void Spawn(int index)
     {
         // 소환 시도 시 풀 생성 안되어있으면 삭제
-        if (!ObjectPoolManager.Instance.ContainsPool(barrackData.spawnUnitKey))
+        if (!ObjectPoolManager.Instance.ContainsPool(barrackData.spawnUnitKey,transform))
         {
-            ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, transform, 4 );
+            ObjectPoolManager.Instance.CreatePool(barrackData.spawnUnitKey, transform);
         }
-        
-        var obj = ObjectPoolManager.Instance.GetPool(barrackData.spawnUnitKey, transform);
+        GameObject obj = ObjectPoolManager.Instance.GetPool(barrackData.spawnUnitKey, transform);
         if (obj != null)
         {
             spawnUnits.Add(obj);
             BarrackUnitStatus unit = obj.GetComponent<BarrackUnitStatus>();
+            NavMeshAgent navmesh = obj.GetComponent<NavMeshAgent>();
+            navmesh.Warp(savePosition[index]);
             unit.transform.position = savePosition[index];
             unit.spawnIndex = index;
             unit.spawnBarrack = this;

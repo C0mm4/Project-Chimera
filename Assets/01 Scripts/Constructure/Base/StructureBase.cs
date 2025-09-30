@@ -35,15 +35,18 @@ public abstract class StructureBase : CharacterStats
         data.maxHealth = statData.maxHealth;
         data.currentHealth = data.maxHealth;
         structureData.CurrentLevel = 1;
-        StageManager.Instance.OnEndStage -= Revive;
-        StageManager.Instance.OnEndStage += Revive;
+        StageManager.Instance.OnStageClear -= Revive;
+        StageManager.Instance.OnStageClear += Revive;
+        StageManager.Instance.OnStageFail -= Revive;
+        StageManager.Instance.OnStageFail += Revive;
+        Revive();
         CopyStatusData(originData);
         UpdateModel();
     }
 
     public abstract void CopyStatusData(BaseStatusSO statData);
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         if (interactionZone != null)
         {
@@ -55,7 +58,7 @@ public abstract class StructureBase : CharacterStats
             BuildEffect();
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         if (interactionZone != null)
         {
@@ -66,7 +69,7 @@ public abstract class StructureBase : CharacterStats
             DestroyEffect();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if(isAlive)
             UpdateEffect();
@@ -90,20 +93,23 @@ public abstract class StructureBase : CharacterStats
     protected override void Death()
     {
         base.Death();
+        Debug.Log("스트럭쳐 베이스의 데스함수");
         structureCollider.enabled = false;
         GetComponent<Renderer>().material.color = Color.red;
         obstacle.enabled = false;
+        tag = "IsDead";
         isAlive = false;
 //        ObjectPoolManager.Instance.ResivePool(gameObject.name, gameObject, StageManager.Instance.Stage.StructureTrans);
         
     }
 
-    private void Revive()
+    protected void Revive()
     {
         structureCollider.enabled = true;
         GetComponent<Renderer>().material.color = Color.white;
         isAlive = true;
         obstacle.enabled = true;
+        tag = "IsAlive";
         Heal();
     }
 

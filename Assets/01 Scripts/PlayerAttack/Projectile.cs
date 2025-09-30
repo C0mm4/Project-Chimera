@@ -67,9 +67,18 @@ public class Projectile : MonoBehaviour
     // 타겟이 죽었는지 확인, 살아있다면 마지막 위치를 갱신
     private void UpdateTargetPosition()
     {
-        if (targetTransform != null)
+        // 조건 1: 타겟의 참조가 존재
+        // 조건 2: 그 타겟이 현재 씬에서 활성 상태인가
+        if (targetTransform != null && targetTransform.gameObject.activeInHierarchy)
         {
+            // 두 조건이 모두 참일 때만, 타겟을 계속 추적합니다.
             lastKnownPosition = targetTransform.position;
+        }
+        else
+        {
+            // 둘 중 하나라도 거짓이라면 (타겟이 죽었거나 비활성화됐다면),
+            // "타겟을 잃었다"고 판단하고 참조를 스스로 끊어버립니다.
+            targetTransform = null;
         }
     }
 
@@ -145,10 +154,13 @@ public class Projectile : MonoBehaviour
             new Vector3(transform.position.x, 0, transform.position.z),
             new Vector3(lastKnownPosition.x, 0, lastKnownPosition.z)
             );
+        //Debug.Log("거리 or 시간 변수 측정중");
 
-        if (horizontalDistance < 0.2f)
+        // 0929: 거리로 확인 로직 + 시간이 지나면 삭제되도록 변경
+        if (horizontalDistance < 0.2f || timeElapsed >= flightDuration)
         {
             //gameObject.SetActive(false);
+            //Debug.Log("거리 or 시간 변수 조건 충족");
             //확인 필요 - SMC
             ObjectPoolManager.Instance.ResivePool(name, gameObject, transform.parent);
         }
@@ -162,14 +174,16 @@ public class Projectile : MonoBehaviour
         string name = gameObject.name;
         name = name.Replace("(Clone)", "");
 
+        Debug.Log("부딪힌 Transform : " + collision.transform);
         // 부딪힌 상대가 지정한 타겟이 맞는지 확인
-        if (targetTransform != null && collision.transform == targetTransform)
+        if ((targetTransform != null && collision.transform == targetTransform) )
         {
             // 타겟이 맞다면 데미지를 준다.
             if (collision.gameObject.TryGetComponent<CharacterStats>(out var status))
             {
                 status.TakeDamage(Instigator, damage);
-                //확인 필요 - SMC
+
+                Debug.Log("발사체 트리거 닿음");
                 ObjectPoolManager.Instance.ResivePool(name,  gameObject, weaponTransform);
             }
         }

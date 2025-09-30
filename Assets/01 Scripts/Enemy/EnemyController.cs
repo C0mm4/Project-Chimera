@@ -19,6 +19,7 @@ public class EnemyController : CharacterStats
         body.isKinematic = true;
     }
 
+
     [SerializeField] private int spawnWaveIndex;
     public void Initialize(int spawnWaveIndex)
     {
@@ -50,5 +51,10 @@ public class EnemyController : CharacterStats
         ObjectPoolManager.Instance.ClearPool(poolName, weaponTrans);
 
         OnDeathStageHandler?.Invoke(spawnWaveIndex, gameObject);
+    }
+
+    private void UpdateHealthUI(float percent)
+    {
+        gaugebarUI.SetFillPercent(percent);
     }
 }

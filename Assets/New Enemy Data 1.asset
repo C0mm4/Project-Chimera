@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d8dd6571861f204284259a61d201e7a, type: 3}
-  m_Name: sword
+  m_Name: New Enemy Data 1
   m_EditorClassIdentifier: 
-  currentHealth: 80
-  maxHealth: 80
-  moveSpeed: 1
-  enemyName: "\uAC80"
+  currentHealth: 0
+  maxHealth: 30
+  moveSpeed: 2
+  enemyName: "\uC801 \uC774\uB984"
   tier: 1
   damage: 5
-  WeaponID: 
+  WeaponID: Pref_500000
   targetDetectrange: 0
   playerFollowTime: 0
   attackDistance: 0
   attackRate: 0
-  description: "\uAC80"
+  description: "\uC801 \uC124\uBA85"
