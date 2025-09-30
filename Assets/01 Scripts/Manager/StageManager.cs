@@ -17,6 +17,7 @@ public class StageManager : Singleton<StageManager>
 
     public StageState state = StageState.Ready;
 
+    public event Action<int> OnGoldChanged;
 
     private void Awake()
     {
@@ -68,6 +69,8 @@ public class StageManager : Singleton<StageManager>
     {
         data.Gold += amount;
         data.CollectedGolds += amount;
+
+        OnGoldChanged?.Invoke(data.Gold);
     }
 
     public bool ConsumeGold(int amount)
@@ -76,6 +79,8 @@ public class StageManager : Singleton<StageManager>
 
         data.Gold -= amount;
         data.ConsumeGolds += amount;
+
+        OnGoldChanged?.Invoke(data.Gold);
 
         return true;
     }
