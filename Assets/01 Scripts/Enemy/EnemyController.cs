@@ -16,6 +16,7 @@ public class EnemyController : CharacterStats
         base.Awake();
         body = GetComponent<Rigidbody>();
         body.freezeRotation = true;
+        body.velocity = Vector3.zero;
         body.isKinematic = true;
     }
 

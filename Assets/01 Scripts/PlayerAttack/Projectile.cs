@@ -61,7 +61,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         UpdateTargetPosition();
         MovementToTarget();
@@ -118,7 +118,7 @@ public class Projectile : MonoBehaviour
         */
 
         // 시간 기반으로 전체 여정의 진행도(0.0 ~ 1.0)를 계산합니다.
-        timeElapsed += Time.deltaTime;
+        timeElapsed += Time.fixedDeltaTime;
         float journeyFraction = timeElapsed / flightDuration;
         journeyFraction = Mathf.Clamp01(journeyFraction); // 안전장치
 
