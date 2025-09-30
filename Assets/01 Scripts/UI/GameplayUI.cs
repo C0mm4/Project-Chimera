@@ -9,13 +9,18 @@ public class GameplayUI : UIBase
     [Header("UI 요소 연결")]
     [SerializeField] private Button pauseButton;
     [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private Button nextStageBtn;
+    [SerializeField] private TMP_Text nextStageText;
 
     protected override void OnOpen()
     {
         base.OnOpen();
         pauseButton.onClick.AddListener(OnPauseButtonClicked);
+        OnStageEnd();
 
         StageManager.Instance.OnGoldChanged += UpdateGoldText;
+        StageManager.Instance.OnStageClear += OnStageEnd;
+        StageManager.Instance.OnStageFail += OnStageEnd;
 
         UpdateGoldText(StageManager.data.Gold); // 처음 UI가 켜길 때, 한 번 업데이트
     }
@@ -53,6 +58,21 @@ public class GameplayUI : UIBase
     private void OnPauseButtonClicked()
     {
         UIManager.Instance.OpenPopupUI<PauseUI>();
+    }
+
+    private void OnNextStageButtonClicked()
+    {
+        StageManager.Instance.NextStage();
+        nextStageBtn.gameObject.SetActive(false);
+        nextStageText.text = "NextStage";
+        nextStageBtn.onClick.RemoveAllListeners();
+    }
+
+    private void OnStageEnd()
+    {
+        nextStageBtn.gameObject.SetActive(true);
+        nextStageBtn.onClick.AddListener(OnNextStageButtonClicked);
+        nextStageText.text = "NextStage";
     }
 
     // ============ 골드 변경 이벤트

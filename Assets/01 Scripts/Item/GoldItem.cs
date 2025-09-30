@@ -83,6 +83,7 @@ public class GoldItem : MonoBehaviour
             hasLanded = true;
             col.isTrigger = true;
             rb.useGravity = false;
+            rb.isKinematic = true;
         }
     }
 
