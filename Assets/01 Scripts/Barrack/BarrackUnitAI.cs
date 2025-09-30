@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class BarrackUnitAI : AIControllerBase
 {
-    NavMeshAgent agent;
 
     Vector3 randomTargetOffset;
 
@@ -12,7 +11,6 @@ public class BarrackUnitAI : AIControllerBase
     protected override void Awake()
     {
         base.Awake();
-        agent = GetComponent<NavMeshAgent>();
 
         randomTargetOffset = Random.insideUnitSphere;
 

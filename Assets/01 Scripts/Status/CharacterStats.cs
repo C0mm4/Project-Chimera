@@ -25,6 +25,7 @@ public class CharacterStats : MonoBehaviour
 
             data.currentHealth = data.maxHealth;
             data.moveSpeed = originData.moveSpeed;
+
         }
 
         if (gaugebarUI == null)

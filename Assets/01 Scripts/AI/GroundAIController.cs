@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class GroundAIController : AIControllerBase
 {
-    NavMeshAgent agent;
     NavMeshPath path;
 
     Vector3 randomTargetOffset;
@@ -16,7 +15,6 @@ public class GroundAIController : AIControllerBase
     {
         base.Awake();
 
-        agent = GetComponent<NavMeshAgent>();
         randomTargetOffset = Random.insideUnitSphere;
 
     }
