@@ -176,7 +176,7 @@ MonoBehaviour:
   <Target>k__BackingField: {fileID: 0}
   PlayerDetectRange: 0
   StructureDetectRange: 0
-  AttackRange: 1
+  AttackRange: 1.5
   PlayerChaseTime: 0
   AttackCoolTime: 1
   TargetGroundDistance: 0

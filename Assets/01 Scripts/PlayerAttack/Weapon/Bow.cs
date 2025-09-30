@@ -22,4 +22,12 @@ public class Bow : BaseWeapon
             projectile.transform.SetParent(null);
         }
     }
+
+    public (string, Transform) GetInfo()
+    {
+        string keyName = RangedData.ProjectilID;
+        Transform arrowTransform = transform;
+
+        return (keyName, arrowTransform);
+    }
 }
