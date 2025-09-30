@@ -18,7 +18,7 @@ public class PlayerChangeWeapon : MonoBehaviour
         ObjectPoolManager.Instance.CreatePool("Pref_510000", weaponPrefab.transform);
 
         //테스트용
-        //ChangeWeapon(WeaponTypes.Sword);
+        ChangeWeapon(WeaponTypes.Bow);
     }
 
     public void Update()
