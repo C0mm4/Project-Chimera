@@ -2,6 +2,154 @@
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "LowPoly/SimpleWater"
 {
+    Properties
+    {
+        _WaterNormal("Water Normal", 2D) = "bump" {}
+        _NormalScale("Normal Scale", Float) = 1
+
+        _DeepColor("Deep Color", Color) = (0,0,0,1)
+        _ShalowColor("Shalow Color", Color) = (1,1,1,1)
+
+        _WaterDepth("Water Depth", Float) = 1
+        _WaterFalloff("Water Falloff", Float) = 1
+
+        _WaterSpecular("Water Specular", Range(0,1)) = 0.5
+        _WaterSmoothness("Water Smoothness", Range(0,1)) = 0.8
+
+        _Foam("Foam", 2D) = "white" {}
+        _FoamDepth("Foam Depth", Float) = 1
+        _FoamFalloff("Foam Falloff", Float) = 1
+        _FoamSpecular("Foam Specular", Range(0,1)) = 0.3
+        _FoamSmoothness("Foam Smoothness", Range(0,1)) = 0.5
+
+        _Distortion("Distortion", Float) = 0.05
+
+        _WavesAmplitude("Waves Amplitude", Float) = 0.05
+        _WavesAmount("Waves Amount", Float) = 4.0
+    }
+
+    SubShader
+    {
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+        LOD 300
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
+
+        Pass
+        {
+            Name "ForwardLit"
+            Tags { "LightMode"="UniversalForward" }
+
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float3 normalOS   : NORMAL;
+                float2 uv         : TEXCOORD0;
+            };
+
+            struct Varyings
+            {
+                float4 positionHCS : SV_POSITION;
+                float2 uv          : TEXCOORD0;
+                float3 normalWS    : TEXCOORD1;
+                float4 screenPos   : TEXCOORD2;
+            };
+
+            // ==== Textures ====
+            TEXTURE2D(_WaterNormal);
+            SAMPLER(sampler_WaterNormal);
+            float4 _WaterNormal_ST;
+
+            TEXTURE2D(_Foam);
+            SAMPLER(sampler_Foam);
+            float4 _Foam_ST;
+
+            TEXTURE2D(_CameraDepthTexture);
+            SAMPLER(sampler_CameraDepthTexture);
+
+            TEXTURE2D(_CameraOpaqueTexture);
+            SAMPLER(sampler_CameraOpaqueTexture);
+
+            // ==== Properties ====
+            float _NormalScale;
+            float4 _DeepColor;
+            float4 _ShalowColor;
+
+            float _WaterDepth;
+            float _WaterFalloff;
+            float _WaterSpecular;
+            float _WaterSmoothness;
+
+            float _FoamDepth;
+            float _FoamFalloff;
+            float _FoamSpecular;
+            float _FoamSmoothness;
+
+            float _Distortion;
+            float _WavesAmplitude;
+            float _WavesAmount;
+
+            Varyings vert (Attributes v)
+            {
+                Varyings o;
+
+                // 물결 애니메이션
+                float3 pos = v.positionOS.xyz;
+                pos += (sin((_WavesAmount * pos.z) + _Time.y) * v.normalOS) * _WavesAmplitude;
+
+                o.positionHCS = TransformObjectToHClip(pos);
+                o.normalWS = TransformObjectToWorldNormal(v.normalOS);
+                o.uv = TRANSFORM_TEX(v.uv, _WaterNormal);
+                o.screenPos = o.positionHCS;
+
+                return o;
+            }
+
+            half4 frag (Varyings i) : SV_Target
+            {
+                // 화면 좌표
+                float2 screenUV = i.screenPos.xy / i.screenPos.w;
+                screenUV = screenUV * 0.5 + 0.5;
+
+                // Scene Depth
+                float sceneRawDepth = SAMPLE_TEXTURE2D(_CameraDepthTexture, sampler_CameraDepthTexture, screenUV).r;
+                float sceneEyeDepth = LinearEyeDepth(sceneRawDepth, _ZBufferParams);
+                float myEyeDepth = LinearEyeDepth(i.screenPos.z / i.screenPos.w, _ZBufferParams);
+                float depthDiff = abs(sceneEyeDepth - myEyeDepth);
+
+                // Water depth fade
+                float depthFactor = saturate(pow(depthDiff + _WaterDepth, _WaterFalloff));
+                float4 baseColor = lerp(_DeepColor, _ShalowColor, depthFactor);
+
+                // Foam
+                float2 foamUV = TRANSFORM_TEX(i.uv, _Foam);
+                foamUV += _Time.y * float2(-0.01, 0.01);
+                float foamTex = SAMPLE_TEXTURE2D(_Foam, sampler_Foam, foamUV).r;
+                float foamMask = saturate(pow(depthDiff + _FoamDepth, _FoamFalloff)) * foamTex;
+                float4 foamColor = lerp(baseColor, float4(1,1,1,1), foamMask);
+
+                // Distortion with OpaqueTexture
+                float3 normalTex = UnpackNormal(SAMPLE_TEXTURE2D(_WaterNormal, sampler_WaterNormal, i.uv));
+                float2 distortedUV = screenUV + normalTex.xy * _Distortion;
+                float4 grabColor = SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, distortedUV);
+
+                float4 finalColor = lerp(foamColor, grabColor, depthFactor);
+
+                return float4(finalColor.rgb, 0.8); // 투명도 조절
+            }
+            ENDHLSL
+        }
+    }
+}
+/*
+Shader "LowPoly/SimpleWater"
+{
 	Properties
 	{
 		_WaterNormal("Water Normal", 2D) = "bump" {}
@@ -109,7 +257,7 @@ Shader "LowPoly/SimpleWater"
 	}
 	Fallback "Diffuse"
 	CustomEditor "ASEMaterialInspector"
-}
+}*/
 /*ASEBEGIN
 Version=14006
 357;92;969;673;-152.21;1759.334;2.21029;True;False
