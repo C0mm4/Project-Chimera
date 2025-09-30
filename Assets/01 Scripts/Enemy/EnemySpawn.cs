@@ -26,6 +26,30 @@ public class EnemySpawn : Singleton<EnemySpawn>
         boxColliders = transform.GetComponentsInChildren<BoxCollider>();
     }
 
+    private void OnEnable()
+    {
+        StageManager.Instance.OnStageFail += OnStageFail;
+    }
+
+    private void OnStageFail()
+    {
+        StopAllCoroutines();
+
+        int count = waveSpawnDict.Count;
+        for (int i = 0; i < count; ++i)
+        {
+            int count2 = waveSpawnDict[i].Count;
+            for (int j = count2 - 1; j >= 0; --j)
+            {
+                GameObject go = waveSpawnDict[i][j];
+                waveSpawnDict[i].Remove(go);
+                go.GetComponent<EnemyController>().OnDeathStageHandler -= OnWaveEnemyDeath;
+                ResiveEnemyPool(go);
+
+            }
+        }
+
+    }
 
     public IEnumerator SpawnMonster(MonsterSpawnInfo info, int waveIndex)
     {

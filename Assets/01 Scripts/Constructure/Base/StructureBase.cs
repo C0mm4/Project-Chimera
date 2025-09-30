@@ -37,10 +37,7 @@ public abstract class StructureBase : CharacterStats
         data.maxHealth = statData.maxHealth;
         data.currentHealth = data.maxHealth;
         structureData.CurrentLevel = 1;
-        StageManager.Instance.OnStageClear -= Revive;
-        StageManager.Instance.OnStageClear += Revive;
-        StageManager.Instance.OnStageFail -= Revive;
-        StageManager.Instance.OnStageFail += Revive;
+
         Revive();
         CopyStatusData(originData);
         UpdateModel();
@@ -48,8 +45,9 @@ public abstract class StructureBase : CharacterStats
 
     public abstract void CopyStatusData(BaseStatusSO statData);
 
-    protected virtual void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         if (interactionZone != null)
         {
             // interactionZone.OnInteract += UIManager.Instance.OpenPopupUI<UpgradePopupUI>;
@@ -58,6 +56,11 @@ public abstract class StructureBase : CharacterStats
 
         if (originData != null)
             BuildEffect();
+
+        StageManager.Instance.OnStageClear -= Revive;
+        StageManager.Instance.OnStageClear += Revive;
+        StageManager.Instance.OnStageFail -= Revive;
+        StageManager.Instance.OnStageFail += Revive;
     }
 
     protected virtual void OnDisable()
@@ -69,6 +72,7 @@ public abstract class StructureBase : CharacterStats
 
         if (originData != null)
             DestroyEffect();
+        
     }
 
     protected virtual void Update()
@@ -95,7 +99,6 @@ public abstract class StructureBase : CharacterStats
     protected override void Death()
     {
         base.Death();
-        Debug.Log("스트럭쳐 베이스의 데스함수");
         structureCollider.enabled = false;
         meshRender.material.color = Color.red;
         obstacle.enabled = false;
@@ -105,8 +108,10 @@ public abstract class StructureBase : CharacterStats
         
     }
 
-    protected void Revive()
+    public void Revive()
     {
+        Debug.Log("부활");
+
         structureCollider.enabled = true;
         meshRender.material.color = Color.white;
         isAlive = true;
