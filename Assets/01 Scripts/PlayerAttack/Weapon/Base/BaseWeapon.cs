@@ -53,6 +53,7 @@ public abstract class BaseWeapon : MonoBehaviour
     // 추가 필요 (플레이어 위치, 방향에 따라 활의 위치 변경?)
     protected abstract void PerformAttack(Transform target);
 
+    //방향 전환
     private void TargetView(Transform target)
     {
         Vector3 dir = target.position - transform.position;

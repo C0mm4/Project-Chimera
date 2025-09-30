@@ -23,11 +23,4 @@ public class Bow : BaseWeapon
         }
     }
 
-    public (string, Transform) GetInfo()
-    {
-        string keyName = RangedData.ProjectilID;
-        Transform arrowTransform = transform;
-
-        return (keyName, arrowTransform);
-    }
 }
