@@ -49,10 +49,7 @@ public class FlyingAIController : AIControllerBase
         if (groundHit.collider)
         {
             Debug.Log(groundHit.point.y);
-            characterController.enabled = false;
             transform.position = new Vector3(transform.position.x, groundHit.point.y + 3f, transform.position.z);
-            characterController.enabled = true;
-
         }
     }
 
@@ -69,5 +66,29 @@ public class FlyingAIController : AIControllerBase
 
         return true;
 
+    }
+
+
+    protected override void TryAttack()
+    {
+        if (attackCoolDown > 0f) return;
+
+        Vector3 groundPosition = transform.position;
+        groundPosition.y = 0;
+
+        LayerMask targetLayer = LayerMask.GetMask(LayerMask.LayerToName(Target.gameObject.layer));
+
+        int count = Physics.OverlapSphereNonAlloc(groundPosition, AttackRange, overlaps, targetLayer);
+
+        if (count < 1) return;
+
+        if (weapon != null)
+        {
+            weapon.Attack(Target);
+        }
+
+        Debug.Log("공격");
+        Debug.DrawRay(transform.position, Target.position - transform.position, Color.red, 3f);
+        attackCoolDown = AttackCoolTime;
     }
 }

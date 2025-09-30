@@ -26,6 +26,7 @@ public class StageManager : Singleton<StageManager>
         state = StageState.Ready;
         OnStageClear += ClearCallback;
         OnStageFail += FailCallback;
+        GetGold(10);
     }
 
     // For Test

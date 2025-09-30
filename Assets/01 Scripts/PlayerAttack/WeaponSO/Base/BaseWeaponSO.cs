@@ -11,4 +11,11 @@ public class BaseWeaponSO : ScriptableObject
     public float Damage;
     public float ScanRange;         // 공격 범위(반지름)
     public float AttackCooldown;    // 공격 주기
+    public WeaponType Type;
+}
+
+
+public enum WeaponType
+{
+    Ranged, Melee
 }

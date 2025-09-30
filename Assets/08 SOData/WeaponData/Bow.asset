@@ -16,6 +16,7 @@ MonoBehaviour:
   Damage: 10
   ScanRange: 5
   AttackCooldown: 1
+  Type: 0
   ProjectilID: Pref_440000
   ProjectileCount: 1
   ProjectileSpeed: 3

@@ -241,8 +241,9 @@ MonoBehaviour:
   StructureLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  SearchType: 0
+  SearchType: 2
   weapon: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!143 &4097475176766307985
 CharacterController:
   m_ObjectHideFlags: 0
