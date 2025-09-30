@@ -4,16 +4,33 @@ public class PlayerStatus : CharacterStats
 {
     [SerializeField] private PlayerStatusSO statusData;
     
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         GameManager.Instance.Player = this;
-        StageManager.Instance.OnStageFail += OnFail;
+        StageManager.Instance.OnStageFail += OnStageFail;
+        StageManager.Instance.OnStageClear += OnStageClear;
     }
 
 
-    private void OnFail()
+    private void OnDisable()
     {
-        Debug.Log("스테이지 실패했을 때 플레이어 처리");
+        StageManager.Instance.OnStageFail -= OnStageFail;
+        StageManager.Instance.OnStageClear -= OnStageClear;
+
+    }
+
+
+    private void OnStageClear()
+    {
+        data.currentHealth = data.maxHealth;
+
+    }
+
+
+    private void OnStageFail()
+    {
+        data.currentHealth = data.maxHealth;
     }
 
     protected override void Awake()
@@ -24,12 +41,16 @@ public class PlayerStatus : CharacterStats
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            Death();
+        }
     }
 
     protected override void Death()
     {
         base.Death();
-
+        
         StageManager.Instance.FailStage();
     }
 

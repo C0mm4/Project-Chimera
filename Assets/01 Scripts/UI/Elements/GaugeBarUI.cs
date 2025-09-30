@@ -20,7 +20,7 @@ public class GaugeBarUI : MonoBehaviour
   
     Canvas canvas;
 
-    AnimationCurve curve;
+    AnimationCurve curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     float frontValue;
     float backValue;
     float changeElapsed;
@@ -30,14 +30,12 @@ public class GaugeBarUI : MonoBehaviour
     private void Awake()
     {
         canvas = GetComponent<Canvas>();
-        curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     }
-
+    
 
     void Start()
     {
         canvas.worldCamera = Camera.main;
-        SetFillPercent(1f);
     }
 
     private void Update()

@@ -38,17 +38,16 @@ public class StageManager : Singleton<StageManager>
     public void FailStage()
     {
         state = StageState.Ready;
-        Debug.Log("스테이지 실패");
-        OnStageFail?.Invoke();
+        Debug.Log("스테이지 실패. 3초 후 관련함수 호출");
+        StartCoroutine(CallActionAfterDelay(OnStageFail, 3f));
     }
 
     public void StageClear()
     {
         state = StageState.Ready;
         data.MaxClearStage = data.CurrentStage++;
-        Debug.Log("스테이지 클리어");
-
-        OnStageClear?.Invoke();
+        Debug.Log("스테이지 클리어. 3초 후 관련함수 호출");
+        StartCoroutine(CallActionAfterDelay(OnStageClear, 3f));
     }
 
     public void NextStage()
@@ -71,7 +70,22 @@ public class StageManager : Singleton<StageManager>
 
         return true;
     }
+
+    IEnumerator CallActionAfterDelay(Action action, float delay)
+    {
+        Debug.Log($"{delay}초 기다리는 중..");
+        yield return new WaitForSeconds(delay);
+        Debug.Log($"{delay}초 지남. 호출");
+        foreach (var d in action.GetInvocationList())
+        {
+            Debug.Log($"구독된 메서드: {d.Method.Name}, 대상: {d.Target}");
+        }
+
+        action.Invoke();
+    }
 }
+
+
 
 
 public enum StageState
