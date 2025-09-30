@@ -64,5 +64,10 @@ public abstract class BaseWeapon : MonoBehaviour
 
         transform.DORotateQuaternion(targetRotation, 0.1f).SetEase(Ease.OutSine);
     }
+
+    public virtual void OnPoolingDisable()
+    {
+
+    }
 }
 

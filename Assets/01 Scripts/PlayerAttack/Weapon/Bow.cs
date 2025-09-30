@@ -23,4 +23,9 @@ public class Bow : BaseWeapon
         }
     }
 
+    public override void OnPoolingDisable()
+    {
+        base.OnPoolingDisable();
+        ObjectPoolManager.Instance.ClearPool(RangedData.ProjectilID, transform);
+    }
 }
