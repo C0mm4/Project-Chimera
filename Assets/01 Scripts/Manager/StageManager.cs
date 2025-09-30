@@ -13,7 +13,6 @@ public class StageManager : Singleton<StageManager>
     public event Action OnStageFail;
     public event Action OnStageClear;
 
-    [SerializeField] private int stageN;
     public static GameData data;
 
     public StageState state = StageState.Ready;
@@ -25,6 +24,8 @@ public class StageManager : Singleton<StageManager>
         data = new GameData();
         data.CurrentStage = 1;
         state = StageState.Ready;
+        OnStageClear += ClearCallback;
+        OnStageFail += FailCallback;
     }
 
     // For Test
@@ -38,17 +39,25 @@ public class StageManager : Singleton<StageManager>
 
     public void FailStage()
     {
-        state = StageState.Ready;
         Debug.Log("스테이지 실패. 3초 후 관련함수 호출");
         StartCoroutine(CallActionAfterDelay(OnStageFail, 3f));
     }
 
     public void StageClear()
     {
-        state = StageState.Ready;
-        data.MaxClearStage = data.CurrentStage++;
         Debug.Log("스테이지 클리어. 3초 후 관련함수 호출");
         StartCoroutine(CallActionAfterDelay(OnStageClear, 3f));
+    }
+
+    private void ClearCallback()
+    {
+        state = StageState.Ready;
+        data.MaxClearStage = data.CurrentStage++;
+    }
+
+    private void FailCallback()
+    {
+        state = StageState.Ready;
     }
 
     public void NextStage()

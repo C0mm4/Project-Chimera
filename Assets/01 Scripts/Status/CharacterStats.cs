@@ -25,6 +25,7 @@ public class CharacterStats : MonoBehaviour
 
             data.currentHealth = data.maxHealth;
             data.moveSpeed = originData.moveSpeed;
+
         }
 
         if (gaugebarUI == null)
@@ -43,9 +44,21 @@ public class CharacterStats : MonoBehaviour
             gaugebarUI.SetFillPercent(1f);
             OnHealthChanged += gaugebarUI.SetFillPercent;
         }
-        
+
+        StageManager.Instance.OnStageClear -= Revive;
+        StageManager.Instance.OnStageClear += Revive;
+        StageManager.Instance.OnStageFail -= Revive;
+        StageManager.Instance.OnStageFail += Revive;
+    }
+    protected void Heal()
+    {
+        data.currentHealth = data.maxHealth;
     }
 
+    protected virtual void Revive()
+    {
+        Heal();
+    }
 
 
     public void TakeDamage(Transform instigator, float damageAmount)

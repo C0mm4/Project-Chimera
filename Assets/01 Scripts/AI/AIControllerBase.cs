@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class AIControllerBase : MonoBehaviour
 {
@@ -32,9 +33,12 @@ public abstract class AIControllerBase : MonoBehaviour
 
     public BaseWeapon weapon;
 
+    public NavMeshAgent agent;
+
     protected virtual void Awake()
     {
         InitializeStrategy();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     protected virtual void OnEnable()

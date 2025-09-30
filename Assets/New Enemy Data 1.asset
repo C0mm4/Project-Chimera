@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 30
-  moveSpeed: 2
+  moveSpeed: 7
   enemyName: "\uC801 \uC774\uB984"
   tier: 1
   damage: 5

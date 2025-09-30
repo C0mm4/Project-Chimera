@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
     }
 
+    private void Start()
+    {
+        MoveSpeed = GetComponent<CharacterStats>().data.moveSpeed;
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         TargetVelocity = context.ReadValue<Vector2>();

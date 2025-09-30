@@ -53,7 +53,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 421f014b3bd0567429e1e1f8f5570be8
-    m_Address: SO_6000012
+    m_Address: SO_600001
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -103,12 +103,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 57c303e6917c4304383863baaffd6b42
-    m_Address: SO_600001
+    m_Address: SO_600002
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e42fac1ae6cb4654b95a6e412b8f5c7a
-    m_Address: Assets/03 Prefabs/Enemy/Gold_Cube.prefab
+    m_Address: Pref_700000
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

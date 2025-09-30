@@ -268,6 +268,8 @@ public class EnemySpawn : Singleton<EnemySpawn>
         ResiveEnemyPool(go);
         if (CheckStageClear())
         {
+            GameEventObserver.CollectGold();
+
             StageManager.Instance.StageClear();
         }
     }

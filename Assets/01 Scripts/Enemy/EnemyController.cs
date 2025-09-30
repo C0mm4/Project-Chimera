@@ -39,6 +39,7 @@ public class EnemyController : CharacterStats
         if (aiController != null && obj != null)
         {
             aiController.weapon = weapon;
+            aiController.agent.speed = data.moveSpeed;
         }
     }
 

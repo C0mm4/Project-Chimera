@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 1168981712510458832, guid: e42fac1ae6cb4654b95a6e412b8f5c7a,
     type: 3}
+  ItemAddress: Pref_700000
   dropCount: 1
