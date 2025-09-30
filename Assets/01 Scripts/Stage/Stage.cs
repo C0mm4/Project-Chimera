@@ -10,5 +10,10 @@ public class Stage : MonoBehaviour
     private void Awake()
     {
         StageManager.Instance.Stage = this;
+
+        ObjectPoolManager.Instance.CreatePool("GoldMining", StructureTrans);
+        ObjectPoolManager.Instance.CreatePool("Tower", StructureTrans);
+        ObjectPoolManager.Instance.CreatePool("Wall", StructureTrans);
+        ObjectPoolManager.Instance.CreatePool("Barrack", StructureTrans);
     }
 }

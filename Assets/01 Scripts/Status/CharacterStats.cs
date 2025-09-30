@@ -36,6 +36,16 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    protected virtual void OnEnable()
+    {
+        if (gaugebarUI != null)
+        {
+            gaugebarUI.SetFillPercent(1f);
+            OnHealthChanged += gaugebarUI.SetFillPercent;
+        }
+        
+    }
+
 
 
     public void TakeDamage(Transform instigator, float damageAmount)
@@ -50,9 +60,9 @@ public class CharacterStats : MonoBehaviour
         Debug.Log(data.currentHealth);
 
         float percent = data.currentHealth / data.maxHealth;
-        //OnHealthChanged?.Invoke(percent);
+        OnHealthChanged?.Invoke(percent);
         //데미지를 받을때 여기밖에 안거치는거같음
-        UpdateHealthUI(percent);
+        // UpdateHealthUI(percent);
         if (aiController != null)
         {
             aiController.OnHit(instigator);
@@ -69,6 +79,8 @@ public class CharacterStats : MonoBehaviour
     {
         
     }
+
+
 
     private void UpdateHealthUI(float percent)
     {

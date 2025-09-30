@@ -10,7 +10,8 @@ public class Barrack : StructureBase
 
     [SerializeField] private BarrackData barrackData;
 
-    private float lastSpawnTime;
+//    private float lastSpawnTime;
+    private float spawnWaitTime;
 
     private List<GameObject> spawnUnits = new();
     private bool[] activateSpawnIndex;
@@ -18,13 +19,20 @@ public class Barrack : StructureBase
     //유닛 위치 저장
     [SerializeField] private List<Vector3> savePosition = new List<Vector3>();
 
-
+    
 
     public override void SetDataSO(StructureSO data)
     {
         Debug.Log("SetData");
         // 데이터 변경 전 풀링 삭제
         ObjectPoolManager.Instance.ClearPool(barrackData.spawnUnitKey, transform);
+
+        /*
+        for (int i = 0; i < spawnUnits.Count; i++)
+        {
+            BarrackUnitStatus unit = spawnUnits[i].GetComponent<BarrackUnitStatus>();
+            spawnUnits[i].transform.position = unit.unitPosition.position;
+        }*/
 
         base.SetDataSO(data);
         // 기존 소환된 애들 삭제 처리
@@ -66,6 +74,28 @@ public class Barrack : StructureBase
         // 소환된 개수가 적으면, 주기적으로 소환
         if (currentSpawnCount < barrackData.spawnCount)
         {
+            spawnWaitTime += Time.deltaTime;
+            if(spawnWaitTime > barrackData.spawnRate)
+            {
+
+                int spawnIndex = -1;
+                for (int i = 0; i <= barrackData.spawnCount; i++)
+                {
+                    if (!activateSpawnIndex[i])
+                    {
+                        spawnIndex = i;
+                        break;
+                    }
+                }
+
+                if (spawnIndex != -1)
+                {
+                    Spawn(spawnIndex);
+                    spawnWaitTime = 0;
+                }
+
+            }
+            /*
             if (Time.time - lastSpawnTime >= barrackData.spawnRate)
             {
                 int spawnIndex = -1;
@@ -85,6 +115,7 @@ public class Barrack : StructureBase
                 }
 
             }
+            */
         }
     }
 

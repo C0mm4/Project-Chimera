@@ -18,7 +18,7 @@ MonoBehaviour:
   enemyName: "\uC801 \uC774\uB984"
   tier: 1
   damage: 5
-  WeaponID: Pref_500000
+  WeaponID: Pref_500001
   targetDetectrange: 0
   playerFollowTime: 0
   attackDistance: 0

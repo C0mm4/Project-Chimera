@@ -22,4 +22,10 @@ public class Bow : BaseWeapon
             projectile.transform.SetParent(null);
         }
     }
+
+    public override void OnPoolingDisable()
+    {
+        base.OnPoolingDisable();
+        ObjectPoolManager.Instance.ClearPool(RangedData.ProjectilID, transform);
+    }
 }

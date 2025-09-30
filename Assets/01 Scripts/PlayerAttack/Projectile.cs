@@ -39,6 +39,11 @@ public class Projectile : MonoBehaviour
 
         this.Instigator = instigator;
         this.weaponTransform = weaponTransform;  
+
+        if(Instigator.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("EnemyAttack");
+        }
         if (targetTransform != null)
         {
             lastKnownPosition = targetTransform.position;
@@ -56,7 +61,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         UpdateTargetPosition();
         MovementToTarget();
@@ -113,7 +118,7 @@ public class Projectile : MonoBehaviour
         */
 
         // 시간 기반으로 전체 여정의 진행도(0.0 ~ 1.0)를 계산합니다.
-        timeElapsed += Time.deltaTime;
+        timeElapsed += Time.fixedDeltaTime;
         float journeyFraction = timeElapsed / flightDuration;
         journeyFraction = Mathf.Clamp01(journeyFraction); // 안전장치
 
@@ -162,7 +167,7 @@ public class Projectile : MonoBehaviour
             //gameObject.SetActive(false);
             //Debug.Log("거리 or 시간 변수 조건 충족");
             //확인 필요 - SMC
-            ObjectPoolManager.Instance.ResivePool(name, gameObject, transform.parent);
+            ObjectPoolManager.Instance.ResivePool(name, gameObject, weaponTransform);
         }
     }
 

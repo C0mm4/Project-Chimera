@@ -16,15 +16,28 @@ public class BasementStructure : StructureBase
         StageManager.Instance.Basement = this;
         StageManager.Instance.OnStageFail += OnFail;
 
-        ObjectPoolManager.Instance.CreatePool("GoldMining", StageManager.Instance.Stage.StructureTrans);
-        ObjectPoolManager.Instance.CreatePool("Tower", StageManager.Instance.Stage.StructureTrans);
-        ObjectPoolManager.Instance.CreatePool("Wall", StageManager.Instance.Stage.StructureTrans);
-        ObjectPoolManager.Instance.CreatePool("Barrack", StageManager.Instance.Stage.StructureTrans);
+        
     }
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        StageManager.Instance.OnStageFail -= OnFail;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Death();
+        }
+
+    }
     private void OnFail()
     {
-        Debug.Log("스테이지 실패 시 해야할 작업");
+        
     }
 
     public override void ConfirmUpgrade()

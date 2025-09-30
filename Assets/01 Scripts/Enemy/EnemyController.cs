@@ -16,6 +16,7 @@ public class EnemyController : CharacterStats
         base.Awake();
         body = GetComponent<Rigidbody>();
         body.freezeRotation = true;
+        body.velocity = Vector3.zero;
         body.isKinematic = true;
     }
 
@@ -46,6 +47,7 @@ public class EnemyController : CharacterStats
         base.Death();
 
         // 사망 시 무기 풀링 초기화
+        weapon.OnPoolingDisable();
         var poolName = weapon.gameObject.name;
         ObjectPoolManager.Instance.ResivePool(poolName, weapon.gameObject, weaponTrans);
         ObjectPoolManager.Instance.ClearPool(poolName, weaponTrans);
@@ -53,8 +55,5 @@ public class EnemyController : CharacterStats
         OnDeathStageHandler?.Invoke(spawnWaveIndex, gameObject);
     }
 
-    private void UpdateHealthUI(float percent)
-    {
-        gaugebarUI.SetFillPercent(percent);
-    }
+
 }
