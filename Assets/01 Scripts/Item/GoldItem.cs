@@ -55,8 +55,8 @@ public class GoldItem : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             hasLanded = true;
-            rb.isKinematic = true;
-            col.isTrigger = true;
+            rb.isKinematic = true; // 물리 효과 끄기
+            col.isTrigger = true; // 플레이어가 통과할 수 있도록 설정
         }
         
         // 땅에 닿으면 물리 효과를 끄고 플레이어가 통과할 수 있도록 설정

@@ -279,7 +279,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
         ResiveEnemyPool(go);
         if (CheckStageClear())
         {
-            GameEventObserver.CollectGold();
+            GameEventObserver.CollectGold(); // 모든 적이 죽었을 시 골드 수집 이벤트 발생
 
             StageManager.Instance.StageClear();
         }
