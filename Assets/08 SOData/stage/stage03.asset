@@ -13,9 +13,48 @@ MonoBehaviour:
   m_Name: stage03
   m_EditorClassIdentifier: 
   monsters:
-  - keyName: enemy2
-    prefabName: enemy2
-    enemyCount: 20
-    spawnPoint: 0
-    spawnCount: 3
-    spawnTime: 1
+  - keyName: Pref_400001
+    prefabName: Pref_400001
+    spawnEnemyCount: 3
+    spawnPointIndex: 0
+    SpawnRepeatCount: 2
+    delayBetweenSpawnRepeat: 2
+    delayBetweenWave: 0
+    delayType: 0
+    checkPrevWaveIndexes: 
+  - keyName: Pref_400002
+    prefabName: Pref_400002
+    spawnEnemyCount: 3
+    spawnPointIndex: 0
+    SpawnRepeatCount: 2
+    delayBetweenSpawnRepeat: 2
+    delayBetweenWave: 0
+    delayType: 0
+    checkPrevWaveIndexes: 
+  - keyName: Pref_400003
+    prefabName: Pref_400003
+    spawnEnemyCount: 3
+    spawnPointIndex: 0
+    SpawnRepeatCount: 2
+    delayBetweenSpawnRepeat: 2
+    delayBetweenWave: 0
+    delayType: 0
+    checkPrevWaveIndexes: 
+  - keyName: Pref_400004
+    prefabName: Pref_400004
+    spawnEnemyCount: 3
+    spawnPointIndex: 0
+    SpawnRepeatCount: 2
+    delayBetweenSpawnRepeat: 2
+    delayBetweenWave: 0
+    delayType: 0
+    checkPrevWaveIndexes: 
+  - keyName: Pref_410001
+    prefabName: Pref_410001
+    spawnEnemyCount: 15
+    spawnPointIndex: 2
+    SpawnRepeatCount: 3
+    delayBetweenSpawnRepeat: 1
+    delayBetweenWave: 2
+    delayType: 3
+    checkPrevWaveIndexes: 03000000
