@@ -86,17 +86,24 @@ public class StageManager : Singleton<StageManager>
         return true;
     }
 
+    private static bool isActiveStageEndHandle = false;
+
     IEnumerator CallActionAfterDelay(Action action, float delay)
     {
-        Debug.Log($"{delay}초 기다리는 중..");
-        yield return new WaitForSeconds(delay);
-        Debug.Log($"{delay}초 지남. 호출");
-        foreach (var d in action.GetInvocationList())
+        if (!isActiveStageEndHandle)
         {
-            Debug.Log($"구독된 메서드: {d.Method.Name}, 대상: {d.Target}");
-        }
+            isActiveStageEndHandle = true;
+            Debug.Log($"{delay}초 기다리는 중..");
+            yield return new WaitForSeconds(delay);
+            Debug.Log($"{delay}초 지남. 호출");
+            foreach (var d in action.GetInvocationList())
+            {
+                Debug.Log($"구독된 메서드: {d.Method.Name}, 대상: {d.Target}");
+            }
 
-        action.Invoke();
+            action.Invoke();
+            isActiveStageEndHandle = false;
+        }
     }
 }
 
