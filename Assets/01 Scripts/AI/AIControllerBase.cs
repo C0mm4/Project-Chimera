@@ -27,6 +27,7 @@ public abstract class AIControllerBase : MonoBehaviour
     public LayerMask StructureLayerMask;
 
     public AISearchType SearchType;
+    [SerializeField]
     protected ISearchStrategy searchStrategy;
 
     protected Collider[] overlaps = new Collider[10];
@@ -51,6 +52,11 @@ public abstract class AIControllerBase : MonoBehaviour
     {
         Target = searchStrategy.SearchTarget();
 
+    }
+
+    public void SetTargetNull()
+    {
+        Target = null;
     }
 
     protected virtual void Update()

@@ -11,6 +11,7 @@ public class EnemyController : CharacterStats
     [SerializeField] private Transform weaponTrans;
     private EnemyData enemyData;
     BaseWeapon weapon;
+    Collider col;
 
     protected override void Awake()
     {
@@ -19,6 +20,7 @@ public class EnemyController : CharacterStats
         body.freezeRotation = true;
         body.velocity = Vector3.zero;
         body.isKinematic = true;
+        col = GetComponent<Collider>(); 
     }
 
 
@@ -43,6 +45,15 @@ public class EnemyController : CharacterStats
             if(aiController.agent != null)
                 aiController.agent.speed = data.moveSpeed;
         }
+
+        StartCoroutine(InitialCallback());
+    }
+
+    private IEnumerator InitialCallback()
+    {
+        col.enabled = false;
+        yield return null;
+        col.enabled = true;
     }
 
     protected override void Death()

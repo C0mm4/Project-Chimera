@@ -23,5 +23,8 @@ public class BarrackUnitStatus : CharacterStats
 //        BarrackUnitSpawn.Instance.nowUnit--;
     }
 
-
+    public void OnStageEnd()
+    {
+        Heal();
+    }
 }

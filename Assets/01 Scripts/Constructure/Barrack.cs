@@ -162,6 +162,19 @@ public class Barrack : StructureBase
         ObjectPoolManager.Instance.ResivePool(unit.gameObject.name, unit.gameObject, transform);
     }
 
+    protected override void Revive()
+    {
+        base.Revive();
+        for (int i = 0; i < spawnUnits.Count; i++)
+        {
+            var unit = spawnUnits[i].GetComponent<BarrackUnitStatus>();
+            var AI = spawnUnits[i].GetComponent<AIControllerBase>();
+            AI.agent.Warp(savePosition[unit.spawnIndex]);
+            AI.SetTargetNull();
+            unit.OnStageEnd();
+        }
+
+    }
     private void SavePositions()
     {
         //유닛 생성
