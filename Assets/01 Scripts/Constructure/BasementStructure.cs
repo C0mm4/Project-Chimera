@@ -29,10 +29,7 @@ public class BasementStructure : StructureBase
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Death();
-        }
+      
 
     }
     private void OnFail()

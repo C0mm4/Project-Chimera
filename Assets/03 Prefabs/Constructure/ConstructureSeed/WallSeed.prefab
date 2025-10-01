@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553408d88dd5043458ea26f9a593a4ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
   interactionZone: {fileID: 5297103194751600370}
 --- !u!1001 &2328159161193680908
 PrefabInstance:

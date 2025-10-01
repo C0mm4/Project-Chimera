@@ -17,12 +17,15 @@ public abstract class StructureBase : CharacterStats
     private Renderer meshRender;
     public bool isAlive = true;
 
+    private Color materialColor;
+
     protected override void Awake()
     {
         base.Awake();
         structureCollider = GetComponentInChildren<Collider>();
         obstacle = GetComponent<NavMeshObstacle>();
         meshRender = GetComponentInChildren<Renderer>();
+        materialColor = meshRender.material.color;
     }
 
 
@@ -109,7 +112,7 @@ public abstract class StructureBase : CharacterStats
     {
         base.Revive();
         structureCollider.enabled = true;
-        meshRender.material.color = Color.white;
+        meshRender.material.color = materialColor;
         isAlive = true;
         obstacle.enabled = true;
         tag = "IsAlive";

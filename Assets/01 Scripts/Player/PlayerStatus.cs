@@ -41,10 +41,7 @@ public class PlayerStatus : CharacterStats
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            Death();
-        }
+       
     }
 
     protected override void Death()

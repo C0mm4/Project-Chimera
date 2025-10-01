@@ -39,6 +39,14 @@ public class Tower : StructureBase
 
         scanner.scanRange = currentWeapon.GetWeaponData().ScanRange;
         scanner.detectCollider.radius = scanner.scanRange;
+        if (weapon.Type == WeaponType.Ranged)
+        {
+            scanner.detectCollider.height = 40;
+        }
+        else
+        {
+            scanner.detectCollider.height = scanner.scanRange;
+        }
     }
 
     protected override void BuildEffect()

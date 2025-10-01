@@ -60,6 +60,14 @@ public class PlayerAttack : MonoBehaviour
             // 2. 스캐너의 탐지 범위를 SO에 있는 값으로 설정합니다.
             scanner.scanRange = data.ScanRange;
             scanner.detectCollider.radius = scanner.scanRange;
+            if (data.Type == WeaponType.Ranged)
+            {
+                scanner.detectCollider.height = 40;
+            }
+            else
+            {
+                scanner.detectCollider.height = scanner.scanRange;
+            }
         }
     }
 

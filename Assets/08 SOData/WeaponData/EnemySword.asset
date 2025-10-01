@@ -16,6 +16,7 @@ MonoBehaviour:
   Damage: 1
   ScanRange: 4
   AttackCooldown: 1
+  Type: 1
   AttackRadius: 5
   AttackArcAngle: 5
   hitboxActiveDuration: 0.3

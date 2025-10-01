@@ -14,7 +14,8 @@ public class EnemyScanner : MonoBehaviour
     public Transform nearestTarget; // 가장 가까운 적
 
     public List<Collider> colliders;
-    public SphereCollider detectCollider;
+    //public SphereCollider detectCollider;
+    public CapsuleCollider detectCollider;
 
     private void FixedUpdate()
     {
@@ -67,12 +68,12 @@ public class EnemyScanner : MonoBehaviour
         return result;
     }
 
-    // 에디터에서 탐지 범위를 시각적으로 확인하기 위한 메서드
+/*    // 에디터에서 탐지 범위를 시각적으로 확인하기 위한 메서드
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, scanRange);
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
