@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,13 +49,22 @@ public class EnemyController : CharacterStats
     {
         base.Death();
 
-        // 사망 시 무기 풀링 초기화
-        weapon.OnPoolingDisable();
-        var poolName = weapon.gameObject.name;
-        ObjectPoolManager.Instance.ResivePool(poolName, weapon.gameObject, weaponTrans);
-        ObjectPoolManager.Instance.ClearPool(poolName, weaponTrans);
+        float downTiem = 0.5f;
 
-        OnDeathStageHandler?.Invoke(spawnWaveIndex, gameObject);
+        transform.DOMoveY(transform.position.y - 0.5f, downTiem).SetEase(Ease.OutQuad);
+
+        transform.DORotate(new Vector3(0, 0, 90), downTiem, RotateMode.Fast).SetEase(Ease.OutQuad).OnComplete(() =>
+        {
+            // 사망 시 무기 풀링 초기화
+            weapon.OnPoolingDisable();
+            var poolName = weapon.gameObject.name;
+            ObjectPoolManager.Instance.ResivePool(poolName, weapon.gameObject, weaponTrans);
+            ObjectPoolManager.Instance.ClearPool(poolName, weaponTrans);
+
+            OnDeathStageHandler?.Invoke(spawnWaveIndex, gameObject);
+        });
+
+
     }
 
 

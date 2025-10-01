@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class CharacterStats : MonoBehaviour
     protected AIControllerBase aiController;
 
     [SerializeField] public StatusData data;
-
+    public GameObject model;
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
@@ -90,7 +91,8 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Death()
     {
-        
+
+
     }
 
 
