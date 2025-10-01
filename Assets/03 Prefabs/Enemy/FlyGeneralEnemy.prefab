@@ -129,6 +129,7 @@ MonoBehaviour:
     m_Bits: 64
   SearchType: 0
   weapon: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!143 &2908227222125576037
 CharacterController:
   m_ObjectHideFlags: 0
@@ -172,6 +173,7 @@ MonoBehaviour:
     currentHealth: 0
     maxHealth: 0
     moveSpeed: 0
+  model: {fileID: 0}
   gaugebarUI: {fileID: 0}
   body: {fileID: 0}
   weaponTrans: {fileID: 2338249663154584319}

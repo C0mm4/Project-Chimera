@@ -47,5 +47,6 @@ public class ItemDropper : MonoBehaviour
             go.transform.position = transform.position;
             go.transform.rotation = transform.rotation;
         }
+        stats.OnDeath -= DropItem;
     }
 }
