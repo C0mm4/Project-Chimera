@@ -26,7 +26,6 @@ public class InputUIBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rect,
             eventData.position,
@@ -36,6 +35,7 @@ public class InputUIBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         dpad.gameObject.SetActive(true);
         dpad.transform.localPosition = localPoint;
+        dpad.OnDragHandler(eventData);
         isClick = true;
     }
 

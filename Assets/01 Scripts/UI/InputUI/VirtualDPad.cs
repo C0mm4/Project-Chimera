@@ -8,11 +8,10 @@ using UnityEngine.InputSystem.OnScreen;
 public class VirtualDPad : MonoBehaviour
 {
     [SerializeField] OnScreenStick stick;
-    [SerializeField] RectTransform stickRect;
 
     public void OnDragHandler(PointerEventData eventData)
     {
-        if (stick != null && stickRect != null)
+        if (stick != null)
         {
             stick.OnDrag(eventData);
         }

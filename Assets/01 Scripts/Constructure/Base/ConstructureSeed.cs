@@ -15,7 +15,6 @@ public class ConstructureSeed : MonoBehaviour
     [SerializeField] InteractionZone interactionZone;
     private void Awake()
     {
-
         if (interactionZone != null)
         {
             interactionZone.OnInteract += Build;
