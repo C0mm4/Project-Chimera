@@ -59,11 +59,13 @@ public class StageManager : Singleton<StageManager>
     private void FailCallback()
     {
         state = StageState.Ready;
+        ConsumeGold(data.getGoldCurrentStage);
     }
 
     public void NextStage()
     {
         EnemySpawn.Instance.StartStage(data.CurrentStage);
+        data.getGoldCurrentStage = 0;
     }
 
     public void GetGold(int amount)
@@ -72,6 +74,7 @@ public class StageManager : Singleton<StageManager>
         data.CollectedGolds += amount;
 
         OnGoldChanged?.Invoke(data.Gold);
+        data.getGoldCurrentStage += amount;
     }
 
     public bool ConsumeGold(int amount)

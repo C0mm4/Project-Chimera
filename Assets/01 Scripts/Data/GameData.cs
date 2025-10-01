@@ -15,5 +15,5 @@ public class GameData
     public int CollectedGolds; // 획득한 총 골드
     public int ConsumeGolds;    // 사용한 총 골드
 
-
+    public int getGoldCurrentStage;
 }

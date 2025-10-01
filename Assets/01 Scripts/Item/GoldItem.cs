@@ -32,6 +32,14 @@ public class GoldItem : MonoBehaviour
         // 오브젝트 풀에서 재사용 될때를 위한 초기화임댜
 
         GameEventObserver.OnCollectGold += AbsorbToPlayer;
+        StageManager.Instance.OnStageFail += OnStageFail;
+    }
+
+    private void OnStageFail()
+    {
+        ObjectPoolManager.Instance.ResivePool("Pref_700000", gameObject, StageManager.Instance.Stage.ObjDropTrans);
+
+        StageManager.Instance.OnStageFail -= OnStageFail;
     }
 
     private void OnDisable()
@@ -99,6 +107,8 @@ public class GoldItem : MonoBehaviour
         StageManager.Instance.GetGold(1);
         ObjectPoolManager.Instance.ResivePool("Pref_700000", gameObject, StageManager.Instance.Stage.ObjDropTrans);
         gameObject.SetActive(false);
+
+        StageManager.Instance.OnStageFail -= OnStageFail;
     }
 }
 
