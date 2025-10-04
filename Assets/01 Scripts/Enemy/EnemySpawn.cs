@@ -18,7 +18,6 @@ public class EnemySpawn : Singleton<EnemySpawn>
     private Dictionary<GameObject, GameObject> monsterIndicators = new();
 
     private Dictionary<int, List<GameObject>> waveSpawnDict = new();
-    [SerializeField] List<GameObject> waveList;
     private bool[] isActivateWave;
 
     //오브젝트의 크기값 비교해서 넣으면됨
@@ -41,9 +40,8 @@ public class EnemySpawn : Singleton<EnemySpawn>
 
     private void LateUpdate()
     {
-        if (waveList != null && enemyTransform.childCount > 0)
+        if (enemyTransform.childCount > 0)
         {
-            Debug.Log(waveList.Count);
             WaveUnitCheck();
         }
         else if (enemyTransform.childCount <= 0 )
@@ -153,7 +151,6 @@ public class EnemySpawn : Singleton<EnemySpawn>
         BoxCollider box = boxColliders[info.spawnPointIndex];
 
         waveSpawnDict[waveIndex] = new();
-        waveList = waveSpawnDict[waveIndex];
 
         for (int wave = 0; wave < info.SpawnRepeatCount; wave++)
         {

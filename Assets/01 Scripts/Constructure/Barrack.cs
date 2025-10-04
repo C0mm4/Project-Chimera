@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class Barrack : StructureBase
 {
@@ -66,6 +67,19 @@ public class Barrack : StructureBase
     protected override void DestroyEffect()
     {
         base.DestroyEffect();
+
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Join(transform.DOMoveY(transform.position.y - 6f, 1f).SetEase(Ease.InOutQuad));
+
+        sequence.Join(transform.DOShakePosition(
+            duration: 1f,
+            strength: new Vector3(0.5f, 0f, 0f),
+            vibrato: 10,
+            randomness: 90f,
+            fadeOut: true
+            ));
+
     }
 
     protected override void UpdateEffect()

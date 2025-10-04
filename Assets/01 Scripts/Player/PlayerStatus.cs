@@ -48,7 +48,6 @@ public class PlayerStatus : CharacterStats
     {
         base.Death();
 
-        EnemySpawn.Instance.WaveUnitCheckClean();
         StageManager.Instance.FailStage();
     }
 
