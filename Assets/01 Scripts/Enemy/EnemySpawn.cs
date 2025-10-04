@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
 
 public class EnemySpawn : Singleton<EnemySpawn>
 {
-
+    
     [SerializeField] private List<StageWaveSO> stageDataSO;
     [SerializeField] private Transform enemyTransform;
+    [SerializeField] private Transform monsterArrowBox;
+    [SerializeField] private Camera cameras;
 
     private BoxCollider[] boxColliders;
 
     private Dictionary<string, List<MonsterSpawnInfo>> stageData = new Dictionary<string, List<MonsterSpawnInfo>>();
+    private Dictionary<GameObject, GameObject> monsterIndicators = new();
 
     private Dictionary<int, List<GameObject>> waveSpawnDict = new();
     [SerializeField] List<GameObject> waveList;
@@ -21,14 +24,32 @@ public class EnemySpawn : Singleton<EnemySpawn>
     //오브젝트의 크기값 비교해서 넣으면됨
     public float outRangeValue = 0.5f;
 
+    private int stageNum = 0;
+
     private void Awake()
     {
         boxColliders = transform.GetComponentsInChildren<BoxCollider>();
+
+        ObjectPoolManager.Instance.CreatePool("Pref_000000", monsterArrowBox);
+      
     }
 
     private void OnEnable()
     {
         StageManager.Instance.OnStageFail += OnStageFail;
+    }
+
+    private void LateUpdate()
+    {
+        if (waveList != null && enemyTransform.childCount > 0)
+        {
+            Debug.Log(waveList.Count);
+            WaveUnitCheck();
+        }
+        else if (enemyTransform.childCount <= 0 )
+        {
+            WaveUnitCheckClean();
+        }
     }
 
     private void OnStageFail()
@@ -132,7 +153,8 @@ public class EnemySpawn : Singleton<EnemySpawn>
         BoxCollider box = boxColliders[info.spawnPointIndex];
 
         waveSpawnDict[waveIndex] = new();
-//        waveList = waveSpawnDict[waveIndex];
+        waveList = waveSpawnDict[waveIndex];
+
         for (int wave = 0; wave < info.SpawnRepeatCount; wave++)
         {
             //랜덤으로 뿌려진 위치 기록용
@@ -242,6 +264,7 @@ public class EnemySpawn : Singleton<EnemySpawn>
     //스테이지 번호 찾아서 해당 몬스터 스테이지 생성
     public void StartStage(int stageNumber)
     {
+        stageNum = stageNumber;
         string key = $"SO_6{stageNumber:D5}";
 
         if (stageData.ContainsKey(key))
@@ -309,4 +332,123 @@ public class EnemySpawn : Singleton<EnemySpawn>
 
         return true;
     }
+
+    public void WaveUnitCheck()
+    {
+        bool IsInView(Vector3 screenPos)
+        {
+            return screenPos.z > 0 && screenPos.x > 0 && screenPos.x < 1 && screenPos.y > 0 && screenPos.y < 1;
+        }
+        
+        foreach (Transform childTransform in enemyTransform)
+        {
+            GameObject monster = childTransform.gameObject;
+            // null 이거나 비활성화된 몬스터는 제거 대상
+            if (monster == null || !monster.activeInHierarchy)
+            {
+                if (monsterIndicators.ContainsKey(monster))
+                {
+                    monsterIndicators[monster].SetActive(false);
+                    ObjectPoolManager.Instance.ResivePool("Pref_000000", monsterIndicators[monster], monsterArrowBox);
+                    monsterIndicators.Remove(monster);
+                }
+                continue;
+            }
+
+            Vector3 screenPos = Camera.main.WorldToViewportPoint(monster.transform.position);
+
+            if (!IsInView(screenPos))
+            {
+                if (!monsterIndicators.ContainsKey(monster))
+                {
+                    GameObject arrow = ObjectPoolManager.Instance.GetPool("Pref_000000", monsterArrowBox);
+                    monsterIndicators.Add(monster, arrow);
+                    arrow.SetActive(true);
+                }
+
+                UpdateIndicatorPosition(monster, monsterIndicators[monster]);
+            }
+            else
+            {
+                if (monsterIndicators.ContainsKey(monster))
+                {
+                    monsterIndicators[monster].SetActive(false);
+                    ObjectPoolManager.Instance.ResivePool("Pref_000000", monsterIndicators[monster], monsterArrowBox);
+                    monsterIndicators.Remove(monster);
+                }
+            }
+        }
+
+        // 완전히 null 된 오브젝트 정리 (혹시 Destroy 된 경우)
+        List<GameObject> toRemove = new List<GameObject>();
+        foreach (var kvp in monsterIndicators)
+        {
+            if (kvp.Key == null)
+            {
+                ObjectPoolManager.Instance.ResivePool("Pref_000000", kvp.Value, monsterArrowBox);
+                toRemove.Add(kvp.Key);
+            }
+        }
+
+        foreach (var monster in toRemove)
+        {
+            monsterIndicators.Remove(monster);
+        }
+    }
+
+    private void UpdateIndicatorPosition(GameObject monster, GameObject indicator)
+    {
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(monster.transform.position);
+
+        // 화면 밖일 때 방향을 조정
+        if (screenPos.z < 0)
+        {
+            screenPos *= -1f;
+        }
+
+        // 화면 중심과 방향 계산
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Vector2 direction = ((Vector2)screenPos - screenCenter).normalized;
+
+        if (screenPos.z < 0)
+        {
+            direction = -direction;
+        }
+
+        float edgeOffset = 50f;
+        Vector2 indicatorPos = screenCenter + direction * (Mathf.Min(screenCenter.x, screenCenter.y) - edgeOffset);
+
+        RectTransform rt = indicator.GetComponent<RectTransform>();
+
+        // 캔버스의 렌더 모드가 Screen Space - Camera
+        RectTransform canvasRect = monsterArrowBox.GetComponent<RectTransform>();
+        Canvas canvas = monsterArrowBox.GetComponentInParent<Canvas>();
+
+        Camera uiCamera = null;
+        if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
+        {
+            uiCamera = canvas.worldCamera;
+        }
+
+        // 스크린 좌표 → 로컬 UI 좌표
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, indicatorPos, uiCamera, out localPoint);
+
+        rt.localPosition = localPoint;
+
+        // 화살표 회전 (몬스터 방향에 맞추기)
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rt.rotation = Quaternion.Euler(0, 0, angle - 90);
+    }
+
+    public async void WaveUnitCheckClean()
+    {
+        await Task.Delay(3000);
+        foreach (Transform childTransform in monsterArrowBox)
+        {
+            GameObject monster = childTransform.gameObject;
+            monster.SetActive(false);
+        }
+    }
 }
+

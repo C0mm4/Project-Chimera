@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Instigator: {fileID: 0}
+  targetTransform: {fileID: 0}
 --- !u!54 &4292416756399703240
 Rigidbody:
   m_ObjectHideFlags: 0

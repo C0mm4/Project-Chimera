@@ -118,7 +118,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             Debug.Log("ClearPool : 키 못찾음");
             return;
         }
-
         //오브젝트 삭제
         foreach (GameObject obj in stack[addressableKey])
         {

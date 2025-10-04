@@ -47,7 +47,8 @@ public class PlayerStatus : CharacterStats
     protected override void Death()
     {
         base.Death();
-        
+
+        EnemySpawn.Instance.WaveUnitCheckClean();
         StageManager.Instance.FailStage();
     }
 
